@@ -1,0 +1,3 @@
+C:/Users/alexi/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/DoomsDepth.dir
+C:/Users/alexi/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/alexi/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/rebuild_cache.dir
