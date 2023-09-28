@@ -5,5 +5,6 @@ int main() {
     printf("Hello World");
     printf("Dans le git");
     printf("For real");
+    printf("map");
     return 0;
 }
