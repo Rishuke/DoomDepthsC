@@ -3,10 +3,11 @@
 #include <SDL/SDL.h>            // SDL core library
 #include <SDL/SDL_image.h>      // SDL_image extension for image loading
 #include <SDL/SDL_ttf.h>        // SDL_ttf extension for TrueType fonts
+#include <SDL/SDL_gfxPrimitives.h>
 #include <SDL/SDL_mixer.h>
 
 SDL_Surface* initSDL(){
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) { //SDL OK
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) { //SDL OK
         SDL_Quit();
         fprintf(stderr, "SDL Initialization Error: %s\n", SDL_GetError());
         exit(1);
@@ -35,18 +36,24 @@ void closeAllSDL(){
 
 void initImg(SDL_Surface **img){ //initialisation des pointeurs sans malloc
     img[0]=IMG_Load("../images/piece.jpg");
+    rotozoomSurfaceXY(img[0],0.0,2.0,3.0,1);
     if(!img[0])exit(1);
     img[1]= IMG_Load("../images/player.jpg");
     if(!img[1])exit(1);
     img[2]= IMG_Load("../images/porte.jpg");
+    if(!img[2])exit(1);
+    img[3]= IMG_Load("../images/porte.jpg");
+    if(!img[3])exit(1);
+    img[4]= IMG_Load("../images/porte.jpg");
+    if(!img[4])exit(1);
 }
 
 
-int initTest(){
+int initTest(){ //equivalent du main
     SDL_Surface *ecran=initSDL();
     SDL_Rect FondGlob;
     //initia Image
-    SDL_Surface* Img[3];
+    SDL_Surface* Img[5];
     initImg(Img);
     //debut game -> afficher map as save in SQLite + inventaire
 
@@ -64,7 +71,7 @@ int initTest(){
                 break;
         }
         SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,0,0,0));
-        FondGlob.x=0;
+        FondGlob.x=50;
         FondGlob.y=0;
         SDL_BlitSurface(Img[0], NULL, ecran, &FondGlob);
         FondGlob.x=600;
