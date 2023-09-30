@@ -1,9 +1,9 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include <time.h>
 #include <SDL/SDL.h>            // SDL core library
 #include <SDL/SDL_image.h>      // SDL_image extension for image loading
-#include <SDL/SDL_ttf.h>        // SDL_ttf extension for TrueType fonts
-#include <SDL/SDL_gfxPrimitives.h>
+#include <SDL/SDL_rotozoom.h>
 #include <SDL/SDL_mixer.h>
 
 SDL_Surface* initSDL(){
@@ -34,27 +34,59 @@ void closeAllSDL(){
     SDL_Quit();
 }
 
-void initImg(SDL_Surface **img){ //initialisation des pointeurs sans malloc
-    img[0]=IMG_Load("../images/piece.jpg");
-    rotozoomSurfaceXY(img[0],0.0,2.0,3.0,1);
-    if(!img[0])exit(1);
-    img[1]= IMG_Load("../images/player.jpg");
-    if(!img[1])exit(1);
-    img[2]= IMG_Load("../images/porte.jpg");
-    if(!img[2])exit(1);
-    img[3]= IMG_Load("../images/porte.jpg");
-    if(!img[3])exit(1);
-    img[4]= IMG_Load("../images/porte.jpg");
-    if(!img[4])exit(1);
+void freeAll(int size,int** toFree){
+    for(int i=0;i<size;i++){
+        free(toFree[i]);
+    }
+    free(toFree);
 }
 
+void initImg(SDL_Surface **img){ //initialisation des pointeurs sans malloc
+    img[0]=IMG_Load("../images/piece.jpg"); //piece
+    img[0]=rotozoomSurfaceXY(img[0],0.0,0.22,0.22,1);
+    SDL_SetColorKey(img[0],SDL_SRCCOLORKEY,SDL_MapRGB(img[0]->format,255,255,255));
+    if(!img[0])exit(1);
+    img[1]= IMG_Load("../images/mob.jpg"); //mob sur chemin
+    img[1]=rotozoomSurfaceXY(img[1],0.0,0.22,0.22,1);
+    SDL_SetColorKey(img[1],SDL_SRCCOLORKEY,SDL_MapRGB(img[1]->format,255,255,255));
+    if(!img[1])exit(1);
+    img[2]= IMG_Load("../images/rien.jpg"); //si il n'y a rien sur le chemin
+    img[2]=rotozoomSurfaceXY(img[2],0.0,0.22,0.22,1);
+    SDL_SetColorKey(img[2],SDL_SRCCOLORKEY,SDL_MapRGB(img[2]->format,255,255,255));
+    if(!img[2])exit(1);
+    img[3]= IMG_Load("../images/porte.jpg"); //Exit
+    img[3]=rotozoomSurfaceXY(img[3],0.0,0.22,0.22,1);
+    if(!img[3])exit(1);
+    img[4]= IMG_Load("../images/player.jpg"); //Player
+    img[4]=rotozoomSurfaceXY(img[4],0.0,0.22,0.22,1);
+    if(!img[4])exit(1);
+    img[5]= IMG_Load("../images/shop.jpg"); //shop
+    img[5]=rotozoomSurfaceXY(img[5],0.0,0.22,0.22,1);
+    SDL_SetColorKey(img[5],SDL_SRCCOLORKEY,SDL_MapRGB(img[1]->format,255,255,255));
+    if(!img[5])exit(1);
+    img[6]= IMG_Load("../images/BOSS.jpg"); //Boss a la fin des chemins
+    img[6]=rotozoomSurfaceXY(img[6],0.0,0.22,0.22,1);
+    SDL_SetColorKey(img[6],SDL_SRCCOLORKEY,SDL_MapRGB(img[6]->format,255,255,255));
+    if(!img[6])exit(1);
+}
+
+void initMap(int** map){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6=shop
+    
+    int xJoueur=
+}
 
 int initTest(){ //equivalent du main
     SDL_Surface *ecran=initSDL();
     SDL_Rect FondGlob;
     //initia Image
-    SDL_Surface* Img[5];
+    SDL_Surface* Img[6];
     initImg(Img);
+    //Init map
+    int** map=malloc(sizeof(int*)*20);
+    for(int i=0;i<20;i++){
+        map[i]=calloc(20,sizeof(int));
+    }
+    initMap(map);
     //debut game -> afficher map as save in SQLite + inventaire
 
     //gameplay
@@ -75,9 +107,10 @@ int initTest(){ //equivalent du main
         FondGlob.y=0;
         SDL_BlitSurface(Img[0], NULL, ecran, &FondGlob);
         FondGlob.x=600;
-        FondGlob.y=600;
+        FondGlob.y=500;
         SDL_BlitSurface(Img[1], NULL, ecran, &FondGlob);
         FondGlob.x=0;
+        FondGlob.y=500;
         SDL_BlitSurface(Img[2], NULL, ecran, &FondGlob);
         SDL_Flip(ecran);
     }
@@ -85,5 +118,6 @@ int initTest(){ //equivalent du main
 
     //Tout fermer
     closeAllSDL();
+    freeAll(20,map);
     return 0;
 }
