@@ -119,13 +119,12 @@ int initTest(){ //equivalent du main
     SDL_Surface* Img[6];
     initImg(Img);
     //Init map
-    int** map=malloc(sizeof(int*)*20);
-    for(int i=0;i<20;i++){
-        map[i]=calloc(20,sizeof(int));
+    //debut game -> afficher map as save in SQLite + inventaire
+    int** map=malloc(sizeof(int*)*taille);
+    for(int i=0;i<taille;i++){
+        map[i]=calloc(taille,sizeof(int));
     }
     initMap(map);
-    //debut game -> afficher map as save in SQLite + inventaire
-
     //gameplay
     SDL_Event event;
     int continuer=1;
@@ -155,6 +154,6 @@ int initTest(){ //equivalent du main
 
     //Tout fermer
     closeAllSDL();
-    freeAll(20,map);
+    freeAll(taille,map);
     return 0;
 }
