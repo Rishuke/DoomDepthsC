@@ -6,6 +6,7 @@
 #include <SDL/SDL_mixer.h>      // SDL_mixer extension for audio
 #include <SDL/SDL_gfxPrimitives.h>
 #include "creationmap.h"
+#include "StartEndGame.h"
 
 int main (int argc, char* argv[])
 {
