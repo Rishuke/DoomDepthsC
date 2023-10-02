@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>            // SDL core library
 #include <SDL/SDL_image.h>      // SDL_image extension for image loading
 #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
 
 SDL_Surface* initSDL(){
     if (SDL_Init(SDL_INIT_VIDEO) != 0) { //SDL OK
@@ -15,6 +16,11 @@ SDL_Surface* initSDL(){
     if ((imgInitResult & imgFlags) != imgFlags) { //IMG SDL OK
         IMG_Quit();
         fprintf(stderr, "SDL_image Initialization Error: %s\n", IMG_GetError());
+        exit(1);
+    }
+    if(TTF_Init()==-1){
+        TTF_Quit();
+        fprintf(stderr, "SDL_image Initialization Error: %s\n", TTF_GetError());
         exit(1);
     }
     SDL_Surface *ecran=NULL;
@@ -30,6 +36,7 @@ SDL_Surface* initSDL(){
 void closeAllSDL(){
     IMG_Quit();
     SDL_Quit();
+    TTF_Quit();
 }
 
 void freeAll(int size,int** toFree){
