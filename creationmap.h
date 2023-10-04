@@ -1,12 +1,14 @@
 //
 // Created by meizarkos on 29/09/23.
 //
+#include "struct.h"
 
 #ifndef DOOMDEPTHSC_CREATIONMAP_H
 #define DOOMDEPTHSC_CREATIONMAP_H
 int initTest();
-void initMap(int** map);
-void freeAll(int size,int** toFree);
-void creerCoordo(int* coordo,int** map,int res);
+void initMap(Carte* carte);
+void initCarte(Carte* carte);
+void freeAll(Carte* carte);
+void creerCoordo(int* coordo,Carte* carte,int res);
 void linkedPoint(int* coordoStart,int* coordoEnd,int** map);
 #endif //DOOMDEPTHSC_CREATIONMAP_H

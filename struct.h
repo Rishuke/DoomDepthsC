@@ -34,4 +34,10 @@ typedef struct
 
 } Monster;
 
+typedef struct{
+    int** map;
+    int taille;
+    int donjonLevel;
+}Carte;
+
 
