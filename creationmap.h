@@ -7,4 +7,5 @@
 int initTest(); //fonction useless
 void initImg(SDL_Surface **img);
 void initMap(int** map);
+void freeAll(int size,int** toFree);
 #endif //DOOMDEPTHSC_CREATIONMAP_H
