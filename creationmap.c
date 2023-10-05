@@ -11,12 +11,25 @@ void freeAll(Carte* carte){
 }
 
 void initCarte(Carte* carte){
-    freeAll(carte); //remettre tout à 0
-    carte->taille=10+(carte->donjonLevel)/2;
+    if(carte->donjonLevel==0){  //first malloc
+        carte->taille=5+(carte->donjonLevel)/2;
+        carte->map= malloc(sizeof(int*)*carte->taille);
+        for(int i=0;i<carte->taille;i++){
+            carte->map[i]=malloc(sizeof(int)*carte->taille);
+        }
+    }
     carte->donjonLevel++;
-    carte->map=malloc(sizeof(int*)*carte->taille);
+    carte->taille=5+(carte->donjonLevel)/2;
+    if(carte->taille>10)carte->taille=10;
+    carte->map= realloc(carte->map,sizeof(int*)*carte->taille); //realloc autre cas
     for(int i=0;i<carte->taille;i++){
-        carte->map[i]=calloc(carte->taille,sizeof(int));
+        carte->map[i]=realloc(carte->map[i],sizeof(int)*carte->taille);
+    }
+
+    for(int i=0;i<carte->taille;i++){   //remettre à 0
+        for(int j=0;j<carte->taille;j++){
+            carte->map[i][j]=0;
+        }
     }
 }
 
@@ -71,13 +84,27 @@ void linkedPoint(int* coordoStart,int* coordoEnd,int** map){
     }
 }
 
+void afficherMap(Carte* carte){
+    char texte[8][10]={"        |","  money |","   mob  |","  safe  |","  EXIT  |"," PLAYER |","  SHOP  |"," DANGER |"};
+    for(int i=0;i<carte->taille;i++){
+        for(int j=0;j<carte->taille;j++){
+            printf("%s",texte[carte->map[i][j]]);
+        }
+        printf("\n");
+        for(int k=0;k<carte->taille*9;k++){
+            printf("-");
+        }
+        printf("\n");
+    }
+    printf("\n \n");
+}
+
 void initMap(Carte* carte){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6=shop 7=boss
-    srand(time(NULL));
-    int player[2];
-    int shop[2];
-    int exit[2];
-    int boss1[2];
-    int boss2[2];
+    int player[2]={0,0};
+    int shop[2]={0,0};
+    int exit[2]={0,0};
+    int boss1[2]={0,0};
+    int boss2[2]={0,0};
     creerCoordo(player,carte,5);
     creerCoordo(shop,carte,6);
     creerCoordo(exit,carte,4);
@@ -92,23 +119,30 @@ void initMap(Carte* carte){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6
     linkedPoint(boss1,boss2,carte->map);
     linkedPoint(boss1,shop,carte->map);
     linkedPoint(boss2,shop,carte->map);
-    for(int i=0;i<carte->taille;i++){
-        for(int j=0;j<carte->taille;j++){
-            printf("%d ",carte->map[i][j]);
-        }
-        printf("\n");
-    }
-    printf("%d    %d  %d \n",carte->map[exit[0]][exit[1]],exit[0],exit[1]);
-    printf("%d    %d  %d \n",carte->map[shop[0]][shop[1]],shop[0],shop[1]);
-    printf("%d    %d  %d \n",carte->map[boss1[0]][boss1[1]],boss1[0],boss1[1]);
-    printf("%d    %d  %d \n",carte->map[boss2[0]][boss2[1]],boss2[0],boss2[1]);
 }
 
 int initTest(){ //equivalent du main
+    srand(time(NULL));
     Carte* carte=malloc(sizeof(carte));
     carte->donjonLevel=0;
     initCarte(carte);
     initMap(carte);
+    afficherMap(carte);
+    initCarte(carte);
+    initMap(carte);
+    afficherMap(carte);
+    initCarte(carte);
+    initMap(carte);
+    afficherMap(carte);
+    initCarte(carte);
+    initMap(carte);
+    afficherMap(carte);
+    initCarte(carte);
+    initMap(carte);
+    afficherMap(carte);
+    initCarte(carte);
+    initMap(carte);
+    afficherMap(carte);
     //gameplay
 
     //sauvegarde file

@@ -9,6 +9,5 @@ int initTest();
 void initMap(Carte* carte);
 void initCarte(Carte* carte);
 void freeAll(Carte* carte);
-void creerCoordo(int* coordo,Carte* carte,int res);
-void linkedPoint(int* coordoStart,int* coordoEnd,int** map);
+void afficherMap(Carte* carte);
 #endif //DOOMDEPTHSC_CREATIONMAP_H
