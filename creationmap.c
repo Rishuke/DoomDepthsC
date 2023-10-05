@@ -131,18 +131,6 @@ int initTest(){ //equivalent du main
     initCarte(carte);
     initMap(carte);
     afficherMap(carte);
-    initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
-    initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
-    initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
-    initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
     //gameplay
 
     //sauvegarde file
