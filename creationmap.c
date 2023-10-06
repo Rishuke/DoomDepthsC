@@ -84,11 +84,16 @@ void linkedPoint(int* coordoStart,int* coordoEnd,int** map){
     }
 }
 
-void afficherMap(Carte* carte){
+void afficherMap(Carte* carte,int x,int y){
     char texte[8][10]={"        |","  money |","   mob  |","  safe  |","  EXIT  |"," PLAYER |","  SHOP  |"," DANGER |"};
     for(int i=0;i<carte->taille;i++){
         for(int j=0;j<carte->taille;j++){
-            printf("%s",texte[carte->map[i][j]]);
+            if(i==x && j==y){
+                printf("%s",texte[5]);
+            }
+            else{
+                printf("%s",texte[carte->map[i][j]]);
+            }
         }
         printf("\n");
         for(int k=0;k<carte->taille*9;k++){
@@ -99,13 +104,18 @@ void afficherMap(Carte* carte){
     printf("\n \n");
 }
 
-void initMap(Carte* carte){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6=shop 7=boss
+void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6=shop 7=boss
     int player[2]={0,0};
+    player[0]=rand()%carte->taille;
+    player[1]=rand()%carte->taille;
+    playInit->x=player[0];
+    playInit->y=player[1];  //initialisé joueur position en le dissociant de la map
+    carte->map[player[0]][player[1]]=3;
+    printf("%d %d \n",playInit->x,playInit->y);
     int shop[2]={0,0};
     int exit[2]={0,0};
     int boss1[2]={0,0};
     int boss2[2]={0,0};
-    creerCoordo(player,carte,5);
     creerCoordo(shop,carte,6);
     creerCoordo(exit,carte,4);
     creerCoordo(boss1,carte,7);
@@ -123,14 +133,15 @@ void initMap(Carte* carte){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Carte* carte=malloc(sizeof(carte));
+    Player* player=malloc(sizeof(*player));
+    Carte* carte=malloc(sizeof(*carte));
     carte->donjonLevel=0;
     initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
+    initMap(carte,player);
+    afficherMap(carte,player->x,player->y);
     initCarte(carte);
-    initMap(carte);
-    afficherMap(carte);
+    initMap(carte,player);
+    afficherMap(carte,player->x,player->y);
     //gameplay
 
     //sauvegarde file

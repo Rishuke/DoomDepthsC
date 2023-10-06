@@ -7,6 +7,9 @@ add_executable(DoomDepthsC main.c
         struct.h
         creationmap.c
         creationmap.h
+        CaseAction.c
+        CaseAction.c
+        CaseAction.h
 )
 
 target_link_libraries(DoomDepthsC SDL)

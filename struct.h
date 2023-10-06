@@ -1,3 +1,6 @@
+#ifndef DOOMDEPTHSC_STRUCT_H
+#define DOOMDEPTHSC_STRUCT_H
+
 typedef struct
 {
     int equiped;
@@ -5,7 +8,7 @@ typedef struct
     int offensive;
     int power;
     int gold;
-} Item;
+}Item;
 
 typedef struct
 {
@@ -39,5 +42,7 @@ typedef struct{
     int taille;
     int donjonLevel;
 }Carte;
+
+#endif
 
 
