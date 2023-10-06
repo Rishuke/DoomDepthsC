@@ -147,10 +147,18 @@ int initTest(){ //equivalent du main
         printf("Entrez z / q / s / d pour un deplacement ou 8 pour quitter \n");
         scanf(" %c",&choice);
         if(choice=='8')break;
-        PlayerMouv(player,carte,choice);
-        caseAction(player,carte);
+        else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
+            caseAction(player,carte);
+            PlayerMouv(player,carte,choice);
+            caseAction(player,carte);
+        }
+        else if(choice=='0'){
+            //voir inventaire
+        }
+        else if(choice=='1'){
+            printf("%d or \n",player->gold);   //voir état joeur
+        }
         afficherMap(carte,player->x,player->y);
-        printf("Player à %d argent \n",player->gold); //afficher état perso
     }
     //sauvegarde file
 

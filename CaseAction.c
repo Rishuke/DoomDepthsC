@@ -10,7 +10,41 @@ int isOK(int x,int y,Carte* carte){
     return 1;
 }
 
+void caseAction(Player* player,Carte* carte){
+    //estSur();
+    char var;
+    if(carte->map[player->x][player->y]==1){
+        player->gold+=50;
+        printf("Vous gagnez 50 d'or! Vous avez maintenant %d or \n",player->gold);
+        carte->map[player->x][player->y]=3;
+    }
+    else if(carte->map[player->x][player->y]==4){
+        printf("Vous êtes sur la sorite appuyer sur e pour sortir ou refuser \n");
+        scanf(" %c",&var);
+        if(var=='e'){
+            initCarte(carte);
+            printf("Vous êtes au niveau %d Voici une nouvelle carte",carte->donjonLevel);
+            initMap(carte,player);
+        }
+        else{
+            return;
+        }
+    }
+    else if(carte->map[player->x][player->y]==6){
+        printf("Vous êtes sur le shop appuyer sur e pour entrez ou refuser poliment \n");
+        scanf(" %c",&var);
+        if(var=='e'){
+            printf("Achetez au shop !! \n");
+        }
+        else{
+            return;
+        }
+    }
+}
+
 void PlayerMouv(Player* player,Carte* carte, char a){
+    int ancienneCoordoX=player->x;
+    int anciennceCoordoY=player->y;
     if(a=='z'){
         if(isOK(player->x-1,player->y,carte)){
             player->x--;
@@ -29,31 +63,6 @@ void PlayerMouv(Player* player,Carte* carte, char a){
     else if(a=='d'){
         if(isOK(player->x,player->y+1,carte)){
             player->y++;
-        }
-    }
-}
-
-void caseAction(Player* player,Carte* carte){
-    char var;
-    if(carte->map[player->x][player->y]==1){
-        printf("Vous gagnez 50 d'or ! \n");
-        player->gold+=50;
-        carte->map[player->x][player->y]=3;
-    }
-    else if(carte->map[player->x][player->y]==4){
-        printf("Vous êtes sur la sorite appuyer sur e pour sortir \n");
-        scanf(" %c",&var);
-        if(var=='e'){
-            initCarte(carte);
-            printf("Vous êtes au niveau %d Voici une nouvelle carte",carte->donjonLevel);
-            initMap(carte,player);
-        }
-    }
-    else if(carte->map[player->x][player->y]==6){
-        printf("Vous êtes sur la sorite appuyer sur e pour entrez dans le shop \n");
-        scanf(" %c",&var);
-        if(var=='e'){
-            printf("Achetez au shop !! \n");
         }
     }
 }
