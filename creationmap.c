@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include <time.h>
 #include "struct.h"
+#include "CaseAction.h"
 
 void freeAll(Carte* carte){
     for(int i=0;i<carte->taille;i++){
@@ -134,20 +135,28 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 int initTest(){ //equivalent du main
     srand(time(NULL));
     Player* player=malloc(sizeof(*player));
+    player->gold=0;
     Carte* carte=malloc(sizeof(*carte));
     carte->donjonLevel=0;
     initCarte(carte);
     initMap(carte,player);
     afficherMap(carte,player->x,player->y);
-    initCarte(carte);
-    initMap(carte,player);
-    afficherMap(carte,player->x,player->y);
+    char choice;
     //gameplay
-
+    while(1){
+        printf("Entrez z / q / s / d pour un deplacement ou 8 pour quitter \n");
+        scanf(" %c",&choice);
+        if(choice=='8')break;
+        PlayerMouv(player,carte,choice);
+        caseAction(player,carte);
+        afficherMap(carte,player->x,player->y);
+        printf("Player à %d argent \n",player->gold); //afficher état perso
+    }
     //sauvegarde file
 
     //Desalloc
     freeAll(carte);
     free(carte);
+    free(player);
     return 0;
 }
