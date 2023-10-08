@@ -10,6 +10,8 @@ add_executable(DoomDepthsC main.c
         CaseAction.c
         CaseAction.c
         CaseAction.h
+        shopInventaire.h
+        shopInventaire.c
 )
 
 target_link_libraries(DoomDepthsC SDL)

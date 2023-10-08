@@ -147,9 +147,9 @@ int initTest(){ //equivalent du main
         strcpy(player->items[i]->name,"Vide");
     }
     //fin fonction;
-    Item item;Item item2;
+    /**Item item;Item item2;
     item.power=5;item.equiped=1;item.name="Test weapon";item.offensive=1;item.gold=50;player->items[0]=&item;
-    item2.power=10;item2.equiped=1;item2.name="Test weapon def";item2.offensive=0;item2.gold=50;player->items[1]=&item2;
+    item2.power=10;item2.equiped=1;item2.name="Test weapon def";item2.offensive=0;item2.gold=50;player->items[1]=&item2;**/
 
     Carte* carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
@@ -169,9 +169,10 @@ int initTest(){ //equivalent du main
         }
         else if(choice=='0'){
             afficherInventaire(player);
+            //changer arme équipé
         }
         else if(choice=='1'){
-            printf("%d or \n",player->gold);   //voir état joeur
+            printf("%d or \n",player->gold);   //voir état joueur
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
@@ -181,7 +182,7 @@ int initTest(){ //equivalent du main
     //Desalloc
     freeAll(carte);
     free(carte);
-    for(int i=2;i<tailleInventaire;i++){
+    for(int i=0;i<tailleInventaire;i++){
         free(player->items[i]->name);
         free(player->items[i]);
     }
