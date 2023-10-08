@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include "creationmap.h"
 #include "struct.h"
+#include "shopInventaire.h"
 
 int isOK(int x,int y,Carte* carte){
     if(x<0 || x>=carte->taille || y<0 || y>=carte->taille || carte->map[x][y]==0){
@@ -11,7 +12,6 @@ int isOK(int x,int y,Carte* carte){
 }
 
 void caseAction(Player* player,Carte* carte){
-    //estSur();
     char var;
     if(carte->map[player->x][player->y]==1){
         player->gold+=50;
@@ -34,7 +34,8 @@ void caseAction(Player* player,Carte* carte){
         printf("Vous êtes sur le shop appuyer sur e pour entrez ou refuser poliment \n");
         scanf(" %c",&var);
         if(var=='e'){
-            printf("Achetez au shop !! \n");
+            buyInShop(player);
+            carte->map[player->x][player->y]=3;
         }
         else{
             return;
@@ -43,8 +44,6 @@ void caseAction(Player* player,Carte* carte){
 }
 
 void PlayerMouv(Player* player,Carte* carte, char a){
-    int ancienneCoordoX=player->x;
-    int anciennceCoordoY=player->y;
     if(a=='z'){
         if(isOK(player->x-1,player->y,carte)){
             player->x--;
