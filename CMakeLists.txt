@@ -8,14 +8,9 @@ add_executable(DoomDepthsC main.c
         creationmap.c
         creationmap.h
         CaseAction.c
-        CaseAction.c
         CaseAction.h
         shopInventaire.h
         shopInventaire.c
+        combat.h
+        combat.c
 )
-
-target_link_libraries(DoomDepthsC SDL)
-target_link_libraries(DoomDepthsC SDL_image)
-target_link_libraries(DoomDepthsC SDL_ttf)
-target_link_libraries(DoomDepthsC SDL_mixer)
-target_link_libraries(DoomDepthsC SDL_gfx)
