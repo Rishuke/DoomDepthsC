@@ -1,3 +1,0 @@
-/home/touareg/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/DoomDepthsC.dir
-/home/touareg/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/touareg/Desktop/DoomDepthsC/cmake-build-debug/CMakeFiles/rebuild_cache.dir
