@@ -12,10 +12,8 @@ add_executable(DoomDepthsC main.c
         CaseAction.h
         shopInventaire.h
         shopInventaire.c
+        Player.h
+        Player.c
+        monster.h
+        monster.c
 )
-
-target_link_libraries(DoomDepthsC SDL)
-target_link_libraries(DoomDepthsC SDL_image)
-target_link_libraries(DoomDepthsC SDL_ttf)
-target_link_libraries(DoomDepthsC SDL_mixer)
-target_link_libraries(DoomDepthsC SDL_gfx)

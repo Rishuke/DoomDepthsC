@@ -24,6 +24,9 @@ typedef struct
     int xp;
     int level;
     int xpForNextLvl;
+    int lifePotion;
+    int manaPotion;
+
 } Player;
 
 typedef struct
