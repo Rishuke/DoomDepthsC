@@ -26,12 +26,14 @@ void initCarte(Carte* carte){
         }
     }
     else{
-        carte->map=realloc(carte->map,sizeof(int*)*carte->taille); //realloc autre cas
-        for(int i=0;i<carte->taille;i++){
-            carte->map[i]=malloc(sizeof(int)*carte->taille);
+        if(carte->donjonLevel%2==0){  //cela veut dire que taille a changé par rapport tours précédents
+            carte->map=realloc(carte->map,sizeof(int*)*carte->taille); //realloc autre cas
+            carte->map[carte->taille-1]=malloc(sizeof(int)*carte->taille);
+            for(int i=0;i<carte->taille-1;i++){
+                carte->map[i]=realloc(carte->map[i],sizeof(int)*carte->taille);
+            }
         }
     }
-
     for(int i=0;i<carte->taille;i++){   //remettre à 0
         for(int j=0;j<carte->taille;j++){
             carte->map[i][j]=0;
@@ -155,7 +157,7 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 int initTest(){ //equivalent du main
     srand(time(NULL));
     Player* player= createPlayer();
-    Monster** listDeMonstre = NULL;
+    Monster** listDeMonstre = malloc(sizeof(Monster*)*3);
     Carte* carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
     initCarte(carte);
@@ -192,5 +194,6 @@ int initTest(){ //equivalent du main
     }
     free(player->items);
     free(player);
+    free(listDeMonstre);
     return 0;
 }

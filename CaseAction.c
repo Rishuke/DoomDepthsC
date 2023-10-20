@@ -26,7 +26,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==2){
-        combat(monster,player,0,0,carte->donjonLevel);
+        //combat(monster,player,0,0,carte->donjonLevel);
         //Tout free ici en cas de défaite;
         carte->map[player->x][player->y]=3;
     }
@@ -57,7 +57,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         }
     }
     else if(carte->map[player->x][player->y]==7){
-        combat(monster,player,1,0,carte->donjonLevel);
+        //combat(monster,player,1,0,carte->donjonLevel);
         carte->map[player->x][player->y]=3;
     }
 }
