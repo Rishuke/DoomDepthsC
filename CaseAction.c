@@ -11,7 +11,14 @@ int isOK(int x,int y,Carte* carte){
     return 1;
 }
 
-void caseAction(Player* player,Carte* carte,Monster** monster){
+void stepBack(char preMouv,Player* player){
+    if(preMouv=='z')player->x++;
+    else if(preMouv=='s')player->x--;
+    else if(preMouv=='d')player->y--;
+    else if(preMouv=='q')player->y++;
+}
+
+void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
     char var;
     if(carte->map[player->x][player->y]==1){
         player->gold+=50;
@@ -33,6 +40,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster){
             initMap(carte,player);
         }
         else{
+            stepBack(preMouv,player);
             return;
         }
     }
@@ -44,6 +52,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster){
             carte->map[player->x][player->y]=3;
         }
         else{
+            stepBack(preMouv,player);
             return;
         }
     }
@@ -53,7 +62,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster){
     }
 }
 
-void PlayerMouv(Player* player,Carte* carte, char a){
+char PlayerMouv(Player* player,Carte* carte, char a){
     if(a=='z'){
         if(isOK(player->x-1,player->y,carte)){
             player->x--;
@@ -74,4 +83,5 @@ void PlayerMouv(Player* player,Carte* carte, char a){
             player->y++;
         }
     }
+    return a;
 }
