@@ -115,7 +115,6 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     playInit->x=player[0];
     playInit->y=player[1];  //initialisé joueur position en le dissociant de la map
     carte->map[player[0]][player[1]]=3;
-    printf("%d %d \n",playInit->x,playInit->y);
     int shop[2]={0,0};
     int exit[2]={0,0};
     int boss1[2]={0,0};

@@ -28,7 +28,7 @@ void afficherItem(Item* arme){
 
 int afficherInventaire(Player* player){
     if(!(strcmp(player->items[0]->name,"Vide"))){
-        printf("Vous n'avez même pas d'items, allez vous battre \n");
+        printf("Vous n'avez même pas d'items mais posséder %d, allez vous battre \n",player->gold);
         return 0;
     }
     for(int i=1;i<tailleInventaire+1;i++){
@@ -90,6 +90,7 @@ void changeEquiped(Player* player,Item* item){
     else{
         player->defense=15+item->power+player->level*3;
     }
+    printf("Vous avez maintenant \n attaque : %d \n defense : %d \n",player->attack,player->defense);
 }
 
 void changerItem(Player* player){

@@ -88,7 +88,6 @@ int allMobLife(Monster** monsters,int size){
 }
 
 int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lvlMap){
-    afficherASCIIBoss();
     int nbMonstre;
     if(fromSauvegarde){ //si sauvegarde
 
@@ -168,9 +167,15 @@ int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lv
             nbTour--;
         }
         for(int i=0;i<nbMonstre;i++){
-            int damage = rand()%(monsters[i]->attackMax-monsters[i]->attackMin+1)+monsters[i]->attackMin;
-            player->hp-=damage;
-            printf("Vous encaissez %d dégat de la part de %s",damage,monsters[i]->name);
+            int damage = rand()%(monsters[i]->attackMax-monsters[i]->attackMin+1)+monsters[i]->attackMin-player->defense;
+            if(damage<=0){
+                printf("Plus de peur que de mal suite à cette misérable attaque");
+            }
+            else{
+                printf("Vous encaissez %d dégat de la part de %s",damage,monsters[i]->name);
+                player->hp-=damage;
+            }
+
             if(player->hp<0){
                 printf("Vous êtes mort au niveau %d de la map",lvlMap);
                 return 0;
