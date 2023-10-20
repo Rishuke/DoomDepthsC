@@ -148,6 +148,7 @@ int initTest(){ //equivalent du main
     //gameplay
     while(1){
         printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder ou 8 pour quitter \n");
+        fflush(stdin);
         scanf(" %c",&choice);
         if(choice=='8')break;
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){

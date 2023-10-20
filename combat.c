@@ -9,15 +9,7 @@
 #include "monster.h"
 
 
-int allMobLife(Monster** monsters,int size){
-    int res=0;
-    for(int i=0;i<size;i++){
-        res+=monsters[i]->hp;
-    }
-    return res;
-}
-
-int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lvlMap){
+void afficherASCIIBoss(){
     char* imgPlayer[]={
             "       .-\'\'-.        ",
             "      /-.{}  \\        ",
@@ -35,15 +27,75 @@ int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lv
             "  / //_      _\\\\ \\  ",
             "  -'  |`\"\"\"`|  `-   ",
     };
+    const char *imgBoss[33]={
+            "                   __,-----,,,,  ,,,--------,__",
+            "                _-/|\\/|\\/|\\|\\|/\\|\\|/|/|\\_",
+            "               /|\\/\\//\\\\\\\\\\\\//////////////\\\\",
+            "             //|//           \\\\\\///            |\\|\\",
+            "            ///|\\/             \\/               \\|\\|\\",
+            "           |/|//                                 |\\|\\",
+            "          |/|/                                    \\|\\|\\",
+            "          ///;    ,,=====,,,  ~~-~~  ,,,=====,,    ;|\\|\\",
+            "         |/|/   '\"          `    `'          \"'   ;|\\|",
+            "         ||/`;   _--~~~~--__         __--~~~~--_   ;/|\\|",
+            "         /|||;  :  /       \\~~-___-~~/       \\  :  ;|\\|",
+            "         /\\|;    -_\\  (o)  / ,'; ;', \\  (o)  /_-    ;||",
+            "         |\\|;      ~-____--~'  ; ;  '~--____-~      ;\\|",
+            "          ||;            ,`   ;   ;   ',            ;||",
+            "        __|\\ ;        ,'`    (  _  )    `',        ;/|__",
+            "    _,-~###\\|/;    ,'`        ~~ ~~        `',    ;|\\###~-,_",
+            "  ,'#########||;  '                           '  ;\\|/#######`,",
+            " .############; ,         _--~~-~~--_           ;#############'.",
+            ",-' `;-,########;        ,; |_| | |_| ;,       ;;########,-;' `-",
+            "      ;@`,######;       ;_| :%`~'~'%: |_;       ;######,'@;",
+            "       ;@@`,#####;     :%%`\\/%%%%%%%\\/%%:     ;#####,'@@;",
+            "        ;@@@`,####;     :%%%%%%%%%%%%%%%:     ;####,'@@@;",
+            "         ;@@@@`,###;     ;./\\_%%%%%_/\\.;     ;####,@@@@;",
+            "   _-'@@@@@@@@;-~;     ~~--|~|~|--~~     ;~--;@@@@@@@'-_",
+            "  _,-'@@@@@@@@@@@@;  ;        ~~~~~        ;   ;@@@@@@@@@@@`-,_",
+            ",~@@@@@@@@@@@@@@@@@;  \\`~--__         __--~/  ;@@@@@@@@@@@@@@@@~,",
+            "@@@@@@@@@@@@@@@@@@@@@;   \\   ~~-----~~    /   ;@@@@@@@@@@@@@@@@@@@",
+            "@@@@@@@@@@@@@@@@@@@@@~-_  \\  /  |  \\   /  _-~@@@@@@@@@@@@@@@@@@@@",
+            "@@@@@@@@@@@@@@@@@@@@@@@@~~-\\/   |   \\/ -~~@@@@@@@@@@@@@@@@@@@@@@@",
+            "@@@@@@@@@@@@@@@@@@@@@@(=)=;==========;=(=)@@@@@@@@@@@@@@@@@@@@@@",
+            "@@@@@@@@@@@@@@@@@@@@@@@@@;    |     ;@@@@@@@@@@@@@@@@@@@@@@@@@@",
+            "",
+            "                  THE DANGER : LE BOSS              ",
+    };
+    for(int i=0;i<33;i++){
+        for(int j=0; j<strlen(imgPlayer[0]);j++){
+            if(i<7 || i>21)printf(" ");
+            else printf("%c",imgPlayer[i-7][j]);
+        }
+        printf("\t\t\t");
+        for(int j=0;j< strlen(imgBoss[i]);j++){
+            printf("%c",imgBoss[i][j]);
+        }
+        printf("\n");
+    }
+}
 
+void afficherASCIIMob(int size){
 
+}
+
+int allMobLife(Monster** monsters,int size){
+    int res=0;
+    for(int i=0;i<size;i++){
+        res+=monsters[i]->hp;
+    }
+    return res;
+}
+
+int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lvlMap){
+    afficherASCIIBoss();
     int nbMonstre;
     if(fromSauvegarde){ //si sauvegarde
 
     }
     else{
         if(boss){
-            nbMonstre=0;
+            nbMonstre=1;
         }
         else{
             nbMonstre=rand()%3;
@@ -61,12 +113,13 @@ int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lv
     int choice;
     printf("Au non c'est une embuscade \n");
     while(1){
+        if(boss)afficherASCIIBoss();
+        else afficherASCIIMob(nbMonstre);
         int nbTour=3;
         while(1){
             if(nbTour<=0)break;
             printf("%d tours restant.",nbTour);
-            printf("Appuyer sur 1 pour attaquer, 2 pour lancer un sort, 3 pour une potion de soin, "
-                   "4 pour une potion de mana, 5 pour finir votre tour ou 6 pour sauvegarder\n");
+            printf("Appuyer sur 1 pour attaquer, 2 pour lancer un sort, 3 pour une potion de soin,z4 pour une potion de mana, 5 pour finir votre tour ou 6 pour sauvegarder\n");
             fflush(stdin);
             scanf(" %d",&choice);
             if(choice<=0 || choice>6){
@@ -125,22 +178,4 @@ int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lv
             printf("Vous avez encore %d vie \n",player->hp);
         }
     }
-
-
-
-
-    /**int size=strlen(imgPlayer[0])+strlen(imgPlayer2[0]);
-
-
-    for(int i=0;i<14;i++){
-        for(int j=0; j<strlen(imgPlayer[i]);j++){
-            printf("%c",imgPlayer[i][j]);
-        }
-        printf("   ");
-        for(int j=0;j< strlen(imgPlayer2[i]);j++){
-            printf("%c",imgPlayer[i][j]);
-        }
-        printf("\n");
-    }**/
-
 }
