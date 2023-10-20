@@ -20,6 +20,8 @@ void caseAction(Player* player,Carte* carte,Monster** monster){
     }
     else if(carte->map[player->x][player->y]==2){
         combat(monster,player,0,0,carte->donjonLevel);
+        //Tout free ici en cas de défaite;
+        carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==4){
         printf("Vous êtes sur la sorite appuyer sur e pour sortir ou refuser \n");
@@ -46,7 +48,8 @@ void caseAction(Player* player,Carte* carte,Monster** monster){
         }
     }
     else if(carte->map[player->x][player->y]==7){
-        combat(monster,player,1);
+        combat(monster,player,1,0,carte->donjonLevel);
+        carte->map[player->x][player->y]=3;
     }
 }
 

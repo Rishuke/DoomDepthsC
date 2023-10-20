@@ -85,10 +85,10 @@ void changeEquiped(Player* player,Item* item){
     }
     item->equiped=1;
     if(item->offensive){
-        player->attack=20+item->power;
+        player->attack=20+item->power+player->level*3;
     }
     else{
-        player->defense=15+item->power;
+        player->defense=15+item->power+player->level*3;
     }
 }
 

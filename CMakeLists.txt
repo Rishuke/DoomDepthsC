@@ -13,4 +13,8 @@ add_executable(DoomDepthsC main.c
         shopInventaire.c
         combat.h
         combat.c
+        Player.h
+        Player.c
+        monster.h
+        monster.c
 )

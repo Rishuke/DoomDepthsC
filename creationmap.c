@@ -4,6 +4,7 @@
 #include <string.h>
 #include "struct.h"
 #include "CaseAction.h"
+#include "player.h"
 #include "shopInventaire.h"
 #define tailleInventaire 6
 
@@ -136,21 +137,8 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Player* player=malloc(sizeof(Player));
-    //sera la fonction créer perso;
+    Player* player= createPlayer();
     Monster** listDeMonstre = NULL;
-    player->gold=10000;
-    player->items=malloc(sizeof(Item*)*6);
-    for(int i=0;i<tailleInventaire;i++){
-        player->items[i]=malloc(sizeof(Item));
-        player->items[i]->name=malloc(sizeof(char)*100);
-        strcpy(player->items[i]->name,"Vide");
-    }
-    //fin fonction;
-    /**Item item;Item item2;
-    item.power=5;item.equiped=1;item.name="Test weapon";item.offensive=1;item.gold=50;player->items[0]=&item;
-    item2.power=10;item2.equiped=1;item2.name="Test weapon def";item2.offensive=0;item2.gold=50;player->items[1]=&item2;
-    **/
     Carte* carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
     initCarte(carte);
