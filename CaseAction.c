@@ -1,8 +1,8 @@
-#include<stdlib.h>
 #include<stdio.h>
 #include "creationmap.h"
 #include "struct.h"
 #include "shopInventaire.h"
+#include "combat.h"
 
 int isOK(int x,int y,Carte* carte){
     if(x<0 || x>=carte->taille || y<0 || y>=carte->taille || carte->map[x][y]==0){
@@ -11,15 +11,21 @@ int isOK(int x,int y,Carte* carte){
     return 1;
 }
 
-void caseAction(Player* player,Carte* carte){
+void caseAction(Player* player,Carte* carte,Monster** monster){
     char var;
     if(carte->map[player->x][player->y]==1){
         player->gold+=50;
         printf("Vous gagnez 50 d'or! Vous avez maintenant %d or \n",player->gold);
         carte->map[player->x][player->y]=3;
     }
+    else if(carte->map[player->x][player->y]==2){
+        combat(monster,player,0,0,carte->donjonLevel);
+        //Tout free ici en cas de défaite;
+        carte->map[player->x][player->y]=3;
+    }
     else if(carte->map[player->x][player->y]==4){
         printf("Vous êtes sur la sorite appuyer sur e pour sortir ou refuser \n");
+        fflush(stdin);
         scanf(" %c",&var);
         if(var=='e'){
             initCarte(carte);
@@ -40,6 +46,10 @@ void caseAction(Player* player,Carte* carte){
         else{
             return;
         }
+    }
+    else if(carte->map[player->x][player->y]==7){
+        combat(monster,player,1,0,carte->donjonLevel);
+        carte->map[player->x][player->y]=3;
     }
 }
 

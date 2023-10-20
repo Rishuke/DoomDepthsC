@@ -8,10 +8,11 @@ add_executable(DoomDepthsC main.c
         creationmap.c
         creationmap.h
         CaseAction.c
-        CaseAction.c
         CaseAction.h
         shopInventaire.h
         shopInventaire.c
+        combat.h
+        combat.c
         Player.h
         Player.c
         monster.h

@@ -4,6 +4,7 @@
 #include <string.h>
 #include "struct.h"
 #include "CaseAction.h"
+#include "player.h"
 #include "shopInventaire.h"
 #define tailleInventaire 6
 
@@ -15,19 +16,20 @@ void freeAll(Carte* carte){
 }
 
 void initCarte(Carte* carte){
-    if(carte->donjonLevel==0){  //first malloc
-        carte->taille=5+(carte->donjonLevel)/2;
+    carte->donjonLevel++;
+    carte->taille=5+(carte->donjonLevel/2);
+    if(carte->taille>10)carte->taille=10;
+    if(carte->donjonLevel==1){  //first malloc
         carte->map= malloc(sizeof(int*)*carte->taille);
         for(int i=0;i<carte->taille;i++){
             carte->map[i]=malloc(sizeof(int)*carte->taille);
         }
     }
-    carte->donjonLevel++;
-    carte->taille=5+(carte->donjonLevel)/2;
-    if(carte->taille>10)carte->taille=10;
-    carte->map= realloc(carte->map,sizeof(int*)*carte->taille); //realloc autre cas
-    for(int i=0;i<carte->taille;i++){
-        carte->map[i]=realloc(carte->map[i],sizeof(int)*carte->taille);
+    else{
+        carte->map=realloc(carte->map,sizeof(int*)*carte->taille); //realloc autre cas
+        for(int i=0;i<carte->taille;i++){
+            carte->map[i]=realloc(carte->map[i],sizeof(int)*carte->taille);
+        }
     }
 
     for(int i=0;i<carte->taille;i++){   //remettre à 0
@@ -136,20 +138,8 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Player* player=malloc(sizeof(Player));
-    //sera la fonction créer perso;
-    player->gold=10000;
-    player->items=malloc(sizeof(Item*)*6);
-    for(int i=0;i<tailleInventaire;i++){
-        player->items[i]=malloc(sizeof(Item));
-        player->items[i]->name=malloc(sizeof(char)*100);
-        strcpy(player->items[i]->name,"Vide");
-    }
-    //fin fonction;
-    /**Item item;Item item2;
-    item.power=5;item.equiped=1;item.name="Test weapon";item.offensive=1;item.gold=50;player->items[0]=&item;
-    item2.power=10;item2.equiped=1;item2.name="Test weapon def";item2.offensive=0;item2.gold=50;player->items[1]=&item2;**/
-
+    Player* player= createPlayer();
+    Monster** listDeMonstre = NULL;
     Carte* carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
     initCarte(carte);
@@ -158,17 +148,17 @@ int initTest(){ //equivalent du main
     char choice;
     //gameplay
     while(1){
-        printf("Entrez z / q / s / d pour un deplacement ou 8 pour quitter \n");
+        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder ou 8 pour quitter \n");
+        fflush(stdin);
         scanf(" %c",&choice);
         if(choice=='8')break;
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
-            caseAction(player,carte);
+            caseAction(player,carte,listDeMonstre);
             PlayerMouv(player,carte,choice);
-            caseAction(player,carte);
+            caseAction(player,carte,listDeMonstre);
         }
         else if(choice=='0'){
-            afficherInventaire(player);
-            //changer arme équipé
+            changerItem(player);
         }
         else if(choice=='1'){
             printf("%d or \n",player->gold);   //voir état joueur

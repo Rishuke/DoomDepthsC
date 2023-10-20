@@ -26,7 +26,11 @@ void afficherItem(Item* arme){
     else  printf("\n");
 }
 
-void afficherInventaire(Player* player){
+int afficherInventaire(Player* player){
+    if(!(strcmp(player->items[0]->name,"Vide"))){
+        printf("Vous n'avez même pas d'items mais posséder %d, allez vous battre \n",player->gold);
+        return 0;
+    }
     for(int i=1;i<tailleInventaire+1;i++){
         if(strcmp(player->items[i-1]->name,"Vide")){
             printf("%d ",i);
@@ -34,6 +38,7 @@ void afficherInventaire(Player* player){
         }
     }
     printf("Vous posséder %d gold \n",player->gold);
+    return 1;
 }
 
 void addItemInventaire(Player* player,Item *item){
@@ -68,6 +73,47 @@ void addItemInventaire(Player* player,Item *item){
         player->items[choice-1]->offensive=item->offensive;
         player->items[choice-1]->power=item->power;
         strcpy(player->items[choice-1]->name,item->name);
+    }
+}
+
+void changeEquiped(Player* player,Item* item){
+    for(int i=0;i<tailleInventaire;i++){
+        if(player->items[i]->equiped==1 && player->items[i]->offensive==item->offensive){
+            player->items[i]->equiped=0;
+            break;
+        }
+    }
+    item->equiped=1;
+    if(item->offensive){
+        player->attack=20+item->power+player->level*3;
+    }
+    else{
+        player->defense=15+item->power+player->level*3;
+    }
+    printf("Vous avez maintenant \n attaque : %d \n defense : %d \n",player->attack,player->defense);
+}
+
+void changerItem(Player* player){
+    if(!afficherInventaire(player)){
+        return;
+    }
+    if((player->items[0]->equiped && player->items[1]->equiped && !(strcmp(player->items[2]->name,"Vide")))){
+        printf("Il n'y a rien à faire dans ce menu pour le moment\n");
+        return;
+    }
+    printf("Entrez le chiffre de celui que vous voulez équipé, sinon entrez 0 \n");
+    int choice;
+    scanf(" %d",&choice);
+    while(choice !=0){
+        if(!(strcmp(player->items[choice-1]->name,"Vide"))|| choice<0 || choice > 6){
+            printf("Entrez une valeur valide ! \n");
+        }
+        else{
+            changeEquiped(player,player->items[choice-1]);
+        }
+        afficherInventaire(player);
+        printf("Entrez le chiffre de celui que vous voulez équipé, sinon entrez 0 \n");
+        scanf(" %d",&choice);
     }
 }
 
