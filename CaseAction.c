@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <stdlib.h>
 #include "creationmap.h"
 #include "struct.h"
 #include "shopInventaire.h"
@@ -18,7 +19,7 @@ void stepBack(char preMouv,Player* player){
     else if(preMouv=='q')player->y++;
 }
 
-void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
+void caseAction(Player* player,Carte* carte,char preMouv){
     char var;
     if(carte->map[player->x][player->y]==1){
         player->gold+=50;
@@ -26,8 +27,11 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==2){
-        //combat(monster,player,0,0,carte->donjonLevel);
-        //Tout free ici en cas de défaite;
+        int win = combat(player,0,0,carte->donjonLevel);
+        if(!win){
+            freeAll(carte,player);
+            exit(0);
+        }
         carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==4){
@@ -57,7 +61,11 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         }
     }
     else if(carte->map[player->x][player->y]==7){
-        //combat(monster,player,1,0,carte->donjonLevel);
+        int win = combat(player,1,0,carte->donjonLevel);
+        if(!win){
+            freeAll(carte,player);
+            exit(0);
+        }
         carte->map[player->x][player->y]=3;
     }
 }

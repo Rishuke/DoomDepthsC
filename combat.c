@@ -90,7 +90,12 @@ int allMobLife(Monster** monsters,int size){
 int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lvlMap){
     int nbMonstre;
     if(fromSauvegarde){ //si sauvegarde
-
+        if(boss){
+            //getBoss
+        }
+        else {
+            //getMobClassique
+        }
     }
     else{
         if(boss){
@@ -166,10 +171,11 @@ int combat(Player* player,Monster** monsters,int boss,int fromSauvegarde, int lv
             }
             nbTour--;
         }
+
         for(int i=0;i<nbMonstre;i++){
             int damage = rand()%(monsters[i]->attackMax-monsters[i]->attackMin+1)+monsters[i]->attackMin-player->defense;
             if(damage<=0){
-                printf("Plus de peur que de mal suite à cette misérable attaque");
+                printf("Plus de peur que de mal suite à cette miserable attaque");
             }
             else{
                 printf("Vous encaissez %d dégat de la part de %s",damage,monsters[i]->name);

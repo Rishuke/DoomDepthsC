@@ -6,13 +6,22 @@
 #include "CaseAction.h"
 #include "player.h"
 #include "shopInventaire.h"
+#include "combat.h"
 #define tailleInventaire 6
 
-void freeAll(Carte* carte){
+void freeAll(Carte* carte,Player* player){
     for(int i=0;i<carte->taille;i++){
         free(carte->map[i]);
     }
     free(carte->map);
+
+    free(carte);
+    for(int i=0;i<player->sizeInventaire;i++){
+        free(player->items[i]->name);
+        free(player->items[i]);
+    }
+    free(player->items);
+    free(player);
 }
 
 void initCarte(Carte* carte){
@@ -152,14 +161,33 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Player* player= createPlayer();
-    player->gold=10000;
-    Monster** listDeMonstre = malloc(sizeof(Monster*)*3);
-    Carte* carte=malloc(sizeof(Carte));
-    carte->donjonLevel=0;
-    initCarte(carte);
-    initMap(carte,player);
-    afficherMap(carte,player->x,player->y);
+    Player* player;Carte* carte;
+    int fromSauvegarde = 0;
+    if(fromSauvegarde){
+        //telecharger player + carte
+        int avecMob=0;
+        if(avecMob){
+            int boss=0;
+            if(boss){
+                //combat(player,0,0,carte->donjonLevel);
+            }
+            else{
+                //combat(player,0,0,carte->donjonLevel);
+            }
+        }
+        else{
+
+        }
+    }
+    else{
+        player= createPlayer();
+        player->gold=10000;
+        carte=malloc(sizeof(Carte));
+        carte->donjonLevel=0;
+        initCarte(carte);
+        initMap(carte,player);
+        afficherMap(carte,player->x,player->y);
+    }
     char choice;
     //gameplay
     while(1){
@@ -169,7 +197,7 @@ int initTest(){ //equivalent du main
         if(choice=='8')break;
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
             char preMouv=PlayerMouv(player,carte,choice);
-            caseAction(player,carte,listDeMonstre,preMouv);
+            caseAction(player,carte,preMouv);
         }
         else if(choice=='0'){
             changerItem(player);
@@ -183,14 +211,6 @@ int initTest(){ //equivalent du main
     //sauvegarde file
 
     //Desalloc
-    freeAll(carte);
-    free(carte);
-    for(int i=0;i<player->sizeInventaire;i++){
-        free(player->items[i]->name);
-        free(player->items[i]);
-    }
-    free(player->items);
-    free(player);
-    free(listDeMonstre);
+    freeAll(carte,player);
     return 0;
 }
