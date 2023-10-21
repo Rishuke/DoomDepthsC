@@ -5,7 +5,7 @@
 #include "monster.h"
 
 
-int main (int argc, char* argv[])
+int main ()
 {
     initTest();
     return 0;

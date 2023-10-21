@@ -31,12 +31,12 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==4){
-        printf("Vous êtes sur la sorite appuyer sur e pour sortir ou refuser \n");
+        printf("Vous etes sur la sorite appuyer sur e pour sortir ou refuser \n");
         fflush(stdin);
         scanf(" %c",&var);
         if(var=='e'){
             initCarte(carte);
-            printf("Vous êtes au niveau %d Voici une nouvelle carte",carte->donjonLevel);
+            printf("Vous etes au niveau %d Voici une nouvelle carte \n",carte->donjonLevel);
             initMap(carte,player);
         }
         else{
@@ -45,7 +45,7 @@ void caseAction(Player* player,Carte* carte,Monster** monster,char preMouv){
         }
     }
     else if(carte->map[player->x][player->y]==6){
-        printf("Vous êtes sur le shop appuyer sur e pour entrez ou refuser poliment \n");
+        printf("Vous etes sur le shop appuyer sur e pour entrez ou refuser poliment \n");
         scanf(" %c",&var);
         if(var=='e'){
             buyInShop(player);

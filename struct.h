@@ -19,6 +19,7 @@ typedef struct
     int mana;
     int defense;
     Item** items;
+    int sizeInventaire;
     int x;
     int y;
     int xp;

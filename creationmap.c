@@ -113,15 +113,12 @@ void afficherMap(Carte* carte,int x,int y){
 }
 
 void safeZone(int* coordo,Carte* carte){
-    printf(" c :  %d %d\n",coordo[0],coordo[1]);
     for(int i=coordo[0]-1;i<=coordo[0]+1;i++){
-        printf("%d",i);
         for(int j=coordo[1]-1;j<=coordo[1]+1;j++){
             if(i>=0 && j>=0 && j<carte->taille && i<carte->taille && carte->map[i][j]!=4 && carte->map[i][j]!=6){
                 carte->map[i][j]=rand()%3+1;
             }
         }
-        printf(" OK \n");
     }
 }
 
@@ -131,6 +128,7 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     player[1]=rand()%carte->taille;
     playInit->x=player[0];
     playInit->y=player[1];  //initialisé joueur position en le dissociant de la map
+    carte->map[player[0]][player[1]]=3;
     int shop[2]={0,0};
     int exit[2]={0,0};
     int boss1[2]={0,0};
@@ -148,15 +146,14 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     linkedPoint(boss1,boss2,carte->map);
     linkedPoint(boss1,shop,carte->map);
     linkedPoint(boss2,shop,carte->map);
-    printf("Shop %d %d \n",shop[0],shop[1]);
     safeZone(shop,carte);
     safeZone(exit,carte);
-    carte->map[player[0]][player[1]]=3;
 }
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
     Player* player= createPlayer();
+    player->gold=10000;
     Monster** listDeMonstre = malloc(sizeof(Monster*)*3);
     Carte* carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
@@ -188,7 +185,7 @@ int initTest(){ //equivalent du main
     //Desalloc
     freeAll(carte);
     free(carte);
-    for(int i=0;i<tailleInventaire;i++){
+    for(int i=0;i<player->sizeInventaire;i++){
         free(player->items[i]->name);
         free(player->items[i]);
     }

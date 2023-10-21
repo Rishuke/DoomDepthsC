@@ -18,12 +18,6 @@ Player* createPlayer(){
             player->defense = 15;
             player->attack = 20;
             player->gold = 0;
-            player->items = malloc(sizeof (Item*) * 6);
-            for(int i=0;i<6;i++){
-                player->items[i]=malloc(sizeof(Item));
-                player->items[i]->name=malloc(sizeof(char)*100);
-                strcpy(player->items[i]->name,"Vide");
-            }
             player->mana = 100;
             player->xp = 0;
             player->xpForNextLvl = 10;
@@ -32,6 +26,7 @@ Player* createPlayer(){
             player->y = -1;
             player->lifePotion = 1;
             player->manaPotion = 1;
+            player->sizeInventaire=0;
             return player;
         } else {
             printf("La saisie n'était pas valide.\n");

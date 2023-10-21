@@ -8,7 +8,8 @@
 #include "struct.h"
 #define tailleInventaire 6
 
-void creerItem(char* name,int offensive,Item* item){
+Item* creerItem(char* name,int offensive){
+    Item* item=malloc(sizeof(Item));
     item->name=malloc(sizeof(char)*(strlen(name)+1));
     strcpy(item->name,name);
     item->power=rand()%12+3;
@@ -18,39 +19,40 @@ void creerItem(char* name,int offensive,Item* item){
 }
 
 void afficherItem(Item* arme){
-    if(arme->offensive)printf("Le %s peut infligé %d degat . ",arme->name,arme->power);
-    else printf("Le %s peut encaissé %d degat . ",arme->name,arme->power);
+    if(arme->offensive)printf("Le %s peut inflige %d degat . ",arme->name,arme->power);
+    else printf("Le %s peut encaisse %d degat . ",arme->name,arme->power);
     printf(" Son prix est de %d gold. ",arme->gold);
-    if(arme->equiped && arme->offensive)printf("Cette arme est équipé \n");
-    else if(arme->equiped && !arme->offensive)printf("Cette protection est équipé \n");
+    if(arme->equiped && arme->offensive)printf("Cette arme est equipe \n");
+    else if(arme->equiped && !arme->offensive)printf("Cette protection est equipe \n");
     else  printf("\n");
 }
 
 int afficherInventaire(Player* player){
-    if(!(strcmp(player->items[0]->name,"Vide"))){
-        printf("Vous n'avez même pas d'items mais posséder %d, allez vous battre \n",player->gold);
+    if(player->sizeInventaire==0){
+        printf("Vous n'avez meme pas d'items mais posseder %d, allez vous battre \n",player->gold);
         return 0;
     }
-    for(int i=1;i<tailleInventaire+1;i++){
-        if(strcmp(player->items[i-1]->name,"Vide")){
-            printf("%d ",i);
-            afficherItem(player->items[i-1]);
-        }
+    for(int i=1;i<player->sizeInventaire+1;i++){
+        printf("%d ",i);
+        afficherItem(player->items[i-1]);
     }
-    printf("Vous posséder %d gold \n",player->gold);
+    printf("Vous posseder %d gold \n",player->gold);
     return 1;
 }
 
 void addItemInventaire(Player* player,Item *item){
-    for(int i=0;i<tailleInventaire;i++){
-        if(!strcmp(player->items[i]->name,"Vide")){
-            player->items[i]->equiped=0;
-            player->items[i]->gold=item->gold;
-            player->items[i]->offensive=item->offensive;
-            player->items[i]->power=item->power;
-            strcpy(player->items[i]->name,item->name);
-            return;
-        }
+    if(player->sizeInventaire < 6){
+        player->sizeInventaire++;
+        if(player->sizeInventaire==1){player->items=malloc(sizeof(Item*));}
+        else {player->items=realloc(player->items,sizeof(Item*)*player->sizeInventaire);}
+        player->items[player->sizeInventaire-1]= malloc(sizeof(Item));
+        player->items[player->sizeInventaire-1]->equiped=0;
+        player->items[player->sizeInventaire-1]->gold=item->gold;
+        player->items[player->sizeInventaire-1]->offensive=item->offensive;
+        player->items[player->sizeInventaire-1]->power=item->power;
+        player->items[player->sizeInventaire-1]->name= malloc(sizeof(char)*(strlen(item->name)+1));
+        strcpy(player->items[player->sizeInventaire-1]->name,item->name);
+        return;
     }
     printf("Votre inventaire est plein. Voici l'item que vous venez de récupérer \n");
     afficherItem(item);
@@ -72,12 +74,13 @@ void addItemInventaire(Player* player,Item *item){
         player->items[choice-1]->gold=item->gold;
         player->items[choice-1]->offensive=item->offensive;
         player->items[choice-1]->power=item->power;
+        player->items[player->sizeInventaire-1]->name= realloc(player->items[player->sizeInventaire-1]->name,sizeof(char)* (strlen(item->name)+1));
         strcpy(player->items[choice-1]->name,item->name);
     }
 }
 
 void changeEquiped(Player* player,Item* item){
-    for(int i=0;i<tailleInventaire;i++){
+    for(int i=0;i<player->sizeInventaire;i++){
         if(player->items[i]->equiped==1 && player->items[i]->offensive==item->offensive){
             player->items[i]->equiped=0;
             break;
@@ -117,20 +120,40 @@ void changerItem(Player* player){
     }
 }
 
-void buyInShop(Player* player){
-    int buy=0;
-    Item** stockInShop=malloc(sizeof(Item*)*3);
-    for(int i=0;i<3;i++){
-        stockInShop[i]=malloc(sizeof(Item));
-        if(stockInShop[i]==NULL)exit(1);
+void freeShop(Item** items,int index,int* size){
+    for(int i=index;i<*size-1;i++){
+        items[i]->name=realloc(items[i]->name,strlen(items[i+1]->name)+1);
+        strcpy(items[i]->name,items[i+1]->name);
+        items[i]->offensive=items[i+1]->offensive;
+        items[i]->power=items[i+1]->power;
+        items[i]->gold=items[i+1]->gold;
     }
-    creerItem("Arme offensive",1,stockInShop[0]);
-    creerItem("Armure",0,stockInShop[1]);
-    creerItem("Arme offensive 2",1,stockInShop[2]);
+    (*size)--;
+    free(items[*size]->name);
+    free(items[*size]);
+    if(*size==0){
+        free(items);
+        return;
+    }
+    items=realloc(items,sizeof(Item*)*(*size));
+}
+
+void buyInShop(Player* player){
+    int sizeShop=4;
+    char* medievalWeapons[]= {"Sword", "Axe", "Mace", "Bow", "Crossbow", "Halberd", "Spear", "Dagger", "Warhammer", "Flail", "Longbow"};
+    char* medievalArmor[] = {"Chainmail", "Plate Armor", "Scale Armor", "Leather Armor", "Brigandine", "Kettle Hat", "Greaves", "Gauntlets", "Helmet", "Shield", "Tabard"};
+    int buy=0;
+    Item** stockInShop=malloc(sizeof(Item*)*sizeShop);
+    for(int i=0;i<sizeShop;i++){
+        int offense=rand()%2;
+        if(offense)stockInShop[i]= creerItem(medievalWeapons[rand()%11],1);
+        else stockInShop[i]= creerItem(medievalArmor[rand()%11],0);
+    }
+
     printf("Voici votre inventaire \n");
     afficherInventaire(player);
-    printf("Voici l'offre proposé \n");
-    for(int i=1;i<4;i++){
+    printf("Voici l'offre propose \n");
+    for(int i=1;i<sizeShop+1;i++){
         printf("%d ",i);
         afficherItem(stockInShop[i-1]);
     }
@@ -138,39 +161,35 @@ void buyInShop(Player* player){
     int choice;
     scanf(" %d",&choice);
     while(choice!=0){
-        if(choice<0 || choice > 4){
+        if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
             scanf(" %d",&choice);
             continue;
         }
-        else if(strcmp(stockInShop[choice-1]->name,"Unable")){
+        else{
             if(player->gold>=stockInShop[choice-1]->gold){
                 player->gold-=stockInShop[choice-1]->gold;
                 addItemInventaire(player,stockInShop[choice-1]);
                 printf("\nVoici votre inventaire \n");
                 afficherInventaire(player);
                 buy++;
-                strcpy(stockInShop[choice-1]->name,"Unable");
-                if(buy>2)break;
+                freeShop(stockInShop,choice-1,&sizeShop);
+                if(buy>3)break;
             }
             else{printf("Vous n'avez pas assez d'or \n");}
         }
-        else {printf("le produit n'est plus disponible \n");}
         printf("Voici l'offre restante \n");
-        for(int i=1;i<4;i++){
-            if(strcmp(stockInShop[i-1]->name,"Unable")){
+        for(int i=1;i<sizeShop+1;i++){
                 printf("%d ",i);
                 afficherItem(stockInShop[i-1]);
-            }
         }
-        printf("Pour continuer à acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
+        printf("Pour continuer a acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
         scanf(" %d",&choice);
     }
-    fflush(stdin);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < sizeShop; i++) {
         free(stockInShop[i]->name);
         free(stockInShop[i]);
     }
-    free(stockInShop);
+    if(sizeShop!=0)free(stockInShop);
     printf("Vous sortez du shop, le marchand vous lance 'On se reverra' puis ce dernier disparait dans les profondeurs \n");
 }
