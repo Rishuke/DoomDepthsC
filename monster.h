@@ -5,6 +5,4 @@
 Monster *createDemon(int lvlMap);
 Monster *createPhantom(int lvlMap);
 Monster *createBoss(int lvlMap);
-char** DisplayDemon();
-char** DisplayPhantom();
 #endif

@@ -2,8 +2,6 @@
 #include "monster.h"
 #include <stdlib.h>
 #include "string.h"
-#include <stdio.h>
-#include <time.h>
 
 Monster* createDemon(int lvlMap) {
     Monster *demon = malloc(sizeof(Monster));
@@ -40,44 +38,3 @@ Monster* createBoss(int lvlMap){
     boss->xpEarn = 50 + (lvlMap * 3);
     return boss;
 };
-
-
-char** DisplayDemon() {
-    const char *imgDemon[] = {
-            "              v     ",
-            "        (__)v | v    ",
-            "        /\\/\\\\_|_/ ",
-            "       _\\__/  |     ",
-            "      /  \\/`<`)     ",
-            "      \\ (  |\\_/    ",
-            "      /)))-(  |      ",
-            "     / /^ ^ \\ |     ",
-            "    /  )^/\\^( |     ",
-            "    )_//`__>> |      ",
-            "      #   #`  |      ",
-            "                     ",
-            "       DEMON         ",
-            "                     ",
-            "                     ",
-    };
-    return imgDemon;
-}
-char** DisplayPhantom() {
-    const char* imgPhantom={
-            " .-.      ",
-            "(o o) boo!",
-            "| O \\    ",
-            " \\   \\  ",
-            "  `~~~'   ",
-            "          ",
-            "          ",
-            "          ",
-            "          ",
-            "          ",
-            "          ",
-            "          ",
-            "  PHANTOM ",
-            "          "
-    };
-    return imgPhantom;
-}

@@ -93,7 +93,7 @@ void changeEquiped(Player* player,Item* item){
     else{
         player->defense=15+item->power+player->level*3;
     }
-    printf("Vous avez maintenant \n attaque : %d \n defense : %d \n",player->attack,player->defense);
+    printf("%s a maintenant \n attaque : %d \n defense : %d \n",player->name,player->attack,player->defense);
 }
 
 void changerItem(Player* player){
@@ -115,7 +115,7 @@ void changerItem(Player* player){
             changeEquiped(player,player->items[choice-1]);
         }
         afficherInventaire(player);
-        printf("Entrez le chiffre de celui que vous voulez équipé, sinon entrez 0 \n");
+        printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
         scanf(" %d",&choice);
     }
 }

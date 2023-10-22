@@ -17,4 +17,6 @@ add_executable(DoomDepthsC main.c
         Player.c
         monster.h
         monster.c
+        affichage.h
+        affichage.c
 )

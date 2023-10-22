@@ -9,6 +9,12 @@
 #include "combat.h"
 #define tailleInventaire 6
 
+
+void afficherAll(Carte* carte,Player* player){
+    printf("%s a \n attaque : %d \n defense : %d \n niveau : %d \n xp : %d/%d \n gold : %d \n potion vie : %d \n potion mana : %d \n levelMap : %d \n"
+    ,player->name,player->attack,player->defense,player->level,player->xp,player->xpForNextLvl,player->gold,player->lifePotion,player->manaPotion,carte->donjonLevel);
+
+}
 void freeAll(Carte* carte,Player* player){
     for(int i=0;i<carte->taille;i++){
         free(carte->map[i]);
@@ -175,13 +181,10 @@ int initTest(){ //equivalent du main
                 //combat(player,0,0,carte->donjonLevel);
             }
         }
-        else{
-
-        }
     }
     else{
         player= createPlayer();
-        player->gold=10000;
+        changeLevel(player);
         carte=malloc(sizeof(Carte));
         carte->donjonLevel=0;
         initCarte(carte);
@@ -203,7 +206,7 @@ int initTest(){ //equivalent du main
             changerItem(player);
         }
         else if(choice=='1'){
-            printf("%d or \n",player->gold);   //voir état joueur
+            afficherAll(carte,player);   //voir état joueur
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
