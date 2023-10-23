@@ -56,8 +56,8 @@ void afficherASCIIBoss(){
             "@@@@@@@@@@@@@@@@@@@@@@@@~~-\\/   |   \\/ -~~@@@@@@@@@@@@@@@@@@@@@@@",
             "@@@@@@@@@@@@@@@@@@@@@@(=)=;==========;=(=)@@@@@@@@@@@@@@@@@@@@@@",
             "@@@@@@@@@@@@@@@@@@@@@@@@@;    |     ;@@@@@@@@@@@@@@@@@@@@@@@@@@",
-            "",
             "                  THE DANGER : LE BOSS              ",
+            "                             1",
     };
     for(int i=0;i<33;i++){
         for(int j=0; j<strlen(imgPlayer[0]);j++){
@@ -65,9 +65,7 @@ void afficherASCIIBoss(){
             else printf("%c",imgPlayer[i-7][j]);
         }
         printf("\t\t\t");
-        for(int j=0;j< strlen(imgBoss[i]);j++){
-            printf("%c",imgBoss[i][j]);
-        }
+        printf("%s",imgBoss[i]);
         printf("\n");
     }
     printf("\n\n");
@@ -107,8 +105,6 @@ void afficherASCIIMob(int size,Monster** monsters){
             "      #   #`  |      ",
             "                     ",
             "       DEMON         ",
-            "                     ",
-            "                     ",
     };
 
     const char* imgPhantom []={
@@ -125,27 +121,40 @@ void afficherASCIIMob(int size,Monster** monsters){
             "          ",
             "          ",
             "  PHANTOM ",
-            "          "
     };
 
-    for(int i=0;i<14;i++){
-        for(int j=0;j<strlen(imgPlayer[0]);j++){
-            printf("%c",imgPlayer[i][j]);
-        }
+    for(int i=0;i<14;i++) {
+        printf("%s",imgPlayer[i]);
         printf("\t\t\t");
-        for(int j=0;j<size;j++){
-            if(!strcmp(monsters[j]->name,"Demon")){
-                for(int k=0;k<strlen(imgDemon[0]);k++){
-                    printf("%c",imgDemon[i][k]);
+        for (int j = 0; j < size; j++) {
+            if (!strcmp(monsters[j]->name, "Demon")) {
+                if (i == 13)printf("         %d         ", j + 1);
+                else {
+                    printf("%s",imgDemon[i]);
+                }
+            } else {
+                if (i == 13)printf("     %d    ", j + 1);
+                else {
+                    printf("%s", imgPhantom[i]);
                 }
             }
-            else{
-                for(int k=0;k<strlen(imgPhantom[0]);k++){
-                    printf("%c",imgPhantom[i][k]);
-                }
-            }
+            printf("\t ");
         }
         printf("\n");
     }
-    printf("\n\n");
+}
+
+void afficherGameOver(){
+    char* gameOver[] = {
+            "   _____                                 ____                        ",
+            "  / ____|                               / __ \\                       ",
+            " | |  __    __ _   _ __ ___     ___    | |  | | __   __   ___   _ __ ",
+            " | | |_ |  / _` | | '_ ` _ \\   / _ \\   | |  | | \\ \\ / /  / _ \\ | '__|",
+            " | |__| | | (_| | | | | | | | |  __/   | |__| |  \\ V /  |  __/ | |   ",
+            "  \\_____|  \\__,_| |_| |_| |_|  \\___|    \\____/    \\_/    \\___| |_   "
+    };
+    for(int i=0;i<5;i++){
+            printf("%s",gameOver[i]);
+            printf("\n");
+    }
 }

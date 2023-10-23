@@ -8,7 +8,7 @@
 void buyInShop(Player* player);
 int afficherInventaire(Player* player);
 void afficherItem(Item* item);
-void creerItem(char* name,int offensive,Item* item);
+Item* creerItem(char* name,int offensive);
 void addItemInventaire(Player* player,Item* item);
 void changerItem(Player* player);
 #endif

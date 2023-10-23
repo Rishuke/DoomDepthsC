@@ -6,4 +6,5 @@
 #define DOOMDEPTHSC_AFFICHAGE_H
 void afficherASCIIBoss();
 void afficherASCIIMob(int size,Monster** monsters);
+void afficherGameOver();
 #endif //DOOMDEPTHSC_AFFICHAGE_H

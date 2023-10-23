@@ -19,7 +19,7 @@ void stepBack(char preMouv,Player* player){
     else if(preMouv=='q')player->y++;
 }
 
-void caseAction(Player* player,Carte* carte,char preMouv){
+int caseAction(Player* player,Carte* carte,char preMouv){
     char var;
     if(carte->map[player->x][player->y]==1){
         player->gold+=50;
@@ -31,7 +31,7 @@ void caseAction(Player* player,Carte* carte,char preMouv){
         if(!win){
             freeAll(carte,player);
             printf("C'est la fin de votre aventure adieu \n");
-            exit(0);
+            return 0;
         }
         else{
             changeLevel(player);
@@ -49,7 +49,6 @@ void caseAction(Player* player,Carte* carte,char preMouv){
         }
         else{
             stepBack(preMouv,player);
-            return;
         }
     }
     else if(carte->map[player->x][player->y]==6){
@@ -61,7 +60,6 @@ void caseAction(Player* player,Carte* carte,char preMouv){
         }
         else{
             stepBack(preMouv,player);
-            return;
         }
     }
     else if(carte->map[player->x][player->y]==7){
@@ -72,6 +70,7 @@ void caseAction(Player* player,Carte* carte,char preMouv){
         }
         carte->map[player->x][player->y]=3;
     }
+    return 1;
 }
 
 char PlayerMouv(Player* player,Carte* carte, char a){

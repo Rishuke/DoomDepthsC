@@ -7,6 +7,8 @@
 #include <string.h>
 #include "struct.h"
 #define tailleInventaire 6
+#define DEFENSESTART 10
+#define ATTACKSTART 20
 
 Item* creerItem(char* name,int offensive){
     Item* item=malloc(sizeof(Item));
@@ -88,10 +90,10 @@ void changeEquiped(Player* player,Item* item){
     }
     item->equiped=1;
     if(item->offensive){
-        player->attack=20+item->power+player->level*3;
+        player->attack=ATTACKSTART+item->power+player->level*3;
     }
     else{
-        player->defense=15+item->power+player->level*3;
+        player->defense=DEFENSESTART+item->power+player->level;
     }
     printf("%s a maintenant \n attaque : %d \n defense : %d \n",player->name,player->attack,player->defense);
 }

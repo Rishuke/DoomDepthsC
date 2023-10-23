@@ -20,13 +20,12 @@ void freeAll(Carte* carte,Player* player){
         free(carte->map[i]);
     }
     free(carte->map);
-
     free(carte);
     for(int i=0;i<player->sizeInventaire;i++){
         free(player->items[i]->name);
         free(player->items[i]);
     }
-    free(player->items);
+    if(player->sizeInventaire!=0)free(player->items);
     free(player);
 }
 
@@ -184,7 +183,6 @@ int initTest(){ //equivalent du main
     }
     else{
         player= createPlayer();
-        changeLevel(player);
         carte=malloc(sizeof(Carte));
         carte->donjonLevel=0;
         initCarte(carte);
@@ -200,7 +198,8 @@ int initTest(){ //equivalent du main
         if(choice=='8')break;
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
             char preMouv=PlayerMouv(player,carte,choice);
-            caseAction(player,carte,preMouv);
+            int isDead=caseAction(player,carte,preMouv);
+            if(!isDead)return 0;
         }
         else if(choice=='0'){
             changerItem(player);
