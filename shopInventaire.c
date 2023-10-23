@@ -110,7 +110,7 @@ void changerItem(Player* player){
     int choice;
     scanf(" %d",&choice);
     while(choice !=0){
-        if(!(strcmp(player->items[choice-1]->name,"Vide"))|| choice<0 || choice > 6){
+        if(choice<0 || choice>player->sizeInventaire){
             printf("Entrez une valeur valide ! \n");
         }
         else{

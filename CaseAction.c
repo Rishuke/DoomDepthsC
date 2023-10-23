@@ -33,9 +33,6 @@ int caseAction(Player* player,Carte* carte,char preMouv){
             printf("C'est la fin de votre aventure adieu \n");
             return 0;
         }
-        else{
-            changeLevel(player);
-        }
         carte->map[player->x][player->y]=3;
     }
     else if(carte->map[player->x][player->y]==4){
@@ -66,7 +63,8 @@ int caseAction(Player* player,Carte* carte,char preMouv){
         int win = combat(player,1,0,carte->donjonLevel);
         if(!win){
             freeAll(carte,player);
-            exit(0);
+            printf("C'est la fin de votre aventure adieu \n");
+            return 0;
         }
         carte->map[player->x][player->y]=3;
     }

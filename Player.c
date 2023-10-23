@@ -18,8 +18,8 @@ Player* createPlayer(){
             player->name = malloc(strlen(name) + 1);
             strcpy(player->name, name);
             player->hp = 100;
-            player->defense = DEFENSESTART;
-            player->attack = ATTACKSTART;
+            player->defense = DEFENSESTART+1;
+            player->attack = ATTACKSTART+3;
             player->gold = 0;
             player->mana = 100;
             player->xp = 0;
@@ -67,7 +67,7 @@ void afficherVieJoueur(int hp){
             printf("-");
         }
     }
-    printf(" ] \n");
+    printf(" ] %d/100 \n",hp);
     setTextColor(7);
 }
 
@@ -83,6 +83,6 @@ void afficherManaJoueur(int mana){
             printf("-");
         }
     }
-    printf(" ] \n");
+    printf(" ] %d/100\n",mana);
     setTextColor(7);
 }
