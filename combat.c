@@ -122,6 +122,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 return 0;
             }
         }
+        else printf("Entrez une valeur valide \n");
     }
 }
 

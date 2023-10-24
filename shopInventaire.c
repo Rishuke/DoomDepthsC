@@ -164,14 +164,12 @@ void buyInShop(Player* player){
         afficherItem(stockInShop[i-1]);
     }
     printf("Pour acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
-    int choice;
-    fflush(stdin);
-    scanf(" %d",&choice);
+    int choice=12;
     while(choice!=0){
+        fflush(stdin);
+        scanf(" %d",&choice);
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
-            fflush(stdin);
-            scanf(" %d",&choice);
             continue;
         }
         else{
@@ -192,8 +190,6 @@ void buyInShop(Player* player){
                 afficherItem(stockInShop[i-1]);
         }
         printf("Pour continuer a acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
-        fflush(stdin);
-        scanf(" %d",&choice);
     }
     for (int i = 0; i < sizeShop; i++) {
         free(stockInShop[i]->name);
