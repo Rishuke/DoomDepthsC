@@ -197,7 +197,10 @@ int initTest(){ //equivalent du main
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
             char preMouv=PlayerMouv(player,carte,choice);
             int isDead=caseAction(player,carte,preMouv);
-            if(!isDead)return 0;
+            if(!isDead){
+                freeAll(carte,player);
+                return 0;
+            }
         }
         else if(choice=='0'){
             changerItem(player);

@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include <stdlib.h>
 #include "creationmap.h"
 #include "struct.h"
 #include "shopInventaire.h"
@@ -29,7 +28,6 @@ int caseAction(Player* player,Carte* carte,char preMouv){
     else if(carte->map[player->x][player->y]==2){
         int win = combat(player,0,0,carte->donjonLevel);
         if(!win){
-            freeAll(carte,player);
             printf("C'est la fin de votre aventure adieu \n");
             return 0;
         }
@@ -63,7 +61,6 @@ int caseAction(Player* player,Carte* carte,char preMouv){
     else if(carte->map[player->x][player->y]==7){
         int win = combat(player,1,0,carte->donjonLevel);
         if(!win){
-            freeAll(carte,player);
             printf("C'est la fin de votre aventure adieu \n");
             return 0;
         }

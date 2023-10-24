@@ -6,5 +6,4 @@
 #ifndef DOOMDEPTHSC_COMBAT_H
 #define DOOMDEPTHSC_COMBAT_H
 int combat(Player* player,int boss,int fromSauvegarde, int lvlMap);
-void changeLevel(Player* player);
 #endif //DOOMDEPTHSC_COMBAT_H

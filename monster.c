@@ -1,7 +1,6 @@
 #include "struct.h"
-#include "monster.h"
 #include <stdlib.h>
-#include "string.h"
+#include <string.h>
 
 Monster* createDemon(int lvlMap) {
     Monster *demon = malloc(sizeof(Monster));
