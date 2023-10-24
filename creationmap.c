@@ -8,8 +8,8 @@
 
 
 void afficherAll(Carte* carte,Player* player){
-    printf("%s a \n attaque : %d \n defense : %d \n niveau : %d \n xp : %d/%d \n gold : %d \n potion vie : %d \n potion mana : %d \n levelMap : %d \n"
-    ,player->name,player->attack,player->defense,player->level,player->xp,player->xpForNextLvl,player->gold,player->lifePotion,player->manaPotion,carte->donjonLevel);
+    printf("%s a \n mana : %d \n hp : %d \n attaque : %d \n defense : %d \n niveau : %d \n xp : %d/%d \n gold : %d \n potion vie : %d \n potion mana : %d \n levelMap : %d \n"
+    ,player->name,player->mana,player->hp,player->attack,player->defense,player->level,player->xp,player->xpForNextLvl,player->gold,player->lifePotion,player->manaPotion,carte->donjonLevel);
 
 }
 void freeAll(Carte* carte,Player* player){
@@ -159,6 +159,7 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     linkedPoint(boss2,shop,carte->map);
     safeZone(shop,carte);
     safeZone(exit,carte);
+    carte->map[player[0]][player[1]]=3;
 }
 
 int initTest(){ //equivalent du main

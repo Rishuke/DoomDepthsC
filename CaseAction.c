@@ -50,6 +50,7 @@ int caseAction(Player* player,Carte* carte,char preMouv){
     }
     else if(carte->map[player->x][player->y]==6){
         printf("Vous etes sur le shop appuyer sur e pour entrez ou refuser poliment \n");
+        fflush(stdin);
         scanf(" %c",&var);
         if(var=='e'){
             buyInShop(player);

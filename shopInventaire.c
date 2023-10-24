@@ -62,9 +62,11 @@ void addItemInventaire(Player* player,Item *item){
     afficherInventaire(player);
     printf("Choisissez l'arme à supprimer dans votre inventaire en tapant son numéro sinon taper 0 \n");
     int choice;
+    fflush(stdin);
     scanf(" %d",&choice);
     while(choice>tailleInventaire || choice<0){
         printf("Entrer une valeur valide \n");
+        fflush(stdin);
         scanf(" %d",&choice);
     }
     if(choice==0){
@@ -106,8 +108,9 @@ void changerItem(Player* player){
         printf("Il n'y a rien à faire dans ce menu pour le moment\n");
         return;
     }
-    printf("Entrez le chiffre de celui que vous voulez équipé, sinon entrez 0 \n");
+    printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
     int choice;
+    fflush(stdin);
     scanf(" %d",&choice);
     while(choice !=0){
         if(choice<0 || choice>player->sizeInventaire){
@@ -118,6 +121,7 @@ void changerItem(Player* player){
         }
         afficherInventaire(player);
         printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
+        fflush(stdin);
         scanf(" %d",&choice);
     }
 }
@@ -161,10 +165,12 @@ void buyInShop(Player* player){
     }
     printf("Pour acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
     int choice;
+    fflush(stdin);
     scanf(" %d",&choice);
     while(choice!=0){
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
+            fflush(stdin);
             scanf(" %d",&choice);
             continue;
         }
@@ -186,6 +192,7 @@ void buyInShop(Player* player){
                 afficherItem(stockInShop[i-1]);
         }
         printf("Pour continuer a acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
+        fflush(stdin);
         scanf(" %d",&choice);
     }
     for (int i = 0; i < sizeShop; i++) {
