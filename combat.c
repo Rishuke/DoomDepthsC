@@ -60,6 +60,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                     if(monsters[i]->hp<0) {
                         reduceSizeMob(i + 1, monsters, nbMonstre);
                     }
+                    reduceSizeMob(i+1,monsters,nbMonstre);
                 }
                 return 0;
             }
@@ -236,6 +237,7 @@ void winCase(Player* player,int goldEarn,int xpEarn){
     printf("Vous voici de retour vers les profondeurs, et les dangers sont nombreux \n");
 }
 
+
 int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
     Monster** monsters=NULL;
     int nbMonstre;
@@ -313,6 +315,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
             else if(choice==6){
                 printf("Sauvegarde en cours ... \n");
                 //launchSauvegarde
+				save_player_to_db(player);
             }
             if(nbMonstre==0){
                 winCase(player,goldEarn,xpEarn);

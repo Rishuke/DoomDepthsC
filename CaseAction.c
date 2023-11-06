@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include <conio.h>
 #include "creationmap.h"
 #include "struct.h"
 #include "shopInventaire.h"

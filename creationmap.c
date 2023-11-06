@@ -3,9 +3,10 @@
 #include <time.h>
 #include "struct.h"
 #include "CaseAction.h"
-#include "player.h"
-#include "shopInventaire.h"
 #include "combat.h"
+#include "Player.h"
+#include "shopInventaire.h"
+#include "sauvegarde_player.h"
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -170,6 +171,8 @@ int initTest(){ //equivalent du main
     int fromSauvegarde = 0;
     if(fromSauvegarde){
         //telecharger player + carte
+        player = malloc(sizeof(Player));
+        load_player_from_db(player);
         int avecMob=0;
         if(avecMob){
             int boss=0;
@@ -183,6 +186,7 @@ int initTest(){ //equivalent du main
     }
     else{
         player= createPlayer();
+        carte=malloc(sizeof(Carte));
         carte->donjonLevel=0;
         initCarte(carte);
         initMap(carte,player);
@@ -209,11 +213,13 @@ int initTest(){ //equivalent du main
         else if(choice=='1'){
             afficherAll(carte,player);   //voir état joueur
         }
+        else if(choice =='7' ){
+        	save_player_to_db(player);
+        }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
-    //sauvegarde file
-
+	save_player_to_db(player) 
     //Desalloc
     freeAll(carte,player);
     return 0;

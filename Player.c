@@ -2,8 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+<<<<<<< HEAD
 #include <conio.h>
 #include <windows.h>
+=======
+//#include <windows.h>
+>>>>>>> origin
 #define DEFENSESTART 10
 #define ATTACKSTART 20
 
@@ -51,6 +55,7 @@ void changeLevel(Player* player){
         printf("%s augmente d'un niveau, vous voilà au niveau %d avec \n attaque : %d \n defense : %d\n",player->name,player->level,player->attack,player->defense);
     }
 }
+<<<<<<< HEAD
 
 void setTextColor(int colorCode) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -59,6 +64,16 @@ void setTextColor(int colorCode) {
 
 void afficherVieJoueur(int hp){
     setTextColor(12);
+=======
+/*
+void setTextColor(int colorCode) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, colorCode);
+}*/
+
+void afficherVieJoueur(int hp){
+   // setTextColor(12);
+>>>>>>> origin
     printf("Vie : [ ");
     for(int i=0;i<100;i++){
         if(i<hp){
@@ -69,12 +84,20 @@ void afficherVieJoueur(int hp){
         }
     }
     printf(" ] %d/100 \n",hp);
+<<<<<<< HEAD
     setTextColor(7);
+=======
+   // setTextColor(7);
+>>>>>>> origin
 }
 
 
 void afficherManaJoueur(int mana){
+<<<<<<< HEAD
     setTextColor(9);
+=======
+   // setTextColor(9);
+>>>>>>> origin
     printf("Mana: [ ");
     for(int i=0;i<100;i++){
         if(i<mana){
@@ -85,5 +108,10 @@ void afficherManaJoueur(int mana){
         }
     }
     printf(" ] %d/100\n",mana);
+<<<<<<< HEAD
     setTextColor(7);
 }
+=======
+   // setTextColor(7);
+}
+>>>>>>> origin
