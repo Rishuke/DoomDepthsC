@@ -5,6 +5,7 @@
 #include "CaseAction.h"
 #include "player.h"
 #include "shopInventaire.h"
+#include "combat.h"
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -164,7 +165,8 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Player* player;Carte* carte;
+    Player* player;
+    Carte* carte=malloc(sizeof(Carte));
     int fromSauvegarde = 0;
     if(fromSauvegarde){
         //telecharger player + carte
@@ -172,16 +174,15 @@ int initTest(){ //equivalent du main
         if(avecMob){
             int boss=0;
             if(boss){
-                //combat(player,0,0,carte->donjonLevel);
+                combat(player,1,1,carte->donjonLevel,carte);
             }
             else{
-                //combat(player,0,0,carte->donjonLevel);
+                combat(player,0,1,carte->donjonLevel,carte);
             }
         }
     }
     else{
         player= createPlayer();
-        carte=malloc(sizeof(Carte));
         carte->donjonLevel=0;
         initCarte(carte);
         initMap(carte,player);

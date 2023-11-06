@@ -174,7 +174,7 @@ char* generateRandomName(int length) {
 
 void xpAllMob(Monster** monsters,int size,int* xp,int* gold){
     for(int i=0;i<size;i++){
-        *gold+=monsters[i]->xpEarn;
+        *gold+=monsters[i]->hp*3;
         *xp+=monsters[i]->hp+monsters[i]->attackMax+monsters[i]->defense;
     }
 }
@@ -236,9 +236,11 @@ void winCase(Player* player,int goldEarn,int xpEarn){
     printf("Vous voici de retour vers les profondeurs, et les dangers sont nombreux \n");
 }
 
-int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
+int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
     Monster** monsters=NULL;
     int nbMonstre;
+    int xpEarn=0;
+    int goldEarn=0;
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
             //getBoss
@@ -267,11 +269,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
             }
         }
     }
+    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     printf("\n Pensez a vous equipez avant le combat \n");
     changerItem(player);
-    int xpEarn=0;
-    int goldEarn=0;
-    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     int choice;
     printf("Au non c'est une embuscade \n");
     while(1){

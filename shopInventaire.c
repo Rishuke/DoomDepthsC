@@ -30,7 +30,7 @@ void afficherItem(Item* arme){
 
 int afficherInventaire(Player* player){
     if(player->sizeInventaire==0){
-        printf("Vous n'avez meme pas d'items mais posseder %d, allez vous battre \n",player->gold);
+        printf("Vous n'avez meme pas d'items et posseder %d gold, allez vous battre \n",player->gold);
         return 0;
     }
     for(int i=1;i<player->sizeInventaire+1;i++){
@@ -100,11 +100,7 @@ void changeEquiped(Player* player,Item* item){
 }
 
 void changerItem(Player* player){
-    if(!afficherInventaire(player)){
-        return;
-    }
-    if((player->items[0]->equiped && player->items[1]->equiped && !(strcmp(player->items[2]->name,"Vide")))){
-        printf("Il n'y a rien à faire dans ce menu pour le moment\n");
+    if(!afficherInventaire(player)) {
         return;
     }
     printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
@@ -167,6 +163,7 @@ void buyInShop(Player* player){
     while(choice!=0){
         fflush(stdin);
         scanf(" %d",&choice);
+        if(choice==0)break;
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
             continue;
