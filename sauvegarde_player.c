@@ -1,4 +1,4 @@
-#include "Player.h.h"
+/**#include "Player.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -78,5 +78,5 @@ void load_player_from_db(Player *player) {
     sqlite3_finalize(res);
     sqlite3_close(db);
     
-}
+}**/
 

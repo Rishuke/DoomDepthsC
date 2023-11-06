@@ -6,7 +6,7 @@
 #include "combat.h"
 #include "Player.h"
 #include "shopInventaire.h"
-#include "sauvegarde_player.h"
+//#include "sauvegarde_player.h"
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -172,7 +172,7 @@ int initTest(){ //equivalent du main
     if(fromSauvegarde){
         //telecharger player + carte
         player = malloc(sizeof(Player));
-        load_player_from_db(player);
+        //load_player_from_db(player);
         int avecMob=0;
         if(avecMob){
             int boss=0;
@@ -214,12 +214,12 @@ int initTest(){ //equivalent du main
             afficherAll(carte,player);   //voir état joueur
         }
         else if(choice =='7' ){
-        	save_player_to_db(player);
+        	//save_player_to_db(player);
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
-	save_player_to_db(player) 
+	//save_player_to_db(player);
     //Desalloc
     freeAll(carte,player);
     return 0;

@@ -19,8 +19,6 @@ add_executable(DoomDepthsC main.c
         monster.c
         affichage.h
         affichage.c
-<<<<<<< HEAD
-=======
         sauvegarde_player.c
->>>>>>> origin
+        sauvegarde_player.c
 )
