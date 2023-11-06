@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <conio.h>
 #include <windows.h>
 #define DEFENSESTART 10
 #define ATTACKSTART 20
