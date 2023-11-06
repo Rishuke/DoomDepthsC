@@ -1,0 +1,3 @@
+/home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles/DoomDepthsC.dir
+/home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles/edit_cache.dir
+/home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles/rebuild_cache.dir
