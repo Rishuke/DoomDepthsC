@@ -52,12 +52,14 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 player->mana-=*nbMonstre*20;
                 for(int i=0;i<*nbMonstre;i++){
                     int damage = 20-(monsters[i]->defense/2);
+                    if(damage<0)damage=0;
                     printf("Sort de glace inflige a %s : %d degat \n",monsters[i]->name,damage);
                     monsters[i]->hp-=damage;
                 }
                 for(int i=0;i<*nbMonstre;i++){
-                    reduceSizeMob(i+1,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
+                    if(monsters[i]->hp<0) {
+                        reduceSizeMob(i + 1, monsters, nbMonstre);
+                    }
                 }
                 return 0;
             }
@@ -113,7 +115,6 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 if(tue==10){
                     printf("%s meurt sur le coup \n",monsters[mobSelect-1]->name);
                     reduceSizeMob(mobSelect,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
                 }
                 else{
                     printf("Il ne se passe rien \n");
@@ -145,7 +146,6 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
     }
     if(monsters[choice-1]->hp<=0){
         reduceSizeMob(choice,monsters,size);
-        if(*size!=0)afficherASCIIMob(*size,monsters);
     }
 }
 

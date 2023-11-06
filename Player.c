@@ -8,7 +8,7 @@
 #define ATTACKSTART 20
 
 Player* createPlayer(){
-    char name[50];
+    char name[10];
     printf("Entrez un nom : ");
     fflush(stdin);
     int result = scanf(" %s", name);
