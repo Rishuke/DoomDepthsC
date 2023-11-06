@@ -103,10 +103,6 @@ void changerItem(Player* player){
     if(!afficherInventaire(player)){
         return;
     }
-    if((player->items[0]->equiped && player->items[1]->equiped && !(strcmp(player->items[2]->name,"Vide")))){
-        printf("Il n'y a rien à faire dans ce menu pour le moment\n");
-        return;
-    }
     printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
     int choice;
     fflush(stdin);

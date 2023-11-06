@@ -5,7 +5,7 @@
 #include <windows.h>
 #include "sqlite3.h"
 
-int save_player_to_db(Player *player) {
+void save_player_to_db(Player *player) {
     sqlite3 *db;
     char *err_msg = 0;
     int rc = sqlite3_open("game.db", &db);
@@ -31,10 +31,10 @@ int save_player_to_db(Player *player) {
     }
 
     sqlite3_close(db);
-    return 0;
+    
 }
 
-int load_player_from_db(Player *player) {
+void load_player_from_db(Player *player) {
     sqlite3 *db;
     sqlite3_stmt *res;
     
@@ -77,6 +77,6 @@ int load_player_from_db(Player *player) {
 
     sqlite3_finalize(res);
     sqlite3_close(db);
-    return 0;
+    
 }
 
