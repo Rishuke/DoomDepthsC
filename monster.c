@@ -17,7 +17,7 @@ Monster* createPhantom(int lvlMap){
     Monster *phantom = malloc(sizeof(Monster));
     phantom->name = malloc(sizeof(char) * 8);
     strcpy(phantom->name, "Phantom");
-    phantom->hp=10+(lvlMap*3);
+    phantom->hp=rand()%5+5+(lvlMap*3);
     phantom->attackMax = rand()%15+10+(lvlMap * 3);
     phantom->attackMin = 1 + (lvlMap * 3);
     phantom->defense = 10 + (lvlMap * 3);

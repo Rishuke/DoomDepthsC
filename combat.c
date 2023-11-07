@@ -19,16 +19,15 @@ void reduceSizeMob(int choice,Monster** monsters,int* size){
         monsters[i]->attackMax=monsters[i+1]->attackMax;
         monsters[i]->attackMin=monsters[i+1]->attackMin;
         monsters[i]->defense=monsters[i+1]->defense;
-        monsters[i]->xpEarn=monsters[i+1]->xpEarn;
     }
     (*size)--;
     free(monsters[*size]->name);
     free(monsters[*size]);
     if(*size==0){
+        printf("Avant free %p\n",monsters[0]);
         free(monsters);
         return;
     }
-    monsters= realloc(monsters,sizeof(Monster*)*(*size));
 }
 
 int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
@@ -57,10 +56,9 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                     monsters[i]->hp-=damage;
                 }
                 for(int i=0;i<*nbMonstre;i++){
-                    if(monsters[i]->hp<0) {
+                    if(monsters[i]->hp<=0) {
                         reduceSizeMob(i + 1, monsters, nbMonstre);
                     }
-                    reduceSizeMob(i+1,monsters,nbMonstre);
                 }
                 return 0;
             }
@@ -147,6 +145,7 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
     }
     if(monsters[choice-1]->hp<=0){
         reduceSizeMob(choice,monsters,size);
+        printf("Apres free %p\n",monsters[0]);
     }
 }
 

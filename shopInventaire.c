@@ -136,7 +136,6 @@ void freeShop(Item** items,int index,int* size){
         free(items);
         return;
     }
-    items=realloc(items,sizeof(Item*)*(*size));
 }
 
 void buyInShop(Player* player){
