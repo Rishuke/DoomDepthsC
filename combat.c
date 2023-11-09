@@ -10,8 +10,10 @@
 #include "affichage.h"
 #include "shopInventaire.h"
 
-void reduceSizeMob(int choice,Monster** monsters,int* size){
-    printf("Vous avez tue %s \n",monsters[choice-1]->name);
+void reduceSizeMob(int choice,Monster** monsters,int* size,Player* player){
+    printf("Vous avez tue %s, il vous donne %d gold et %d xp\n",monsters[choice-1]->name,monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5,monsters[choice-1]->attackMax*5);
+    player->xp+=monsters[choice-1]->hp*3;
+    player->gold+=monsters[choice-1]->attackMax*5;
     for(int i=choice-1;i<*size-1;i++){
         monsters[i]->name= realloc(monsters[i]->name,sizeof(char)*(strlen(monsters[i+1]->name)+1));
         strcpy(monsters[i]->name,monsters[i+1]->name);
@@ -57,7 +59,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 }
                 for(int i=0;i<*nbMonstre;i++){
                     if(monsters[i]->hp<=0) {
-                        reduceSizeMob(i + 1, monsters, nbMonstre);
+                        reduceSizeMob(i + 1, monsters, nbMonstre,player);
                     }
                 }
                 return 0;
@@ -113,7 +115,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 int tue=rand()%10+1;
                 if(tue==10){
                     printf("%s meurt sur le coup \n",monsters[mobSelect-1]->name);
-                    reduceSizeMob(mobSelect,monsters,nbMonstre);
+                    reduceSizeMob(mobSelect,monsters,nbMonstre,player);
                 }
                 else{
                     printf("Il ne se passe rien \n");
@@ -144,8 +146,7 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
         monsters[choice-1]->hp-=damage;
     }
     if(monsters[choice-1]->hp<=0){
-        reduceSizeMob(choice,monsters,size);
-        printf("Apres free %p\n",monsters[0]);
+        reduceSizeMob(choice,monsters,size,player);
     }
 }
 
@@ -171,14 +172,6 @@ char* generateRandomName(int length) {
     name[length] = '\0';
     return name;
 }
-
-void xpAllMob(Monster** monsters,int size,int* xp,int* gold){
-    for(int i=0;i<size;i++){
-        *gold+=monsters[i]->hp*3;
-        *xp+=monsters[i]->hp+monsters[i]->attackMax+monsters[i]->defense;
-    }
-}
-
 
 int prendreMana(Player* player){
     if(player->mana==100){
@@ -218,14 +211,12 @@ int prendreVie(Player* player){
     }
 }
 
-void winCase(Player* player,int goldEarn,int xpEarn){
+void winCase(Player* player){
     int randPotV=rand()%3;
     int randPotM=rand()%3;
-    player->gold+=goldEarn;
-    player->xp=xpEarn;
     player->lifePotion+=randPotV;
     player->manaPotion+=randPotM;
-    printf("Vous vainquez au travers des tenebres et repartez avec %d gold et %d xp et %d potion de vie et %d potion de mana\n",goldEarn,xpEarn,randPotV,randPotM);
+    printf("Vous vainquez au travers des tenebres et repartez avec %d potion de vie et %d potion de mana\n",randPotV,randPotM);
     changeLevel(player);
     printf("Dans leur debauche les ennemis perdent une de leurs arme \n");
     char* name= generateRandomName(rand()%20+4);
@@ -237,11 +228,9 @@ void winCase(Player* player,int goldEarn,int xpEarn){
 }
 
 
-int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
+int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
     Monster** monsters=NULL;
     int nbMonstre;
-    int xpEarn=0;
-    int goldEarn=0;
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
             //getBoss
@@ -270,7 +259,6 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
             }
         }
     }
-    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     printf("\n Pensez a vous equipez avant le combat \n");
     changerItem(player);
     int choice;
@@ -317,7 +305,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
 				//save_player_to_db(player);
             }
             if(nbMonstre==0){
-                winCase(player,goldEarn,xpEarn);
+                winCase(player);
                 return 1;
             }
             nbTour--;

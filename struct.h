@@ -37,8 +37,6 @@ typedef struct
     int attackMin;
     int attackMax;
     int defense;
-    int xpEarn;
-
 } Monster;
 
 typedef struct{
