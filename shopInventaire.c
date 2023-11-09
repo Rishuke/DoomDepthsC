@@ -27,6 +27,10 @@ void afficherItem(Item* arme){
 }
 
 void afficherInventaire(Player* player){
+    if(!strcmp(player->items[0]->name,"Vide")){
+        printf("Ce dernier est vide ...\n");
+        return;
+    }
     for(int i=1;i<tailleInventaire+1;i++){
         if(strcmp(player->items[i-1]->name,"Vide")){
             printf("%d ",i);

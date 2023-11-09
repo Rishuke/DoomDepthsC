@@ -169,7 +169,6 @@ int initTest(){ //equivalent du main
         }
         else if(choice=='0'){
             afficherInventaire(player);
-            //changer arme équipé
         }
         else if(choice=='1'){
             printf("%d or \n",player->gold);   //voir état joueur
