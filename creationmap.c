@@ -221,6 +221,7 @@ int initTest(){ //equivalent du main
     }
     //sauvegarde file
 	save_player_to_db(player);
+	sauvegarderInventaire(player);
     //Desalloc
     freeAll(carte,player);
     return 0;
