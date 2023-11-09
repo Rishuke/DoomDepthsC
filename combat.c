@@ -302,7 +302,12 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
             else if(choice==6){
                 printf("Sauvegarde en cours ... \n");
                 //launchSauvegarde
+<<<<<<< HEAD
 				//save_player_to_db(player);
+=======
+				save_player_to_db(player);
+				sauvegarderInventaire(player);
+>>>>>>> c313e6b9c2ceb3191da7af33bf4adbb431ae19ad
             }
             if(nbMonstre==0){
                 winCase(player);

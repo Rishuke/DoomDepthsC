@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /**#include "Player.h"
-=======
-#include "Player.h"
->>>>>>> 05743a04e107a8aa2e338189b270921387be9460
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
