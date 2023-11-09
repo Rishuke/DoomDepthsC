@@ -9,7 +9,7 @@
 #include "Player.h"
 #include "affichage.h"
 #include "shopInventaire.h"
-
+//fr
 void reduceSizeMob(int choice,Monster** monsters,int* size){
     printf("Vous avez tue %s \n",monsters[choice-1]->name);
     for(int i=choice-1;i<*size-1;i++){
