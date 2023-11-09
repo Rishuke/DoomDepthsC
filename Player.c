@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-//#include <windows.h>
+
+
 #define DEFENSESTART 10
 #define ATTACKSTART 20
 
 Player* createPlayer(){
-    char name[50];
+    char name[10];
     printf("Entrez un nom : ");
     fflush(stdin);
     int result = scanf(" %s", name);
@@ -50,6 +51,15 @@ void changeLevel(Player* player){
         printf("%s augmente d'un niveau, vous voilà au niveau %d avec \n attaque : %d \n defense : %d\n",player->name,player->level,player->attack,player->defense);
     }
 }
+
+
+void setTextColor(int colorCode) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, colorCode);
+}
+
+void afficherVieJoueur(int hp){
+
 /*
 void setTextColor(int colorCode) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -58,6 +68,7 @@ void setTextColor(int colorCode) {
 
 void afficherVieJoueur(int hp){
    // setTextColor(12);
+
     printf("Vie : [ ");
     for(int i=0;i<100;i++){
         if(i<hp){
@@ -68,12 +79,16 @@ void afficherVieJoueur(int hp){
         }
     }
     printf(" ] %d/100 \n",hp);
+
    // setTextColor(7);
+
 }
 
 
 void afficherManaJoueur(int mana){
+
    // setTextColor(9);
+
     printf("Mana: [ ");
     for(int i=0;i<100;i++){
         if(i<mana){
@@ -84,5 +99,7 @@ void afficherManaJoueur(int mana){
         }
     }
     printf(" ] %d/100\n",mana);
+
    // setTextColor(7);
 }
+

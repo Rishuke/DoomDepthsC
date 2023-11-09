@@ -52,12 +52,15 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 player->mana-=*nbMonstre*20;
                 for(int i=0;i<*nbMonstre;i++){
                     int damage = 20-(monsters[i]->defense/2);
+                    if(damage<0)damage=0;
                     printf("Sort de glace inflige a %s : %d degat \n",monsters[i]->name,damage);
                     monsters[i]->hp-=damage;
                 }
                 for(int i=0;i<*nbMonstre;i++){
+                    if(monsters[i]->hp<0) {
+                        reduceSizeMob(i + 1, monsters, nbMonstre);
+                    }
                     reduceSizeMob(i+1,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
                 }
                 return 0;
             }
@@ -113,7 +116,6 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 if(tue==10){
                     printf("%s meurt sur le coup \n",monsters[mobSelect-1]->name);
                     reduceSizeMob(mobSelect,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
                 }
                 else{
                     printf("Il ne se passe rien \n");
@@ -145,7 +147,6 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
     }
     if(monsters[choice-1]->hp<=0){
         reduceSizeMob(choice,monsters,size);
-        if(*size!=0)afficherASCIIMob(*size,monsters);
     }
 }
 
@@ -174,7 +175,7 @@ char* generateRandomName(int length) {
 
 void xpAllMob(Monster** monsters,int size,int* xp,int* gold){
     for(int i=0;i<size;i++){
-        *gold+=monsters[i]->xpEarn;
+        *gold+=monsters[i]->hp*3;
         *xp+=monsters[i]->hp+monsters[i]->attackMax+monsters[i]->defense;
     }
 }
@@ -236,9 +237,12 @@ void winCase(Player* player,int goldEarn,int xpEarn){
     printf("Vous voici de retour vers les profondeurs, et les dangers sont nombreux \n");
 }
 
-int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
+
+int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
     Monster** monsters=NULL;
     int nbMonstre;
+    int xpEarn=0;
+    int goldEarn=0;
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
             //getBoss
@@ -267,11 +271,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
             }
         }
     }
+    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     printf("\n Pensez a vous equipez avant le combat \n");
     changerItem(player);
-    int xpEarn=0;
-    int goldEarn=0;
-    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     int choice;
     printf("Au non c'est une embuscade \n");
     while(1){

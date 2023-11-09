@@ -5,5 +5,5 @@
 
 #ifndef DOOMDEPTHSC_COMBAT_H
 #define DOOMDEPTHSC_COMBAT_H
-int combat(Player* player,int boss,int fromSauvegarde, int lvlMap);
+int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte);
 #endif //DOOMDEPTHSC_COMBAT_H

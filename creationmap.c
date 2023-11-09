@@ -3,6 +3,7 @@
 #include <time.h>
 #include "struct.h"
 #include "CaseAction.h"
+#include "combat.h"
 #include "Player.h"
 #include "shopInventaire.h"
 #include "sauvegarde_player.h"
@@ -165,21 +166,21 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-    Player* player;Carte* carte;
+    Player* player;
+    Carte* carte=malloc(sizeof(Carte));
     int fromSauvegarde = 0;
     if(fromSauvegarde){
         //telecharger player + carte
         player = malloc(sizeof(Player));
         load_player_from_db(player);
-        //load map
         int avecMob=0;
         if(avecMob){
             int boss=0;
             if(boss){
-                //combat(player,0,0,carte->donjonLevel);
+                combat(player,1,1,carte->donjonLevel,carte);
             }
             else{
-                //combat(player,0,0,carte->donjonLevel);
+                combat(player,0,1,carte->donjonLevel,carte);
             }
         }
     }
@@ -211,7 +212,6 @@ int initTest(){ //equivalent du main
         }
         else if(choice=='1'){
             afficherAll(carte,player);   //voir état joueur
-            
         }
         else if(choice =='7' ){
         	save_player_to_db(player);
@@ -219,8 +219,10 @@ int initTest(){ //equivalent du main
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
+
     //sauvegarde file
 	save_player_to_db(player);
+
     //Desalloc
     freeAll(carte,player);
     return 0;
