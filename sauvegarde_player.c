@@ -1,8 +1,8 @@
-#include "Player.h.h"
+#include "Player.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <windows.h>
+//#include <windows.h>
 #include "sqlite3.h"
 
 void save_player_to_db(Player *player) {
@@ -13,7 +13,7 @@ void save_player_to_db(Player *player) {
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return -1;
+        
     }
 
     char *sql = sqlite3_mprintf("REPLACE INTO player (id, name, hp, defense, attack, gold, mana, xp, xpForNextLvl, level, x, y, lifePotion, manaPotion, sizeInventaire) VALUES (1, %Q, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);",
@@ -27,7 +27,7 @@ void save_player_to_db(Player *player) {
         fprintf(stderr, "SQL error: %s\n", err_msg);
         sqlite3_free(err_msg);
         sqlite3_close(db);
-        return -1;
+        
     }
 
     sqlite3_close(db);
@@ -43,7 +43,7 @@ void load_player_from_db(Player *player) {
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return -1;
+        
     }
 
     rc = sqlite3_prepare_v2(db, "SELECT * FROM player WHERE id = 1", -1, &res, 0);
@@ -51,7 +51,7 @@ void load_player_from_db(Player *player) {
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Failed to fetch data: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
-        return -1;
+        
     }
 
     int step = sqlite3_step(res);

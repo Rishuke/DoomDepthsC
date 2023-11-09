@@ -19,5 +19,13 @@ add_executable(DoomDepthsC main.c
         monster.c
         affichage.h
         affichage.c
+        sauvegarde_player.h
         sauvegarde_player.c
+        sauvegarde_inventaire.h
+        sauvegarde_inventaire.c
 )
+
+
+
+# Link the SQLite3 library
+target_link_libraries(DoomDepthsC sqlite3)

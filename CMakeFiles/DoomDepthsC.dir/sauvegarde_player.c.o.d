@@ -1,6 +1,8 @@
-CMakeFiles/DoomDepthsC.dir/creationmap.c.o: \
- /home/rishi/Documents/C/DoomDepthsC-main/creationmap.c \
- /usr/include/stdc-predef.h /usr/include/stdlib.h \
+CMakeFiles/DoomDepthsC.dir/sauvegarde_player.c.o: \
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.c \
+ /usr/include/stdc-predef.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/Player.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/struct.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -39,7 +41,10 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: \
  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
@@ -47,15 +52,4 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h /usr/include/time.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /home/rishi/Documents/C/DoomDepthsC-main/struct.h \
- /home/rishi/Documents/C/DoomDepthsC-main/CaseAction.h \
- /home/rishi/Documents/C/DoomDepthsC-main/Player.h \
- /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
- /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.h \
- /usr/include/sqlite3.h
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h /usr/include/sqlite3.h

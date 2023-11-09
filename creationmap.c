@@ -220,7 +220,7 @@ int initTest(){ //equivalent du main
         afficherMap(carte,player->x,player->y);
     }
     //sauvegarde file
-	save_player_to_db(player) 
+	save_player_to_db(player);
     //Desalloc
     freeAll(carte,player);
     return 0;

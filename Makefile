@@ -297,6 +297,30 @@ monster.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/monster.c.s
 .PHONY : monster.c.s
 
+sauvegarde_inventaire.o: sauvegarde_inventaire.c.o
+.PHONY : sauvegarde_inventaire.o
+
+# target to build an object file
+sauvegarde_inventaire.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.o
+.PHONY : sauvegarde_inventaire.c.o
+
+sauvegarde_inventaire.i: sauvegarde_inventaire.c.i
+.PHONY : sauvegarde_inventaire.i
+
+# target to preprocess a source file
+sauvegarde_inventaire.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.i
+.PHONY : sauvegarde_inventaire.c.i
+
+sauvegarde_inventaire.s: sauvegarde_inventaire.c.s
+.PHONY : sauvegarde_inventaire.s
+
+# target to generate assembly for a file
+sauvegarde_inventaire.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.s
+.PHONY : sauvegarde_inventaire.c.s
+
 sauvegarde_player.o: sauvegarde_player.c.o
 .PHONY : sauvegarde_player.o
 
@@ -375,6 +399,9 @@ help:
 	@echo "... monster.o"
 	@echo "... monster.i"
 	@echo "... monster.s"
+	@echo "... sauvegarde_inventaire.o"
+	@echo "... sauvegarde_inventaire.i"
+	@echo "... sauvegarde_inventaire.s"
 	@echo "... sauvegarde_player.o"
 	@echo "... sauvegarde_player.i"
 	@echo "... sauvegarde_player.s"
