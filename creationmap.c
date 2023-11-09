@@ -219,7 +219,12 @@ int initTest(){ //equivalent du main
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
+<<<<<<< HEAD
 	//save_player_to_db(player);
+=======
+    //sauvegarde file
+	save_player_to_db(player);
+>>>>>>> 05743a04e107a8aa2e338189b270921387be9460
     //Desalloc
     freeAll(carte,player);
     return 0;

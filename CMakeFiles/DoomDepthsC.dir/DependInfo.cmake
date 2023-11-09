@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/rishi/Documents/C/DoomDepthsC-main/creationmap.c" "CMakeFiles/DoomDepthsC.dir/creationmap.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/creationmap.c.o.d"
   "/home/rishi/Documents/C/DoomDepthsC-main/main.c" "CMakeFiles/DoomDepthsC.dir/main.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/main.c.o.d"
   "/home/rishi/Documents/C/DoomDepthsC-main/monster.c" "CMakeFiles/DoomDepthsC.dir/monster.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/monster.c.o.d"
+  "/home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_inventaire.c" "CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.o.d"
   "/home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.c" "CMakeFiles/DoomDepthsC.dir/sauvegarde_player.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/sauvegarde_player.c.o.d"
   "/home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.c" "CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o" "gcc" "CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o.d"
   )
