@@ -5,7 +5,6 @@
 
 #ifndef DOOMDEPTHSC_CASEACTION_H
 #define DOOMDEPTHSC_CASEACTION_H
-void caseAction(Player *player,Carte* carte);
-int isOK(int x,int y,Carte* carte);
-void PlayerMouv(Player* player,Carte* carte, char a);
+int caseAction(Player *player,Carte* carte,char preMouv);
+char PlayerMouv(Player* player,Carte* carte, char a);
 #endif //DOOMDEPTHSC_CASEACTION_H

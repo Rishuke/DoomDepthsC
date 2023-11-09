@@ -8,6 +8,4 @@
 int initTest();
 void initCarte(Carte* carte);
 void initMap(Carte* carte,Player* player);
-void afficherMap(Carte* carte,int x,int y);
-void freeAll(Carte* carte);
 #endif

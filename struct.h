@@ -12,6 +12,10 @@ typedef struct
 
 typedef struct
 {
+<<<<<<< HEAD
+=======
+	int id; 
+>>>>>>> origin
     char *name;
     int hp;
     int attack;
@@ -19,11 +23,21 @@ typedef struct
     int mana;
     int defense;
     Item** items;
+<<<<<<< HEAD
+=======
+    int sizeInventaire;
+>>>>>>> origin
     int x;
     int y;
     int xp;
     int level;
     int xpForNextLvl;
+<<<<<<< HEAD
+=======
+    int lifePotion;
+    int manaPotion;
+
+>>>>>>> origin
 } Player;
 
 typedef struct
