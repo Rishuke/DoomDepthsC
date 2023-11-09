@@ -30,7 +30,7 @@ void afficherItem(Item* arme){
 
 int afficherInventaire(Player* player){
     if(player->sizeInventaire==0){
-        printf("Vous n'avez meme pas d'items mais posseder %d, allez vous battre \n",player->gold);
+        printf("Vous n'avez meme pas d'items et posseder %d gold, allez vous battre \n",player->gold);
         return 0;
     }
     for(int i=1;i<player->sizeInventaire+1;i++){
@@ -82,22 +82,6 @@ void addItemInventaire(Player* player,Item *item){
     }
 }
 
-<<<<<<< HEAD
-void buyInShop(Player* player){
-    int buy=0;
-    Item** stockInShop=malloc(sizeof(Item*)*3);
-    for(int i=0;i<3;i++){
-        stockInShop[i]=malloc(sizeof(Item));
-        if(stockInShop[i]==NULL)exit(1);
-    }
-    creerItem("Arme offensive",1,stockInShop[0]);
-    creerItem("Armure",0,stockInShop[1]);
-    creerItem("Arme offensive 2",1,stockInShop[2]);
-    printf("Voici votre inventaire \n");
-    afficherInventaire(player);
-    printf("Voici l'offre proposé \n");
-    for(int i=1;i<4;i++){
-=======
 void changeEquiped(Player* player,Item* item){
     for(int i=0;i<player->sizeInventaire;i++){
         if(player->items[i]->equiped==1 && player->items[i]->offensive==item->offensive){
@@ -116,7 +100,7 @@ void changeEquiped(Player* player,Item* item){
 }
 
 void changerItem(Player* player){
-    if(!afficherInventaire(player)){
+    if(!afficherInventaire(player)) {
         return;
     }
     printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
@@ -152,7 +136,6 @@ void freeShop(Item** items,int index,int* size){
         free(items);
         return;
     }
-    items=realloc(items,sizeof(Item*)*(*size));
 }
 
 void buyInShop(Player* player){
@@ -171,62 +154,26 @@ void buyInShop(Player* player){
     afficherInventaire(player);
     printf("Voici l'offre propose \n");
     for(int i=1;i<sizeShop+1;i++){
->>>>>>> origin
         printf("%d ",i);
         afficherItem(stockInShop[i-1]);
     }
     printf("Pour acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
-<<<<<<< HEAD
-    int choice;
-    scanf(" %d",&choice);
-    while(choice!=0){
-        if(choice<0 || choice > 4){
-            printf("Entrez une valeur valide \n");
-            scanf(" %d",&choice);
-            continue;
-        }
-        else if(strcmp(stockInShop[choice-1]->name,"Unable")){
-=======
     int choice=12;
     while(choice!=0){
         fflush(stdin);
         scanf(" %d",&choice);
+        if(choice==0)break;
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
             continue;
         }
         else{
->>>>>>> origin
             if(player->gold>=stockInShop[choice-1]->gold){
                 player->gold-=stockInShop[choice-1]->gold;
                 addItemInventaire(player,stockInShop[choice-1]);
                 printf("\nVoici votre inventaire \n");
                 afficherInventaire(player);
                 buy++;
-<<<<<<< HEAD
-                strcpy(stockInShop[choice-1]->name,"Unable");
-                if(buy>2)break;
-            }
-            else{printf("Vous n'avez pas assez d'or \n");}
-        }
-        else {printf("le produit n'est plus disponible \n");}
-        printf("Voici l'offre restante \n");
-        for(int i=1;i<4;i++){
-            if(strcmp(stockInShop[i-1]->name,"Unable")){
-                printf("%d ",i);
-                afficherItem(stockInShop[i-1]);
-            }
-        }
-        printf("Pour continuer à acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
-        scanf(" %d",&choice);
-    }
-    fflush(stdin);
-    for (int i = 0; i < 3; i++) {
-        free(stockInShop[i]->name);
-        free(stockInShop[i]);
-    }
-    free(stockInShop);
-=======
                 freeShop(stockInShop,choice-1,&sizeShop);
                 if(buy>3)break;
             }
@@ -234,8 +181,8 @@ void buyInShop(Player* player){
         }
         printf("Voici l'offre restante \n");
         for(int i=1;i<sizeShop+1;i++){
-                printf("%d ",i);
-                afficherItem(stockInShop[i-1]);
+            printf("%d ",i);
+            afficherItem(stockInShop[i-1]);
         }
         printf("Pour continuer a acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
     }
@@ -244,6 +191,6 @@ void buyInShop(Player* player){
         free(stockInShop[i]);
     }
     if(sizeShop!=0)free(stockInShop);
->>>>>>> origin
     printf("Vous sortez du shop, le marchand vous lance 'On se reverra' puis ce dernier disparait dans les profondeurs \n");
 }
+
