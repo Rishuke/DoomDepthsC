@@ -215,6 +215,7 @@ int initTest(){ //equivalent du main
         }
         else if(choice =='7' ){
         	save_player_to_db(player);
+        	sauvegarderInventaire(player);
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
@@ -222,6 +223,7 @@ int initTest(){ //equivalent du main
 
     //sauvegarde file
 	save_player_to_db(player);
+	sauvegarderInventaire(player);
 
     //Desalloc
     freeAll(carte,player);

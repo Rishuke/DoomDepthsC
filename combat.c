@@ -316,6 +316,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* map){
                 printf("Sauvegarde en cours ... \n");
                 //launchSauvegarde
 				save_player_to_db(player);
+				sauvegarderInventaire(player);
             }
             if(nbMonstre==0){
                 winCase(player,goldEarn,xpEarn);
