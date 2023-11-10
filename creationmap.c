@@ -6,7 +6,7 @@
 #include "combat.h"
 #include "Player.h"
 #include "shopInventaire.h"
-//#include "sauvegarde_player.h"
+#include "sauvegarde_player.h"
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -134,10 +134,7 @@ void safeZone(int* coordo,Carte* carte){
         }
     }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 197503f31774c35e9850a42618072c7de563dd50
 void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4=porte 5=joueur 6=shop 7=boss
     int player[2]={0,0};
     player[0]=rand()%carte->taille;
@@ -169,17 +166,13 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main
     srand(time(NULL));
-<<<<<<< HEAD
-    Player* player;Carte* carte;
-=======
     Player* player;
     Carte* carte=malloc(sizeof(Carte));
->>>>>>> 197503f31774c35e9850a42618072c7de563dd50
     int fromSauvegarde = 0;
     if(fromSauvegarde){
         //telecharger player + carte
         player = malloc(sizeof(Player));
-        //load_player_from_db(player);
+        load_player_from_db(player);
         int avecMob=0;
         if(avecMob){
             int boss=0;

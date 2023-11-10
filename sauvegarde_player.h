@@ -2,8 +2,6 @@
 #define PLAYER_H
 
 #include "sqlite3.h"
-
-
 #include "Player.h"
 
 void save_player_to_db(Player *player);

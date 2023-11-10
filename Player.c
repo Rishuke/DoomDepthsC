@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <windows.h>
+//#include <windows.h>
 #define DEFENSESTART 10
 #define ATTACKSTART 20
 
@@ -50,13 +50,13 @@ void changeLevel(Player* player){
     }
 }
 
-void setTextColor(int colorCode) {
+/**void setTextColor(int colorCode) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, colorCode);
-}
+}**/
 
 void afficherVieJoueur(int hp){
-    setTextColor(12);
+    //setTextColor(12);
     printf("Vie : [ ");
     for(int i=0;i<100;i++){
         if(i<hp){
@@ -67,12 +67,12 @@ void afficherVieJoueur(int hp){
         }
     }
     printf(" ] %d/100 \n",hp);
-    setTextColor(7);
+    //setTextColor(7);
 }
 
 
 void afficherManaJoueur(int mana) {
-    setTextColor(9);
+    //setTextColor(9);
     printf("Mana: [ ");
     for (int i = 0; i < 100; i++) {
         if (i < mana) {
@@ -82,5 +82,5 @@ void afficherManaJoueur(int mana) {
         }
     }
     printf(" ] %d/100\n", mana);
-    setTextColor(7);
+    //setTextColor(7);
 }
