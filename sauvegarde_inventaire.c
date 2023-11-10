@@ -1,5 +1,5 @@
 #include "sqlite3.h"
-#include "struct.h" // Assurez-vous que ce fichier contient les définitions ci-dessus.
+#include "struct.h" 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

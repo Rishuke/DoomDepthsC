@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "shopInventaire.h"
 #include "sauvegarde_player.h"
+#include "sauvegarde_inventaire.h"
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -166,11 +167,14 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 int initTest(){ //equivalent du main
     srand(time(NULL));
     Player* player;Carte* carte;
+    
     int fromSauvegarde = 0;
     if(fromSauvegarde){
         //telecharger player + carte
+        printf("here");
         player = malloc(sizeof(Player));
         load_player_from_db(player);
+        printf("here");
         //load map
         int avecMob=0;
         if(avecMob){
@@ -215,6 +219,7 @@ int initTest(){ //equivalent du main
         }
         else if(choice =='7' ){
         	save_player_to_db(player);
+        	sauvegarderInventaire(player);
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);

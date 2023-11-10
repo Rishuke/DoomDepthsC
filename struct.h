@@ -33,6 +33,7 @@ typedef struct
 
 typedef struct
 {
+	int id;
     int hp;
     char *name;
     int attackMin;

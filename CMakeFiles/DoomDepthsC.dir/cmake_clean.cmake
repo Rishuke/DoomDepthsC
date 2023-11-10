@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoomDepthsC.dir/monster.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.o"
   "CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.o.d"
+  "CMakeFiles/DoomDepthsC.dir/sauvegarde_mob.c.o"
+  "CMakeFiles/DoomDepthsC.dir/sauvegarde_mob.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/sauvegarde_player.c.o"
   "CMakeFiles/DoomDepthsC.dir/sauvegarde_player.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o"

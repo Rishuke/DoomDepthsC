@@ -242,6 +242,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
             //getBoss
+            /*monsters = malloc(sizeof((Monster*)*1));
+            nbMonstre =1;
+            monsters[0] = createBoss(lvlMap);*/
         }
         else {
             //getMobClassique
@@ -315,6 +318,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
                 //launchSauvegarde
 				save_player_to_db(player);
 				sauvegarderInventaire(player);
+				for(int i=0;i<nbMonstre;i++){
+					sauvegarderMonstre(monsters, i);
+				}
             }
             if(nbMonstre==0){
                 winCase(player,goldEarn,xpEarn);
