@@ -57,7 +57,7 @@ void initData() {
         fprintf(stderr, "SQL error: %s\n", err_msg);
         sqlite3_free(err_msg);
         sqlite3_close(db);
-        return 1;
+        return;
     }
 
     // Execute SQL for creating inventory table
@@ -66,7 +66,7 @@ void initData() {
         fprintf(stderr, "SQL error: %s\n", err_msg);
         sqlite3_free(err_msg);
         sqlite3_close(db);
-        return 1;
+        return;
     }
 
     // Execute SQL for creating monsters table
@@ -75,13 +75,15 @@ void initData() {
         fprintf(stderr, "SQL error: %s\n", err_msg);
         sqlite3_free(err_msg);
         sqlite3_close(db);
-        return 1;
+        return;
     }
 
     
    sqlite3_close(db); 
     
 }
+
+
 int main ()
 {
 	initData();
