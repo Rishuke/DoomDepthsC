@@ -12,7 +12,7 @@
 
 void reduceSizeMob(int choice,Monster** monsters,int* size,Player* player){
     printf("Vous avez tue %s, il vous donne %d gold et %d xp\n",monsters[choice-1]->name,monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5,monsters[choice-1]->attackMax*5);
-    player->xp+=monsters[choice-1]->hp*3;
+    player->xp+=monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5;
     player->gold+=monsters[choice-1]->attackMax*5;
     for(int i=choice-1;i<*size-1;i++){
         monsters[i]->name= realloc(monsters[i]->name,sizeof(char)*(strlen(monsters[i+1]->name)+1));
@@ -234,6 +234,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
             //getBoss
+            /*monsters = malloc(sizeof((Monster*)*1));
+            nbMonstre =1;
+            monsters[0] = createBoss(lvlMap);*/
         }
         else {
             //getMobClassique
@@ -303,6 +306,9 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
                 printf("Sauvegarde en cours ... \n");
 				save_player_to_db(player);
 				sauvegarderInventaire(player);
+				for(int i=0;i<nbMonstre;i++){
+					sauvegarderMonstre(monsters, i);
+				}
             }
             if(nbMonstre==0){
                 winCase(player);
