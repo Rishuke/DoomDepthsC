@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include <string.h>
 #include "struct.h"
+#include "getInt.h"
 #define tailleInventaire 6
 #define DEFENSESTART 10
 #define ATTACKSTART 20
@@ -62,11 +63,11 @@ void addItemInventaire(Player* player,Item *item){
     printf("Choisissez l'arme à supprimer dans votre inventaire en tapant son numéro sinon taper 0 \n");
     int choice;
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice>tailleInventaire || choice<0){
         printf("Entrer une valeur valide \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
     if(choice==0){
         printf("L'item est jeté à la poubelle \n");
@@ -106,7 +107,7 @@ void changerItem(Player* player){
     printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
     int choice;
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice !=0){
         if(choice<0 || choice>player->sizeInventaire){
             printf("Entrez une valeur valide ! \n");
@@ -117,7 +118,7 @@ void changerItem(Player* player){
         afficherInventaire(player);
         printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
 }
 
@@ -161,7 +162,7 @@ void buyInShop(Player* player){
     int choice=12;
     while(choice!=0){
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
         if(choice==0)break;
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
