@@ -165,7 +165,7 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     carte->map[player[0]][player[1]]=3;
 }
 
-int initTest(){ //equivalent du main
+int initTest(){ //equivalent du main  
     srand(time(NULL));
     Player* player;Carte* carte;
     int fromSauvegarde = 0;

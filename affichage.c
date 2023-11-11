@@ -92,12 +92,12 @@ void afficherASCIIMob(int size,Monster** monsters){
     };
 
     const char *imgDemon[] = {
-            "              v     ",
+            "              v      ",
             "        (__)v | v    ",
-            "        /\\/\\\\_|_/ ",
+            "        /\\/\\\\_|_/    ",
             "       _\\__/  |     ",
             "      /  \\/`<`)     ",
-            "      \\ (  |\\_/    ",
+            "      \\ (  |\\_/       ",
             "      /)))-(  |      ",
             "     / /^ ^ \\ |     ",
             "    /  )^/\\^( |     ",
@@ -128,17 +128,21 @@ void afficherASCIIMob(int size,Monster** monsters){
         printf("\t\t\t");
         for (int j = 0; j < size; j++) {
             if (!strcmp(monsters[j]->name, "Demon")) {
-                if (i == 13)printf("         %d         ", j + 1);
+                if (i == 13){
+                    printf("         %d            ", j + 1);
+                }
                 else {
                     printf("%s",imgDemon[i]);
                 }
             } else {
-                if (i == 13)printf("     %d    ", j + 1);
+                if (i == 13){
+                    printf("     %d    ", j + 1);
+                }
                 else {
                     printf("%s", imgPhantom[i]);
                 }
             }
-            printf("\t ");
+            printf("\t");
         }
         printf("\n");
     }
