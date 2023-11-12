@@ -312,7 +312,6 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
 				}
             }**/
             
-            
             if(nbMonstre==0){
                 winCase(player);
                 return 1;
