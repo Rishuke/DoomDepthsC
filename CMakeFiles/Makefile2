@@ -81,12 +81,12 @@ clean: CMakeFiles/DoomDepthsC.dir/clean
 CMakeFiles/DoomDepthsC.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target DoomDepthsC"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target DoomDepthsC"
 .PHONY : CMakeFiles/DoomDepthsC.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DoomDepthsC.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/DoomDepthsC.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/rishi/Documents/C/DoomDepthsC-main/CMakeFiles 0
 .PHONY : CMakeFiles/DoomDepthsC.dir/rule

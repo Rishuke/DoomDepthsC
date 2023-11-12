@@ -12,7 +12,7 @@ typedef struct
 
 typedef struct
 {
-	int id; 
+	int id;
     char *name;
     int hp;
     int attack;
@@ -28,7 +28,6 @@ typedef struct
     int xpForNextLvl;
     int lifePotion;
     int manaPotion;
-
 } Player;
 
 typedef struct
@@ -39,8 +38,6 @@ typedef struct
     int attackMin;
     int attackMax;
     int defense;
-    int xpEarn;
-
 } Monster;
 
 typedef struct{

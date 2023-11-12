@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include <string.h>
 #include "struct.h"
+#include "getInt.h"
 #define tailleInventaire 6
 #define DEFENSESTART 10
 #define ATTACKSTART 20
@@ -30,7 +31,7 @@ void afficherItem(Item* arme){
 
 int afficherInventaire(Player* player){
     if(player->sizeInventaire==0){
-        printf("Vous n'avez meme pas d'items mais posseder %d, allez vous battre \n",player->gold);
+        printf("Vous n'avez meme pas d'items et posseder %d gold, allez vous battre \n",player->gold);
         return 0;
     }
     for(int i=1;i<player->sizeInventaire+1;i++){
@@ -62,11 +63,11 @@ void addItemInventaire(Player* player,Item *item){
     printf("Choisissez l'arme à supprimer dans votre inventaire en tapant son numéro sinon taper 0 \n");
     int choice;
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice>tailleInventaire || choice<0){
         printf("Entrer une valeur valide \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
     if(choice==0){
         printf("L'item est jeté à la poubelle \n");
@@ -100,13 +101,13 @@ void changeEquiped(Player* player,Item* item){
 }
 
 void changerItem(Player* player){
-    if(!afficherInventaire(player)){
+    if(!afficherInventaire(player)) {
         return;
     }
     printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
     int choice;
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice !=0){
         if(choice<0 || choice>player->sizeInventaire){
             printf("Entrez une valeur valide ! \n");
@@ -117,7 +118,7 @@ void changerItem(Player* player){
         afficherInventaire(player);
         printf("Entrez le chiffre de celui que vous voulez équipe, sinon entrez 0 \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
 }
 
@@ -136,7 +137,6 @@ void freeShop(Item** items,int index,int* size){
         free(items);
         return;
     }
-    items=realloc(items,sizeof(Item*)*(*size));
 }
 
 void buyInShop(Player* player){
@@ -162,7 +162,8 @@ void buyInShop(Player* player){
     int choice=12;
     while(choice!=0){
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
+        if(choice==0)break;
         if(choice<0 || choice > sizeShop){
             printf("Entrez une valeur valide \n");
             continue;
@@ -181,8 +182,8 @@ void buyInShop(Player* player){
         }
         printf("Voici l'offre restante \n");
         for(int i=1;i<sizeShop+1;i++){
-                printf("%d ",i);
-                afficherItem(stockInShop[i-1]);
+            printf("%d ",i);
+            afficherItem(stockInShop[i-1]);
         }
         printf("Pour continuer a acheter taper le chiffre correspondant ou appuyer sur 0 pour quitter \n");
     }
@@ -193,3 +194,4 @@ void buyInShop(Player* player){
     if(sizeShop!=0)free(stockInShop);
     printf("Vous sortez du shop, le marchand vous lance 'On se reverra' puis ce dernier disparait dans les profondeurs \n");
 }
+

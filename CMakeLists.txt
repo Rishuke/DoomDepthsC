@@ -25,10 +25,9 @@ add_executable(DoomDepthsC main.c
         sauvegarde_inventaire.c
         sauvegarde_mob.h
         sauvegarde_mob.c
-        
+        getInt.c
+        getInt.h
+
 )
 
-
-
-# Link the SQLite3 library
 target_link_libraries(DoomDepthsC sqlite3)

@@ -55,6 +55,7 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /home/rishi/Documents/C/DoomDepthsC-main/struct.h \
  /home/rishi/Documents/C/DoomDepthsC-main/CaseAction.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/combat.h \
  /home/rishi/Documents/C/DoomDepthsC-main/Player.h \
  /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
  /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.h \

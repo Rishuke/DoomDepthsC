@@ -54,4 +54,5 @@ CMakeFiles/DoomDepthsC.dir/combat.c.o: \
  /home/rishi/Documents/C/DoomDepthsC-main/monster.h \
  /home/rishi/Documents/C/DoomDepthsC-main/Player.h \
  /home/rishi/Documents/C/DoomDepthsC-main/affichage.h \
- /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h
+ /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/getInt.h

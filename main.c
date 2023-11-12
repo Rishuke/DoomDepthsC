@@ -1,4 +1,7 @@
 #include "creationmap.h"
+#include "CaseAction.h"
+#include "shopInventaire.h"
+#include "creationmap.h"
 #include "sqlite3.h"
 #include <stdio.h>
 
@@ -47,8 +50,7 @@ void initData() {
                                "hp INTEGER, "
                                "attack_min INTEGER, "
                                "attack_max INTEGER, "
-                               "defense INTEGER, "
-                               "xp_earn INTEGER);";
+                               "defense INTEGER);";
 	
 	
 	// Execute SQL for creating player table

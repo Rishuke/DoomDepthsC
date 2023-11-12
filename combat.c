@@ -9,9 +9,12 @@
 #include "Player.h"
 #include "affichage.h"
 #include "shopInventaire.h"
-//fr
-void reduceSizeMob(int choice,Monster** monsters,int* size){
-    printf("Vous avez tue %s \n",monsters[choice-1]->name);
+#include "getInt.h"
+
+void reduceSizeMob(int choice,Monster** monsters,int* size,Player* player){
+    printf("Vous avez tue %s, il vous donne %d gold et %d xp\n",monsters[choice-1]->name,monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5,monsters[choice-1]->attackMax*5);
+    player->xp+=monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5;
+    player->gold+=monsters[choice-1]->attackMax*5;
     for(int i=choice-1;i<*size-1;i++){
         monsters[i]->name= realloc(monsters[i]->name,sizeof(char)*(strlen(monsters[i+1]->name)+1));
         strcpy(monsters[i]->name,monsters[i+1]->name);
@@ -19,16 +22,15 @@ void reduceSizeMob(int choice,Monster** monsters,int* size){
         monsters[i]->attackMax=monsters[i+1]->attackMax;
         monsters[i]->attackMin=monsters[i+1]->attackMin;
         monsters[i]->defense=monsters[i+1]->defense;
-        monsters[i]->xpEarn=monsters[i+1]->xpEarn;
     }
     (*size)--;
     free(monsters[*size]->name);
     free(monsters[*size]);
     if(*size==0){
+        printf("Avant free %p\n",monsters[0]);
         free(monsters);
         return;
     }
-    monsters= realloc(monsters,sizeof(Monster*)*(*size));
 }
 
 int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
@@ -41,7 +43,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
         printf("4 : Colere noir, necessite 100 mana, 1 chance sur 10 d'éxecuter le monstre choisi \n");
         printf("Que choississez vous ? 0 vous permet d'annuler cette action\n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
         if(choice==0)return 1;
         if(choice==1){
             if(player->mana<(*nbMonstre)*20){
@@ -52,12 +54,14 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 player->mana-=*nbMonstre*20;
                 for(int i=0;i<*nbMonstre;i++){
                     int damage = 20-(monsters[i]->defense/2);
+                    if(damage<0)damage=0;
                     printf("Sort de glace inflige a %s : %d degat \n",monsters[i]->name,damage);
                     monsters[i]->hp-=damage;
                 }
                 for(int i=0;i<*nbMonstre;i++){
-                    reduceSizeMob(i+1,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
+                    if(monsters[i]->hp<=0) {
+                        reduceSizeMob(i + 1, monsters, nbMonstre,player);
+                    }
                 }
                 return 0;
             }
@@ -66,11 +70,11 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
             int mobSelect;
             printf("Quelle monstre souhaitez vous attaquer ?\n");
             fflush(stdin);
-            scanf(" %d",&mobSelect);
+            mobSelect=getInt();
             while(mobSelect<1 || mobSelect>*nbMonstre){
                 printf("Entrez une valeur valide \n");
                 fflush(stdin);
-                scanf(" %d",&mobSelect);
+                mobSelect=getInt();
             }
             printf("%s possede une defense tremblante \n",monsters[mobSelect-1]->name);
             monsters[mobSelect-1]->defense-=10;
@@ -103,17 +107,16 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 int mobSelect;
                 printf("Quelle monstre souhaitez vous attaquer ?\n");
                 fflush(stdin);
-                scanf(" %d",&mobSelect);
+                mobSelect=getInt();
                 while(mobSelect<1 || mobSelect>*nbMonstre){
                     printf("Entrez une valeur valide \n");
                     fflush(stdin);
-                    scanf(" %d",&mobSelect);
+                    mobSelect=getInt();
                 }
                 int tue=rand()%10+1;
                 if(tue==10){
                     printf("%s meurt sur le coup \n",monsters[mobSelect-1]->name);
-                    reduceSizeMob(mobSelect,monsters,nbMonstre);
-                    if(*nbMonstre!=0)afficherASCIIMob(*nbMonstre,monsters);
+                    reduceSizeMob(mobSelect,monsters,nbMonstre,player);
                 }
                 else{
                     printf("Il ne se passe rien \n");
@@ -130,11 +133,11 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
     int choice;
     printf("Qui voulez vous attaquer \n");
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice<1 || choice>*size){
         printf("Entrez une valeur valide \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
     int damage = player->attack-(monsters[choice-1]->defense/2);
     if(damage<=0){
@@ -144,8 +147,7 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
         monsters[choice-1]->hp-=damage;
     }
     if(monsters[choice-1]->hp<=0){
-        reduceSizeMob(choice,monsters,size);
-        if(*size!=0)afficherASCIIMob(*size,monsters);
+        reduceSizeMob(choice,monsters,size,player);
     }
 }
 
@@ -171,14 +173,6 @@ char* generateRandomName(int length) {
     name[length] = '\0';
     return name;
 }
-
-void xpAllMob(Monster** monsters,int size,int* xp,int* gold){
-    for(int i=0;i<size;i++){
-        *gold+=monsters[i]->xpEarn;
-        *xp+=monsters[i]->hp+monsters[i]->attackMax+monsters[i]->defense;
-    }
-}
-
 
 int prendreMana(Player* player){
     if(player->mana==100){
@@ -218,14 +212,12 @@ int prendreVie(Player* player){
     }
 }
 
-void winCase(Player* player,int goldEarn,int xpEarn){
+void winCase(Player* player){
     int randPotV=rand()%3;
     int randPotM=rand()%3;
-    player->gold+=goldEarn;
-    player->xp=xpEarn;
     player->lifePotion+=randPotV;
     player->manaPotion+=randPotM;
-    printf("Vous vainquez au travers des tenebres et repartez avec %d gold et %d xp et %d potion de vie et %d potion de mana\n",goldEarn,xpEarn,randPotV,randPotM);
+    printf("Vous vainquez au travers des tenebres et repartez avec %d potion de vie et %d potion de mana\n",randPotV,randPotM);
     changeLevel(player);
     printf("Dans leur debauche les ennemis perdent une de leurs arme \n");
     char* name= generateRandomName(rand()%20+4);
@@ -236,7 +228,8 @@ void winCase(Player* player,int goldEarn,int xpEarn){
     printf("Vous voici de retour vers les profondeurs, et les dangers sont nombreux \n");
 }
 
-int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
+
+int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
     Monster** monsters=NULL;
     int nbMonstre;
     if(fromSauvegarde){ //si sauvegarde
@@ -272,9 +265,6 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
     }
     printf("\n Pensez a vous equipez avant le combat \n");
     changerItem(player);
-    int xpEarn=0;
-    int goldEarn=0;
-    xpAllMob(monsters,nbMonstre,&xpEarn,&goldEarn);
     int choice;
     printf("Au non c'est une embuscade \n");
     while(1){
@@ -289,7 +279,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
             printf("%d tours restant \n",nbTour);
             printf("Appuyer sur 1 pour attaquer, 2 pour lancer un sort, 3 pour une potion de soin,4 pour une potion de mana, 5 pour finir votre tour ou 6 pour sauvegarder\n");
             fflush(stdin);
-            scanf(" %d",&choice);
+            choice=getInt();
             if(choice<=0 || choice>6){
                 printf("Entrez une valeur valide \n");
                 continue;
@@ -313,17 +303,17 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap){
                 printf("Vous preferer la defense ? \n");
                 break;
             }
-            else if(choice==6){
+            /**else if(choice==6){
                 printf("Sauvegarde en cours ... \n");
-                //launchSauvegarde
 				save_player_to_db(player);
 				sauvegarderInventaire(player);
 				for(int i=0;i<nbMonstre;i++){
 					sauvegarderMonstre(monsters, i);
 				}
-            }
+            }**/
+            
             if(nbMonstre==0){
-                winCase(player,goldEarn,xpEarn);
+                winCase(player);
                 return 1;
             }
             nbTour--;

@@ -3,6 +3,7 @@
 #include <time.h>
 #include "struct.h"
 #include "CaseAction.h"
+#include "combat.h"
 #include "Player.h"
 #include "shopInventaire.h"
 #include "sauvegarde_player.h"
@@ -164,44 +165,27 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
     carte->map[player[0]][player[1]]=3;
 }
 
-int initTest(){ //equivalent du main
+int initTest(){ //equivalent du main  
     srand(time(NULL));
-    Player* player;Carte* carte;
-    
-    int fromSauvegarde = 0;
-    if(fromSauvegarde){
-        //telecharger player + carte
-        printf("here");
-        player = malloc(sizeof(Player));
-        load_player_from_db(player);
-        printf("here");
-        //load map
-        int avecMob=0;
-        if(avecMob){
-            int boss=0;
-            if(boss){
-                //combat(player,0,0,carte->donjonLevel);
-            }
-            else{
-                //combat(player,0,0,carte->donjonLevel);
-            }
-        }
-    }
-    else{
-        player= createPlayer();
-        carte=malloc(sizeof(Carte));
-        carte->donjonLevel=0;
-        initCarte(carte);
-        initMap(carte,player);
-        afficherMap(carte,player->x,player->y);
-    }
+    Player* player;
+    Carte* carte;
+    player= createPlayer();
+    carte=malloc(sizeof(Carte));
+    carte->donjonLevel=0;
+    initCarte(carte);
+    initMap(carte,player);
+    afficherMap(carte,player->x,player->y);
     char choice;
     //gameplay
     while(1){
-        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder ou 8 pour quitter \n");
+        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder,  9 pour recommencer la partie ou 8 pour quitter \n");
         fflush(stdin);
         scanf(" %c",&choice);
-        if(choice=='8')break;
+        if(choice=='8'){
+            save_player_to_db(player);
+            sauvegarderInventaire(player);
+            break;
+        }
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
             char preMouv=PlayerMouv(player,carte,choice);
             int isDead=caseAction(player,carte,preMouv);
@@ -215,18 +199,17 @@ int initTest(){ //equivalent du main
         }
         else if(choice=='1'){
             afficherAll(carte,player);   //voir état joueur
-            
         }
         else if(choice =='7' ){
         	save_player_to_db(player);
         	sauvegarderInventaire(player);
         }
+        else if(choice =='9' ){
+        	
+        }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
-    //sauvegarde file
-	save_player_to_db(player);
-	sauvegarderInventaire(player);
     //Desalloc
     freeAll(carte,player);
     return 0;

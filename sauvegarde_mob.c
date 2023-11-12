@@ -15,8 +15,8 @@ void sauvegarderMonstre(Monster *monster, int id) {
         return;
     }
 
-    char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense, xp_earn) VALUES (%d, %Q, %d, %d, %d, %d, %d);",
-                                id, monster->name, monster->hp, monster->attackMin, monster->attackMax, monster->defense, monster->xpEarn);
+    char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense, xp_earn) VALUES (%d, %Q, %d, %d, %d, %d);",
+                                id, monster->name, monster->hp, monster->attackMin, monster->attackMax, monster->defense);
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
@@ -61,7 +61,6 @@ void chargerMonstre(Monster *monster, int id) {
         monster->attackMin = sqlite3_column_int(stmt, 2);
         monster->attackMax = sqlite3_column_int(stmt, 3);
         monster->defense = sqlite3_column_int(stmt, 4);
-        monster->xpEarn = sqlite3_column_int(stmt, 5);
     }
 
     sqlite3_finalize(stmt);

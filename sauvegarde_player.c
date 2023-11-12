@@ -58,25 +58,27 @@ void load_player_from_db(Player *player) {
 
     if (step == SQLITE_ROW) {
         // Suppose that the player name will not exceed 49 characters + null terminator
+      
         strncpy(player->name, (const char*)sqlite3_column_text(res, 1), 49);
-        player->name[49] = '\0';
         player->hp = sqlite3_column_int(res, 2);
-        player->defense = sqlite3_column_int(res, 3);
-        player->attack = sqlite3_column_int(res, 4);
-        player->gold = sqlite3_column_int(res, 5);
-        player->mana = sqlite3_column_int(res, 6);
-        player->xp = sqlite3_column_int(res, 7);
-        player->xpForNextLvl = sqlite3_column_int(res, 8);
-        player->level = sqlite3_column_int(res, 9);
-        player->x = sqlite3_column_int(res, 10);
-        player->y = sqlite3_column_int(res, 11);
-        player->lifePotion = sqlite3_column_int(res, 12);
-        player->manaPotion = sqlite3_column_int(res, 13);
-        player->sizeInventaire = sqlite3_column_int(res, 14);
+        player->attack = sqlite3_column_int(res, 3);
+        player->gold = sqlite3_column_int(res, 4);
+        player->mana = sqlite3_column_int(res, 5);
+        player->defense = sqlite3_column_int(res, 6);
+        player->sizeInventaire = sqlite3_column_int(res, 7);
+        player->x = sqlite3_column_int(res, 8);
+        player->y = sqlite3_column_int(res, 9);
+        player->xp = sqlite3_column_int(res, 10);
+        player->level = sqlite3_column_int(res, 11);
+        player->xpForNextLvl = sqlite3_column_int(res, 12);
+        player->lifePotion = sqlite3_column_int(res, 13);
+        player->manaPotion = sqlite3_column_int(res, 14);
+        
     }
-
-    sqlite3_finalize(res);
     sqlite3_close(db);
-    
+    sqlite3_finalize(res);
 }
+
+
+
 
