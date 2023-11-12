@@ -303,14 +303,14 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
                 printf("Vous preferer la defense ? \n");
                 break;
             }
-            else if(choice==6){
+            /**else if(choice==6){
                 printf("Sauvegarde en cours ... \n");
 				save_player_to_db(player);
 				sauvegarderInventaire(player);
 				for(int i=0;i<nbMonstre;i++){
 					sauvegarderMonstre(monsters, i);
 				}
-            }
+            }**/
             
             
             if(nbMonstre==0){

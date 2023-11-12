@@ -167,7 +167,8 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 
 int initTest(){ //equivalent du main  
     srand(time(NULL));
-    Player* player;Carte* carte;
+    Player* player;
+    Carte* carte;
     player= createPlayer();
     carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
