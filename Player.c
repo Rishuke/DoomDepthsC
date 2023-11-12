@@ -58,7 +58,6 @@ Player* createPlayer(){
             player->name = malloc(strlen(name) + 1);
             
             if(doesPlayerExist( name)){
-            	printf("here");
             	load_player_from_db(player);
             	return player;
             }
