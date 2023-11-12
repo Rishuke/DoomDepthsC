@@ -47,7 +47,7 @@ int doesPlayerExist(const char *name) {
     return exists;
 }
 
-/*Player* createPlayer(){
+Player* createPlayer(){
     char name[11];
     printf("Entrez un nom : ");
     fflush(stdin);
@@ -85,55 +85,6 @@ int doesPlayerExist(const char *name) {
             result = scanf(" %10s", name);
         }
     }
-}*/
-
-Player* createPlayer() {
-    char name[11];
-    printf("Entrez un nom : ");
-    fflush(stdin);
-    scanf(" %10[^\n]", name); 
-
-    if (strlen(name) > 10) {
-        fprintf(stderr, "Le nom ne doit pas dépasser 10 caractères.\n");
-        return NULL; 
-    }
-
-    Player *player = malloc(sizeof(Player));
-    if (player == NULL) {
-        fprintf(stderr, "Erreur d'allocation mémoire.\n");
-        return NULL; // Gestion de l'erreur d'allocation
-    }
-
-    player->name = malloc(strlen(name) + 1);
-    if (player->name == NULL) {
-        free(player); 
-        fprintf(stderr, "Erreur d'allocation mémoire.\n");
-        return NULL;
-    }
-    
-    
-
-    strcpy(player->name, name);
-    player->hp = 100;
-    player->defense = DEFENSESTART+1;
-    player->attack = ATTACKSTART+3;
-    player->gold = 0;
-    player->mana = 100;
-    player->xp = 0;
-    player->xpForNextLvl = 10;
-    player->level = 1;
-    player->x = -1;
-    player->y = -1;
-    player->lifePotion = 1;
-    player->manaPotion = 1;
-    player->sizeInventaire=0;
-    return player;
-    if (doesPlayerExist(name)) {
-  
-        load_player_from_db(player);
-        return player; 
-    } 
-    
 }
 
 void changeLevel(Player* player){
