@@ -124,6 +124,7 @@ CMakeFiles/DoomDepthsC.dir/Player.c.o
  /usr/include/sqlite3.h
  /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.h
  /home/rishi/Documents/C/DoomDepthsC-main/Player.h
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_inventaire.h
 
 CMakeFiles/DoomDepthsC.dir/affichage.c.o
  /home/rishi/Documents/C/DoomDepthsC-main/affichage.c
