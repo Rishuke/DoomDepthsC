@@ -68,7 +68,7 @@ void initData() {
         fprintf(stderr, "SQL error: %s\n", err_msg);
         sqlite3_free(err_msg);
         sqlite3_close(db);
-        return ;
+        return;
     }
 
     // Execute SQL for creating monsters table

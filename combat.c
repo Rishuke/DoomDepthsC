@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "affichage.h"
 #include "shopInventaire.h"
+#include "getInt.h"
 
 void reduceSizeMob(int choice,Monster** monsters,int* size,Player* player){
     printf("Vous avez tue %s, il vous donne %d gold et %d xp\n",monsters[choice-1]->name,monsters[choice-1]->attackMin*3+monsters[choice-1]->hp*-5,monsters[choice-1]->attackMax*5);
@@ -42,7 +43,7 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
         printf("4 : Colere noir, necessite 100 mana, 1 chance sur 10 d'éxecuter le monstre choisi \n");
         printf("Que choississez vous ? 0 vous permet d'annuler cette action\n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
         if(choice==0)return 1;
         if(choice==1){
             if(player->mana<(*nbMonstre)*20){
@@ -69,11 +70,11 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
             int mobSelect;
             printf("Quelle monstre souhaitez vous attaquer ?\n");
             fflush(stdin);
-            scanf(" %d",&mobSelect);
+            mobSelect=getInt();
             while(mobSelect<1 || mobSelect>*nbMonstre){
                 printf("Entrez une valeur valide \n");
                 fflush(stdin);
-                scanf(" %d",&mobSelect);
+                mobSelect=getInt();
             }
             printf("%s possede une defense tremblante \n",monsters[mobSelect-1]->name);
             monsters[mobSelect-1]->defense-=10;
@@ -106,11 +107,11 @@ int lancerSort(Monster** monsters,int* nbMonstre,Player* player){
                 int mobSelect;
                 printf("Quelle monstre souhaitez vous attaquer ?\n");
                 fflush(stdin);
-                scanf(" %d",&mobSelect);
+                mobSelect=getInt();
                 while(mobSelect<1 || mobSelect>*nbMonstre){
                     printf("Entrez une valeur valide \n");
                     fflush(stdin);
-                    scanf(" %d",&mobSelect);
+                    mobSelect=getInt();
                 }
                 int tue=rand()%10+1;
                 if(tue==10){
@@ -132,11 +133,11 @@ void attaqueMonstre(Monster** monsters,int *size,Player* player){
     int choice;
     printf("Qui voulez vous attaquer \n");
     fflush(stdin);
-    scanf(" %d",&choice);
+    choice=getInt();
     while(choice<1 || choice>*size){
         printf("Entrez une valeur valide \n");
         fflush(stdin);
-        scanf(" %d",&choice);
+        choice=getInt();
     }
     int damage = player->attack-(monsters[choice-1]->defense/2);
     if(damage<=0){
@@ -278,7 +279,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
             printf("%d tours restant \n",nbTour);
             printf("Appuyer sur 1 pour attaquer, 2 pour lancer un sort, 3 pour une potion de soin,4 pour une potion de mana, 5 pour finir votre tour ou 6 pour sauvegarder\n");
             fflush(stdin);
-            scanf(" %d",&choice);
+            choice=getInt();
             if(choice<=0 || choice>6){
                 printf("Entrez une valeur valide \n");
                 continue;
