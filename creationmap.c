@@ -182,6 +182,7 @@ int initTest(){ //equivalent du main
         fflush(stdin);
         scanf(" %c",&choice);
         if(choice=='8'){
+            resetDatabase("game.db");
             save_player_to_db(player);
             sauvegarderInventaire(player);
             break;
@@ -201,6 +202,7 @@ int initTest(){ //equivalent du main
             afficherAll(carte,player);   //voir état joueur
         }
         else if(choice =='7' ){
+            resetDatabase("game.db");
         	save_player_to_db(player);
         	sauvegarderInventaire(player);
         }
