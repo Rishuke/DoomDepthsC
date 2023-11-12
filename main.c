@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 
+
 void initData() {
     sqlite3 *db;
     char *err_msg = 0;
@@ -86,6 +87,8 @@ void initData() {
 }
 int main ()
 {
+	
+    
 	initData();
     initTest();
     

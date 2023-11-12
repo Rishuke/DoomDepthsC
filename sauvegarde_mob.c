@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void sauvegarderMonstre(Monster *monster, int id) {
+void sauvegarderMonstres(Monster *monsters, int nombreMonstres) {
     sqlite3 *db;
     char *err_msg = 0;
     int rc = sqlite3_open("game.db", &db);
@@ -15,20 +15,26 @@ void sauvegarderMonstre(Monster *monster, int id) {
         return;
     }
 
-    char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense, xp_earn) VALUES (%d, %Q, %d, %d, %d, %d);",
-                                id, monster->name, monster->hp, monster->attackMin, monster->attackMax, monster->defense);
+    sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, &err_msg);
 
-    rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
+    for (int i = 0; i < nombreMonstres; ++i) {
+        char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense) VALUES (%d, %Q, %d, %d, %d, %d);",
+                                    monsters[i].id, monsters[i].name, monsters[i].hp, monsters[i].attackMin, monsters[i].attackMax, monsters[i].defense);
 
-    sqlite3_free(sql);
+        rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", err_msg);
-        sqlite3_free(err_msg);
-        sqlite3_close(db);
-        return;
+        sqlite3_free(sql);
+
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "SQL error: %s\n", err_msg);
+            sqlite3_free(err_msg);
+            sqlite3_exec(db, "ROLLBACK TRANSACTION;", NULL, NULL, &err_msg);
+            sqlite3_close(db);
+            return;
+        }
     }
 
+    sqlite3_exec(db, "COMMIT TRANSACTION;", NULL, NULL, &err_msg);
     sqlite3_close(db);
 }
 
@@ -37,7 +43,6 @@ void chargerMonstre(Monster *monster, int id) {
     sqlite3_stmt *stmt;
 
     int rc = sqlite3_open("game.db", &db);
-
     if (rc != SQLITE_OK) {
         fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
@@ -45,7 +50,6 @@ void chargerMonstre(Monster *monster, int id) {
     }
 
     char *sql = sqlite3_mprintf("SELECT name, hp, attack_min, attack_max, defense, xp_earn FROM monsters WHERE id = %d;", id);
-
     rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
     sqlite3_free(sql);
 
@@ -56,14 +60,21 @@ void chargerMonstre(Monster *monster, int id) {
     }
 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
+        // Libération de la mémoire précédente si nécessaire
+        free(monster->name);
         monster->name = strdup((const char *)sqlite3_column_text(stmt, 0));
         monster->hp = sqlite3_column_int(stmt, 1);
         monster->attackMin = sqlite3_column_int(stmt, 2);
         monster->attackMax = sqlite3_column_int(stmt, 3);
         monster->defense = sqlite3_column_int(stmt, 4);
+        
+    } else {
+        fprintf(stderr, "No data found for monster with ID: %d\n", id);
     }
 
-    sqlite3_finalize(stmt);
+    
     sqlite3_close(db);
+    sqlite3_finalize(stmt);
 }
+
 

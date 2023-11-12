@@ -121,7 +121,8 @@ CMakeFiles/DoomDepthsC.dir/Player.c.o: Player.c \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
   /usr/include/sqlite3.h \
   sauvegarde_player.h \
-  Player.h
+  Player.h \
+  sauvegarde_inventaire.h
 
 CMakeFiles/DoomDepthsC.dir/affichage.c.o: affichage.c \
   /usr/include/stdc-predef.h \
@@ -737,9 +738,9 @@ affichage.c:
 
 /usr/include/features-time64.h:
 
-sauvegarde_inventaire.h:
-
 affichage.h:
+
+sauvegarde_inventaire.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 

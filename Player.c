@@ -114,7 +114,9 @@ Player* createPlayer(){
                 chargerInventaire(player);
             	return player;
             }
+
             resetDatabase("game.db");
+
             strcpy(player->name, name);
             player->hp = 100;
             player->defense = DEFENSESTART+1;

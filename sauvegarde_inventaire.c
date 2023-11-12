@@ -71,6 +71,9 @@ void chargerInventaire(Player *player) {
         
     }
 
+    
+	
+
     player->items=malloc(sizeof(Item*)*player->sizeInventaire);
     int sizeActu=0;
     while (sqlite3_step(stmt) == SQLITE_ROW) {

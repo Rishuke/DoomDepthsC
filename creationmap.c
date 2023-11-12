@@ -205,6 +205,7 @@ int initTest(){ //equivalent du main
             resetDatabase("game.db");
         	save_player_to_db(player);
         	sauvegarderInventaire(player);
+        	
         }
         else if(choice =='9' ){
         	
