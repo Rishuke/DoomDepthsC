@@ -170,6 +170,7 @@ int initTest(){ //equivalent du main
     Player* player;
     Carte* carte;
     player= createPlayer();
+
     carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
     initCarte(carte);
