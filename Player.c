@@ -87,7 +87,7 @@ Player* createPlayer(){
 }
 
 void changeLevel(Player* player){
-    while(player->xp>player->xpForNextLvl){
+    while(player->xp>=player->xpForNextLvl){
         player->level++;
         player->xp-=player->xpForNextLvl;
         player->attack+=3;
