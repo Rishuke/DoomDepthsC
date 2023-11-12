@@ -4,11 +4,63 @@
 #include <stdio.h>
 #include "sqlite3.h"
 #include "sauvegarde_player.h"
+#include "sauvegarde_inventaire.h"
 //#include <windows.h>
 #define DEFENSESTART 10
 #define ATTACKSTART 20
 
+int resetDatabase(const char *db_path) {
+    sqlite3 *db;
+    char *err_msg = 0;
 
+
+    int rc = sqlite3_open(db_path, &db);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        return rc;
+    }
+
+
+    rc = sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, &err_msg);
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "SQL error: %s\n", err_msg);
+        sqlite3_free(err_msg);
+        sqlite3_close(db);
+        return rc;
+    }
+
+    //
+    const char *tables[] = {"player", "inventory", "monsters"};
+    int num_tables = sizeof(tables) / sizeof(tables[0]);
+
+    for (int i = 0; i < num_tables; i++) {
+        char sql[256];
+        sprintf(sql, "DELETE FROM %s;", tables[i]);
+        rc = sqlite3_exec(db, sql, NULL, NULL, &err_msg);
+        if (rc != SQLITE_OK) {
+            fprintf(stderr, "Failed to delete data from %s: %s\n", tables[i], err_msg);
+            sqlite3_free(err_msg);
+            break;
+        }
+    }
+
+
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_exec(db, "END TRANSACTION;", NULL, NULL, &err_msg);
+    } else {
+        sqlite3_exec(db, "ROLLBACK;", NULL, NULL, &err_msg);
+    }
+
+    if (rc != SQLITE_OK && err_msg != NULL) {
+        fprintf(stderr, "SQL error: %s\n", err_msg);
+        sqlite3_free(err_msg);
+    }
+
+
+    sqlite3_close(db);
+
+    return rc;
+}
 
 
 int doesPlayerExist(const char *name) {
@@ -59,8 +111,10 @@ Player* createPlayer(){
             
             if(doesPlayerExist( name)){
             	load_player_from_db(player);
+                chargerInventaire(player);
             	return player;
             }
+            resetDatabase("game.db");
             strcpy(player->name, name);
             player->hp = 100;
             player->defense = DEFENSESTART+1;

@@ -178,7 +178,7 @@ int initTest(){ //equivalent du main
     char choice;
     //gameplay
     while(1){
-        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder,  9 pour recommencer la partie ou 8 pour quitter \n");
+        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder,  8 pour quitter et sauvegarder et  9 pour recommencer \n");
         fflush(stdin);
         scanf(" %c",&choice);
         if(choice=='8'){
