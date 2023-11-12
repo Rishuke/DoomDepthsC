@@ -168,39 +168,23 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 int initTest(){ //equivalent du main  
     srand(time(NULL));
     Player* player;Carte* carte;
-    int fromSauvegarde = 0; //Faire une fonction qui execute dynamiquement pour voir si le sauvegarde existe
-    if(fromSauvegarde){
-        //telecharger player + carte
-        printf("here");
-        player = malloc(sizeof(Player));
-        load_player_from_db(player);
-        printf("here");
-        int avecMob=0;
-        if(avecMob){
-            int boss=0;
-            if(boss){
-                combat(player,1,1,carte->donjonLevel,carte);
-            }
-            else{
-                combat(player,0,1,carte->donjonLevel,carte);
-            }
-        }
-    }
-    else{
-        player= createPlayer();
-        carte=malloc(sizeof(Carte));
-        carte->donjonLevel=0;
-        initCarte(carte);
-        initMap(carte,player);
-        afficherMap(carte,player->x,player->y);
-    }
+    player= createPlayer();
+    carte=malloc(sizeof(Carte));
+    carte->donjonLevel=0;
+    initCarte(carte);
+    initMap(carte,player);
+    afficherMap(carte,player->x,player->y);
     char choice;
     //gameplay
     while(1){
         printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder,  9 pour recommencer la partie ou 8 pour quitter \n");
         fflush(stdin);
         scanf(" %c",&choice);
-        if(choice=='8')break;
+        if(choice=='8'){
+            save_player_to_db(player);
+            sauvegarderInventaire(player);
+            break;
+        }
         else if(choice=='z' || choice=='q' || choice=='s' || choice=='d'){
             char preMouv=PlayerMouv(player,carte,choice);
             int isDead=caseAction(player,carte,preMouv);
@@ -226,8 +210,6 @@ int initTest(){ //equivalent du main
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
     }
-	save_player_to_db(player);
-	sauvegarderInventaire(player);
     //Desalloc
     freeAll(carte,player);
     return 0;
