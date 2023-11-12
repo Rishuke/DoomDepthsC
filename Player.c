@@ -2,9 +2,46 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "sqlite3.h"
+#include "sauvegarde_player.h"
 //#include <windows.h>
 #define DEFENSESTART 10
 #define ATTACKSTART 20
+
+
+
+int doesPlayerExist( const char *name) {
+
+	sqlite3 *db;
+    char *err_msg = 0;
+    int rc = sqlite3_open("game.db", &db); 
+
+    if (rc != SQLITE_OK) {
+        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        sqlite3_close(db);
+        return 0;
+    }
+    
+    const char *query = "SELECT COUNT(*) FROM player WHERE name = ?";
+    sqlite3_stmt *stmt;
+    int exists = 0;
+
+    if (sqlite3_prepare_v2(db, query, -1, &stmt, NULL) != SQLITE_OK) {
+        fprintf(stderr, "Erreur de préparation de la requête: %s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    sqlite3_bind_text(stmt, 1, name, -1, SQLITE_STATIC);
+
+    if (sqlite3_step(stmt) == SQLITE_ROW) {
+        exists = sqlite3_column_int(stmt, 0) > 0;
+    } else {
+        fprintf(stderr, "Erreur lors de la vérification de l'existence du joueur: %s\n", sqlite3_errmsg(db));
+    }
+
+    sqlite3_finalize(stmt);
+    return 1;
+}
 
 Player* createPlayer(){
     char name[11];
@@ -15,6 +52,10 @@ Player* createPlayer(){
         if (result == 1 && strlen(name) <= 10) {
             Player *player = malloc(sizeof(Player));
             player->name = malloc(strlen(name) + 1);
+            if(doesPlayerExist( name)){
+            	load_player_from_db(player);
+            	return player;
+            }
             strcpy(player->name, name);
             player->hp = 100;
             player->defense = DEFENSESTART+1;
@@ -34,6 +75,7 @@ Player* createPlayer(){
             printf("La saisie n'était pas valide.\n");
             fflush(stdin);
             printf("Entrez un nom : ");
+            
             result = scanf(" %10s", name);
         }
     }

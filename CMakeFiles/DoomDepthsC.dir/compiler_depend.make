@@ -118,7 +118,10 @@ CMakeFiles/DoomDepthsC.dir/Player.c.o: Player.c \
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
-  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/sqlite3.h \
+  sauvegarde_player.h \
+  Player.h
 
 CMakeFiles/DoomDepthsC.dir/affichage.c.o: affichage.c \
   /usr/include/stdc-predef.h \
@@ -644,8 +647,6 @@ CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o: shopInventaire.c \
 
 sauvegarde_inventaire.c:
 
-/usr/include/sqlite3.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 main.c:
@@ -659,6 +660,8 @@ getInt.c:
 /usr/include/time.h:
 
 monster.h:
+
+/usr/include/sqlite3.h:
 
 Player.h:
 
