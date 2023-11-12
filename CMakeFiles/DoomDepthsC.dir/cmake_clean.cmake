@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/DoomDepthsC.dir/combat.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/creationmap.c.o"
   "CMakeFiles/DoomDepthsC.dir/creationmap.c.o.d"
+  "CMakeFiles/DoomDepthsC.dir/getInt.c.o"
+  "CMakeFiles/DoomDepthsC.dir/getInt.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/main.c.o"
   "CMakeFiles/DoomDepthsC.dir/main.c.o.d"
   "CMakeFiles/DoomDepthsC.dir/monster.c.o"

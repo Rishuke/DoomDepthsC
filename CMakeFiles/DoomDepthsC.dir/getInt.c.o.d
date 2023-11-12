@@ -1,12 +1,6 @@
-CMakeFiles/DoomDepthsC.dir/main.c.o: \
- /home/rishi/Documents/C/DoomDepthsC-main/main.c \
- /usr/include/stdc-predef.h \
- /home/rishi/Documents/C/DoomDepthsC-main/creationmap.h \
- /home/rishi/Documents/C/DoomDepthsC-main/struct.h \
- /home/rishi/Documents/C/DoomDepthsC-main/CaseAction.h \
- /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
- /usr/include/sqlite3.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
- /usr/include/stdio.h \
+CMakeFiles/DoomDepthsC.dir/getInt.c.o: \
+ /home/rishi/Documents/C/DoomDepthsC-main/getInt.c \
+ /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -16,6 +10,7 @@ CMakeFiles/DoomDepthsC.dir/main.c.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \

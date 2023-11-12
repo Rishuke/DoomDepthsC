@@ -249,6 +249,30 @@ creationmap.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/creationmap.c.s
 .PHONY : creationmap.c.s
 
+getInt.o: getInt.c.o
+.PHONY : getInt.o
+
+# target to build an object file
+getInt.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/getInt.c.o
+.PHONY : getInt.c.o
+
+getInt.i: getInt.c.i
+.PHONY : getInt.i
+
+# target to preprocess a source file
+getInt.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/getInt.c.i
+.PHONY : getInt.c.i
+
+getInt.s: getInt.c.s
+.PHONY : getInt.s
+
+# target to generate assembly for a file
+getInt.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/getInt.c.s
+.PHONY : getInt.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -320,6 +344,30 @@ sauvegarde_inventaire.s: sauvegarde_inventaire.c.s
 sauvegarde_inventaire.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_inventaire.c.s
 .PHONY : sauvegarde_inventaire.c.s
+
+sauvegarde_mob.o: sauvegarde_mob.c.o
+.PHONY : sauvegarde_mob.o
+
+# target to build an object file
+sauvegarde_mob.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_mob.c.o
+.PHONY : sauvegarde_mob.c.o
+
+sauvegarde_mob.i: sauvegarde_mob.c.i
+.PHONY : sauvegarde_mob.i
+
+# target to preprocess a source file
+sauvegarde_mob.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_mob.c.i
+.PHONY : sauvegarde_mob.c.i
+
+sauvegarde_mob.s: sauvegarde_mob.c.s
+.PHONY : sauvegarde_mob.s
+
+# target to generate assembly for a file
+sauvegarde_mob.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DoomDepthsC.dir/build.make CMakeFiles/DoomDepthsC.dir/sauvegarde_mob.c.s
+.PHONY : sauvegarde_mob.c.s
 
 sauvegarde_player.o: sauvegarde_player.c.o
 .PHONY : sauvegarde_player.o
@@ -393,6 +441,9 @@ help:
 	@echo "... creationmap.o"
 	@echo "... creationmap.i"
 	@echo "... creationmap.s"
+	@echo "... getInt.o"
+	@echo "... getInt.i"
+	@echo "... getInt.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -402,6 +453,9 @@ help:
 	@echo "... sauvegarde_inventaire.o"
 	@echo "... sauvegarde_inventaire.i"
 	@echo "... sauvegarde_inventaire.s"
+	@echo "... sauvegarde_mob.o"
+	@echo "... sauvegarde_mob.i"
+	@echo "... sauvegarde_mob.s"
 	@echo "... sauvegarde_player.o"
 	@echo "... sauvegarde_player.i"
 	@echo "... sauvegarde_player.s"

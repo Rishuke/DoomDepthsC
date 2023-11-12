@@ -3,7 +3,7 @@
 
 CMakeFiles/DoomDepthsC.dir/CaseAction.c.o: CaseAction.c \
   /usr/include/stdc-predef.h \
-  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/features.h \
   /usr/include/features-time64.h \
@@ -14,10 +14,40 @@ CMakeFiles/DoomDepthsC.dir/CaseAction.c.o: CaseAction.c \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/alloca.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/stdio.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -25,8 +55,6 @@ CMakeFiles/DoomDepthsC.dir/CaseAction.c.o: CaseAction.c \
   /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn.h \
-  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   creationmap.h \
   struct.h \
   shopInventaire.h \
@@ -186,7 +214,8 @@ CMakeFiles/DoomDepthsC.dir/combat.c.o: combat.c \
   monster.h \
   Player.h \
   affichage.h \
-  shopInventaire.h
+  shopInventaire.h \
+  getInt.h
 
 CMakeFiles/DoomDepthsC.dir/creationmap.c.o: creationmap.c \
   /usr/include/stdc-predef.h \
@@ -250,16 +279,46 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: creationmap.c \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   struct.h \
   CaseAction.h \
+  combat.h \
   Player.h \
   shopInventaire.h \
   sauvegarde_player.h \
   /usr/include/sqlite3.h \
   sauvegarde_inventaire.h
 
+CMakeFiles/DoomDepthsC.dir/getInt.c.o: getInt.c \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdio.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/features.h \
+  /usr/include/features-time64.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h
+
 CMakeFiles/DoomDepthsC.dir/main.c.o: main.c \
   /usr/include/stdc-predef.h \
   creationmap.h \
   struct.h \
+  CaseAction.h \
+  shopInventaire.h \
   /usr/include/sqlite3.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
   /usr/include/stdio.h \
@@ -579,7 +638,8 @@ CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o: shopInventaire.c \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
-  struct.h
+  struct.h \
+  getInt.h
 
 
 sauvegarde_inventaire.c:
@@ -589,6 +649,8 @@ sauvegarde_inventaire.c:
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
 main.c:
+
+getInt.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
@@ -604,39 +666,21 @@ Player.h:
 
 /usr/include/string.h:
 
-sauvegarde_player.h:
+Player.c:
 
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+shopInventaire.h:
 
-/usr/include/alloca.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-affichage.c:
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-shopInventaire.c:
-
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/select.h:
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
-monster.c:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 CaseAction.h:
 
@@ -644,57 +688,49 @@ CaseAction.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
+getInt.h:
+
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-Player.c:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-sauvegarde_player.c:
-
-sauvegarde_mob.c:
-
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/stdc-predef.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
-/usr/include/stdio.h:
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
-CaseAction.c:
+creationmap.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/features.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/stdlib.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+affichage.c:
+
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/features-time64.h:
 
@@ -704,39 +740,23 @@ affichage.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+sauvegarde_player.c:
 
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+sauvegarde_mob.c:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
-creationmap.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-struct.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-shopInventaire.h:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-combat.h:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/include/stdlib.h:
-
-/usr/include/x86_64-linux-gnu/sys/types.h:
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 creationmap.c:
 
 combat.c:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+struct.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
@@ -747,3 +767,47 @@ combat.c:
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+combat.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+monster.c:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+shopInventaire.c:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/alloca.h:
+
+CaseAction.c:
+
+/usr/include/stdio.h:
+
+sauvegarde_player.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:

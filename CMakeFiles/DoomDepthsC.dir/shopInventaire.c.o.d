@@ -50,4 +50,5 @@ CMakeFiles/DoomDepthsC.dir/shopInventaire.c.o: \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h /home/rishi/Documents/C/DoomDepthsC-main/struct.h
+ /usr/include/strings.h /home/rishi/Documents/C/DoomDepthsC-main/struct.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/getInt.h

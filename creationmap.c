@@ -197,7 +197,7 @@ int initTest(){ //equivalent du main
     char choice;
     //gameplay
     while(1){
-        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder ou 8 pour quitter \n");
+        printf("Entrez z / q / s / d , 0 pour changer d'arme, 1 pour des infos sur la partie, 7 pour sauvegarder,  9 pour recommencer la partie ou 8 pour quitter \n");
         fflush(stdin);
         scanf(" %c",&choice);
         if(choice=='8')break;
@@ -218,6 +218,10 @@ int initTest(){ //equivalent du main
         else if(choice =='7' ){
         	save_player_to_db(player);
         	sauvegarderInventaire(player);
+        }
+        
+        else if(choice =='9' ){
+        	
         }
         else{printf("La valeur n'est pas valide \n");}
         afficherMap(carte,player->x,player->y);
