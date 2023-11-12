@@ -59,7 +59,6 @@ void load_player_from_db(Player *player) {
     if (step == SQLITE_ROW) {
         // Suppose that the player name will not exceed 49 characters + null terminator
         strncpy(player->name, (const char*)sqlite3_column_text(res, 1), 49);
-        player->name[49] = '\0';
         player->hp = sqlite3_column_int(res, 2);
         player->defense = sqlite3_column_int(res, 3);
         player->attack = sqlite3_column_int(res, 4);
@@ -77,7 +76,6 @@ void load_player_from_db(Player *player) {
 
     sqlite3_finalize(res);
     sqlite3_close(db);
-    
 }
 
 
