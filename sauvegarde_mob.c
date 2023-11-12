@@ -74,7 +74,14 @@ int chargerMonstre(Monster **monsters, int id) {
         else{
             monsters=realloc(monsters,sizeof(Monster*)*(sizeActu+1));
         }
-        monsters[sizeActu]=actu;
+        monsters[sizeActu]=malloc(sizeof(Monster));
+        monsters[sizeActu]->name=malloc(sizeof(char)*(strlen(actu->name)+1));
+        strcpy(monsters[sizeActu]->name,actu->name);
+        monsters[sizeActu]->hp=actu->hp;
+        monsters[sizeActu]->attackMax=actu->attackMax;
+        monsters[sizeActu]->attackMin=actu->attackMin;
+        monsters[sizeActu]->defense=actu->defense;
+      	printf("%s",actu->name);
         sizeActu++;
     }
 
