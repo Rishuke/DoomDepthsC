@@ -8,6 +8,8 @@
 #include "shopInventaire.h"
 #include "sauvegarde_player.h"
 #include "sauvegarde_inventaire.h"
+#include "sauvegarde_mob.h"
+
 
 
 void afficherAll(Carte* carte,Player* player){
@@ -170,7 +172,27 @@ int initTest(){ //equivalent du main
     Player* player;
     Carte* carte;
     player= createPlayer();
-
+    Monster** monsters =  NULL;
+    int nbMonstre =  chargerMonstre(monsters, 1);
+    int win;
+    if(nbMonstre){
+    	if(!strcmp(monsters[0]->name,"BOSS")){
+    			win =combat(player,1,1, 0,NULL);
+    	}else{
+    		win = combat(player,0,1, 0,NULL);
+    	}
+    }	
+    
+    freeAllMob(monsters,nbMonstre);
+    
+    if(!win){
+	for(int i=0;i<player->sizeInventaire;i++){
+        free(player->items[i]->name);
+        free(player->items[i]);
+    }
+    if(player->sizeInventaire!=0)free(player->items);
+    free(player);
+	}
     carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;
     initCarte(carte);

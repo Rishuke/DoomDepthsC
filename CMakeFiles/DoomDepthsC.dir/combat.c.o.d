@@ -53,6 +53,10 @@ CMakeFiles/DoomDepthsC.dir/combat.c.o: \
  /usr/include/strings.h /home/rishi/Documents/C/DoomDepthsC-main/struct.h \
  /home/rishi/Documents/C/DoomDepthsC-main/monster.h \
  /home/rishi/Documents/C/DoomDepthsC-main/Player.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.h \
+ /usr/include/sqlite3.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_inventaire.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_mob.h \
  /home/rishi/Documents/C/DoomDepthsC-main/affichage.h \
  /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
  /home/rishi/Documents/C/DoomDepthsC-main/getInt.h

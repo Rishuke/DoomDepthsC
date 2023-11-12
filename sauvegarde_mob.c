@@ -38,7 +38,8 @@ void sauvegarderMonstres(Monster **monsters, int nombreMonstres) {
     sqlite3_close(db);
 }
 
-int chargerMonstre(Monster **monsters) {
+
+int chargerMonstre(Monster **monsters, int id) {
     sqlite3 *db;
     sqlite3_stmt *stmt;
 
@@ -49,7 +50,7 @@ int chargerMonstre(Monster **monsters) {
         return 0;
     }
 
-    char *sql = sqlite3_mprintf("SELECT name, hp, attack_min, attack_max, defense FROM monsters WHERE id = %d;", 1);
+    char *sql = sqlite3_mprintf("SELECT name, hp, attack_min, attack_max, defense FROM monsters WHERE id = %d;", id);
     rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
     sqlite3_free(sql);
 
@@ -62,7 +63,7 @@ int chargerMonstre(Monster **monsters) {
     int sizeActu=0;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         Monster* actu= malloc(sizeof(Monster ));
-        actu->name = strdup((const char *)sqlite3_column_text(stmt, 0));
+        actu->name = strdup(sqlite3_column_text(stmt, 0));
         actu->hp=sqlite3_column_int(stmt, 1);
         actu->attackMin=sqlite3_column_int(stmt, 2);
         actu->attackMax=sqlite3_column_int(stmt, 3);
@@ -78,7 +79,7 @@ int chargerMonstre(Monster **monsters) {
         sizeActu++;
     }
 
-    
+
     sqlite3_close(db);
     sqlite3_finalize(stmt);
     return sizeActu;
