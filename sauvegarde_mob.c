@@ -18,7 +18,7 @@ void sauvegarderMonstres(Monster **monsters, int nombreMonstres) {
     sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, &err_msg);
 
     for (int i = 0; i < nombreMonstres; ++i) {
-        char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense) VALUES (%d, %Q, %d, %d, %d, %d);",
+        char *sql = sqlite3_mprintf("INSERT INTO monsters (monster_id, name, hp, attack_min, attack_max, defense) VALUES (%d, %Q, %d, %d, %d, %d);",
                                     1, monsters[i]->name, monsters[i]->hp, monsters[i]->attackMin, monsters[i]->attackMax, monsters[i]->defense);
 
         rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
@@ -49,7 +49,7 @@ int chargerMonstre(Monster **monsters, int id) {
         return 0;
     }
 
-    char *sql = sqlite3_mprintf("SELECT name, hp, attack_min, attack_max, defense FROM monsters WHERE id = %d;", id);
+    char *sql = sqlite3_mprintf("SELECT name, hp, attack_min, attack_max, defense FROM monsters WHERE monster_id = %d;", id);
     rc = sqlite3_prepare_v2(db, sql, -1, &stmt, 0);
     sqlite3_free(sql);
 

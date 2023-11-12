@@ -46,7 +46,7 @@ void initData() {
                                 "FOREIGN KEY(player_id) REFERENCES player(id));";
 
     const char *sql_monsters = "CREATE TABLE IF NOT EXISTS monsters ("
-                               "id INTEGER PRIMARY KEY, "
+                               "monster_id INTEGER, "
                                "name TEXT, "
                                "hp INTEGER, "
                                "attack_min INTEGER, "
