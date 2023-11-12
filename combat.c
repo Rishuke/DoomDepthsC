@@ -7,6 +7,9 @@
 #include "struct.h"
 #include "monster.h"
 #include "Player.h"
+#include "sauvegarde_player.h"
+#include "sauvegarde_inventaire.h"
+#include "sauvegarde_mob.h"
 #include "affichage.h"
 #include "shopInventaire.h"
 #include "getInt.h"
@@ -231,13 +234,13 @@ void winCase(Player* player){
 
 int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
     Monster** monsters=NULL;
-    int nbMonstre;
+    int nbMonstre ;
     if(fromSauvegarde){ //si sauvegarde
         if(boss){
-            chargerMonstre(monsters, 1);
+            nbMonstre =chargerMonstre(monsters, 1);
         }
         else {
-            //getMobClassique
+            nbMonstre =chargerMonstre(monsters, 1);
         }
     }
     else{

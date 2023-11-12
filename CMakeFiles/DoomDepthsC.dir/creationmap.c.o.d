@@ -60,4 +60,5 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: \
  /home/rishi/Documents/C/DoomDepthsC-main/shopInventaire.h \
  /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_player.h \
  /usr/include/sqlite3.h \
- /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_inventaire.h
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_inventaire.h \
+ /home/rishi/Documents/C/DoomDepthsC-main/sauvegarde_mob.h

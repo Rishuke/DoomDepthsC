@@ -112,6 +112,7 @@ Player* createPlayer(){
             if(doesPlayerExist( name)){
             	load_player_from_db(player);
                 chargerInventaire(player);
+                
             	return player;
             }
 

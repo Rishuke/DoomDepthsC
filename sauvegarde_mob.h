@@ -3,10 +3,10 @@
 
 #include "struct.h" 
 
-void sauvegarderMonstre(Monster *monster, int id);
+void sauvegarderMonstres(Monster **monsters, int nombreMonstres);
 
 
-void chargerMonstre(Monster *monster, int id);
+int chargerMonstre(Monster **monsters, int id);
 
 #endif // SAUVEGARDE_MOB_H
 

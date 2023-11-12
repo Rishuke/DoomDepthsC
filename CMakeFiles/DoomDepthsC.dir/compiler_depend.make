@@ -217,6 +217,10 @@ CMakeFiles/DoomDepthsC.dir/combat.c.o: combat.c \
   struct.h \
   monster.h \
   Player.h \
+  sauvegarde_player.h \
+  /usr/include/sqlite3.h \
+  sauvegarde_inventaire.h \
+  sauvegarde_mob.h \
   affichage.h \
   shopInventaire.h \
   getInt.h
@@ -288,7 +292,8 @@ CMakeFiles/DoomDepthsC.dir/creationmap.c.o: creationmap.c \
   shopInventaire.h \
   sauvegarde_player.h \
   /usr/include/sqlite3.h \
-  sauvegarde_inventaire.h
+  sauvegarde_inventaire.h \
+  sauvegarde_mob.h
 
 CMakeFiles/DoomDepthsC.dir/getInt.c.o: getInt.c \
   /usr/include/stdc-predef.h \
@@ -659,6 +664,8 @@ getInt.c:
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
 /usr/include/time.h:
+
+sauvegarde_mob.h:
 
 monster.h:
 
