@@ -61,6 +61,7 @@ Player* createPlayer(){
             	load_player_from_db(player);
             	return player;
             }
+            
             strcpy(player->name, name);
             player->hp = 100;
             player->defense = DEFENSESTART+1;
