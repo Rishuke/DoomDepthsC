@@ -10,9 +10,9 @@
 
 
 
-int doesPlayerExist( const char *name) {
 
-	sqlite3 *db;
+int doesPlayerExist(const char *name) {
+    sqlite3 *db;
     char *err_msg = 0;
     int rc = sqlite3_open("game.db", &db); 
 
@@ -26,8 +26,11 @@ int doesPlayerExist( const char *name) {
     sqlite3_stmt *stmt;
     int exists = 0;
 
-    if (sqlite3_prepare_v2(db, query, -1, &stmt, NULL) != SQLITE_OK) {
+    rc = sqlite3_prepare_v2(db, query, -1, &stmt, NULL); // Ajout de rc pour récupérer le code de retour
+    if (rc != SQLITE_OK) {
         fprintf(stderr, "Erreur de préparation de la requête: %s\n", sqlite3_errmsg(db));
+        sqlite3_finalize(stmt); // Finaliser le stmt avant de retourner
+        sqlite3_close(db); // Fermer la DB avant de retourner
         return 0;
     }
 
@@ -40,10 +43,11 @@ int doesPlayerExist( const char *name) {
     }
 
     sqlite3_finalize(stmt);
-    return 1;
+    sqlite3_close(db); // Fermer la DB
+    return exists;
 }
 
-Player* createPlayer(){
+/*Player* createPlayer(){
     char name[11];
     printf("Entrez un nom : ");
     fflush(stdin);
@@ -52,7 +56,9 @@ Player* createPlayer(){
         if (result == 1 && strlen(name) <= 10) {
             Player *player = malloc(sizeof(Player));
             player->name = malloc(strlen(name) + 1);
+            
             if(doesPlayerExist( name)){
+            	printf("here");
             	load_player_from_db(player);
             	return player;
             }
@@ -79,6 +85,55 @@ Player* createPlayer(){
             result = scanf(" %10s", name);
         }
     }
+}*/
+
+Player* createPlayer() {
+    char name[11];
+    printf("Entrez un nom : ");
+    fflush(stdin);
+    scanf(" %10[^\n]", name); 
+
+    if (strlen(name) > 10) {
+        fprintf(stderr, "Le nom ne doit pas dépasser 10 caractères.\n");
+        return NULL; 
+    }
+
+    Player *player = malloc(sizeof(Player));
+    if (player == NULL) {
+        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        return NULL; // Gestion de l'erreur d'allocation
+    }
+
+    player->name = malloc(strlen(name) + 1);
+    if (player->name == NULL) {
+        free(player); 
+        fprintf(stderr, "Erreur d'allocation mémoire.\n");
+        return NULL;
+    }
+    
+    
+
+    strcpy(player->name, name);
+    player->hp = 100;
+    player->defense = DEFENSESTART+1;
+    player->attack = ATTACKSTART+3;
+    player->gold = 0;
+    player->mana = 100;
+    player->xp = 0;
+    player->xpForNextLvl = 10;
+    player->level = 1;
+    player->x = -1;
+    player->y = -1;
+    player->lifePotion = 1;
+    player->manaPotion = 1;
+    player->sizeInventaire=0;
+    return player;
+    if (doesPlayerExist(name)) {
+  
+        load_player_from_db(player);
+        return player; 
+    } 
+    
 }
 
 void changeLevel(Player* player){
