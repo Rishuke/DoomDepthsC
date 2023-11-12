@@ -168,7 +168,7 @@ void initMap(Carte* carte,Player* playInit){ //0=interdit 1=piece 2=mob 3=rien 4
 int initTest(){ //equivalent du main
     srand(time(NULL));
     Player* player;Carte* carte;
-    int fromSauvegarde = 0;
+    int fromSauvegarde = 0; //Faire une fonction qui execute dynamiquement pour voir si le sauvegarde existe
     if(fromSauvegarde){
         //telecharger player + carte
         printf("here");
