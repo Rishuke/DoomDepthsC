@@ -70,23 +70,9 @@ void chargerInventaire(Player *player) {
         sqlite3_close(db);
         
     }
-<<<<<<< HEAD
-    
-	player->items=malloc(sizeof(Item)*player->sizeInventaire);
-    int sizeActu=0;
-    while (sqlite3_step(stmt) == SQLITE_ROW) {
-        Item *item = malloc(sizeof(Item));
-        item->name = strdup((const char *)sqlite3_column_text(stmt, 1));
-        item->power = sqlite3_column_int(stmt, 2);
-        item->equiped = sqlite3_column_int(stmt, 3);
-        item->offensive = sqlite3_column_int(stmt, 4);
-        item->gold = sqlite3_column_int(stmt, 5);
 
-       
-        player->items[sizeActu] = item;
-        sizeActu++;
-    }
-=======
+    
+	
 
     player->items=malloc(sizeof(Item*)*player->sizeInventaire);
     int sizeActu=0;
@@ -107,7 +93,7 @@ void chargerInventaire(Player *player) {
         sizeActu++;
     }
     printf("-----%d---------",sizeActu);
->>>>>>> origin/dataSave
+
     sqlite3_close(db);
     sqlite3_finalize(stmt);
 }
