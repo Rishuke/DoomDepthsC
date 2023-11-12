@@ -61,7 +61,7 @@ void chargerInventaire(Player *player) {
         
     }
 
-    char *sql_select = sqlite3_mprintf("SELECT item_name, power, equipped, offensive, gold FROM inventory WHERE player_id = %d;", player->id);
+    char *sql_select = sqlite3_mprintf("SELECT item_name, power, equipped, offensive, gold FROM inventory WHERE player_id = %d;", 1);
     rc = sqlite3_prepare_v2(db, sql_select, -1, &stmt, 0);
     sqlite3_free(sql_select);
 
@@ -70,6 +70,7 @@ void chargerInventaire(Player *player) {
         sqlite3_close(db);
         
     }
+<<<<<<< HEAD
     
 	player->items=malloc(sizeof(Item)*player->sizeInventaire);
     int sizeActu=0;
@@ -85,6 +86,28 @@ void chargerInventaire(Player *player) {
         player->items[sizeActu] = item;
         sizeActu++;
     }
+=======
+
+    player->items=malloc(sizeof(Item*)*player->sizeInventaire);
+    int sizeActu=0;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        Item *item = malloc(sizeof(Item));
+        item->name = strdup((const char *)sqlite3_column_text(stmt, 0));
+        item->power = sqlite3_column_int(stmt, 1);
+        item->equiped = sqlite3_column_int(stmt, 3);
+        item->gold = sqlite3_column_int(stmt, 4);
+        item->offensive = sqlite3_column_int(stmt, 2);
+
+        player->items[sizeActu]=malloc(sizeof(Item));
+        player->items[sizeActu]->name = malloc(sizeof(char)*(strlen(item->name)+1));
+        strcpy(player->items[sizeActu]->name,item->name);
+        player->items[sizeActu]->offensive=item->offensive;
+        player->items[sizeActu]->power=item->power;
+        player->items[sizeActu]->gold=item->gold;
+        sizeActu++;
+    }
+    printf("-----%d---------",sizeActu);
+>>>>>>> origin/dataSave
     sqlite3_close(db);
     sqlite3_finalize(stmt);
 }
