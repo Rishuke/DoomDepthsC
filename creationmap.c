@@ -173,10 +173,12 @@ int initTest(){ //equivalent du main
     Player* player;
     Carte* carte;
     player= createPlayer();
-    Monster** monsters =  NULL;
+    Monster** monsters=(Monster**)malloc(sizeof(Monster*)*3);
     int nbMonstre =  chargerMonstre(monsters, 1);
-    int win;
+    int win=1;
     if(nbMonstre){
+        printf("%d",nbMonstre);
+        scanf(" %d",&win);
     	if(!strcmp(monsters[0]->name,"BOSS")){
     			win =combat(player,1,1, 0,NULL);
     	}else{
@@ -185,14 +187,19 @@ int initTest(){ //equivalent du main
     }	
     
     freeAllMob(monsters,nbMonstre);
-    
-    if(!win){
-	for(int i=0;i<player->sizeInventaire;i++){
-        free(player->items[i]->name);
-        free(player->items[i]);
+    if(nbMonstre==0){
+        free(monsters);
     }
-    if(player->sizeInventaire!=0)free(player->items);
-    free(player);
+    if(!win){
+        for(int i=0;i<player->sizeInventaire;i++){
+            free(player->items[i]->name);
+            free(player->items[i]);
+        }
+        if(player->sizeInventaire!=0){
+            free(player->items);
+            free(player);
+        }
+        return 0;
 	}
     carte=malloc(sizeof(Carte));
     carte->donjonLevel=0;

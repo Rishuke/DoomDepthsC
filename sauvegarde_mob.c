@@ -39,7 +39,7 @@ void sauvegarderMonstres(Monster **monsters, int nombreMonstres) {
 }
 
 
-int chargerMonstre(Monster **monsters, int id) {
+int chargerMonstre(Monster** monsters, int id) {
     sqlite3 *db;
     sqlite3_stmt *stmt;
 
@@ -62,27 +62,26 @@ int chargerMonstre(Monster **monsters, int id) {
 
     int sizeActu=0;
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        Monster* actu= malloc(sizeof(Monster ));
+        Monster* actu= malloc(sizeof(Monster));
         actu->name = strdup(sqlite3_column_text(stmt, 0));
         actu->hp=sqlite3_column_int(stmt, 1);
         actu->attackMin=sqlite3_column_int(stmt, 2);
         actu->attackMax=sqlite3_column_int(stmt, 3);
         actu->defense=sqlite3_column_int(stmt, 4);
-        if(sizeActu==0){
+        /**if(sizeActu==0){
             monsters= malloc(sizeof(Monster*));
         }
         else{
             monsters=realloc(monsters,sizeof(Monster*)*(sizeActu+1));
-        }
-        monsters[sizeActu]=malloc(sizeof(Monster));
-        monsters[sizeActu]->name=malloc(sizeof(char)*(strlen(actu->name)+1));
-        strcpy(monsters[sizeActu]->name,actu->name);
+        }**/
+        monsters[sizeActu]=(Monster*)malloc(sizeof(Monster));
+        monsters[sizeActu]->name=strdup(actu->name);
         monsters[sizeActu]->hp=actu->hp;
         monsters[sizeActu]->attackMax=actu->attackMax;
         monsters[sizeActu]->attackMin=actu->attackMin;
         monsters[sizeActu]->defense=actu->defense;
+        free(actu->name);
         free(actu);
-      	printf("%s",actu->name);
         sizeActu++;
     }
 

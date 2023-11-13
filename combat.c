@@ -308,6 +308,7 @@ int combat(Player* player,int boss,int fromSauvegarde, int lvlMap,Carte* carte){
 				save_player_to_db(player);
 				sauvegarderInventaire(player);
 				sauvegarderMonstres(monsters, nbMonstre);
+                continue;
             }
             
             if(nbMonstre==0){

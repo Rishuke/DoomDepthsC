@@ -6,7 +6,7 @@
 void sauvegarderMonstres(Monster **monsters, int nombreMonstres);
 
 
-int chargerMonstre(Monster **monsters, int id);
+int chargerMonstre(Monster** monsters, int id);
 
 #endif // SAUVEGARDE_MOB_H
 
