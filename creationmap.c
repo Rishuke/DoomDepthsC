@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include <time.h>
+#include <string.h>
 #include "struct.h"
 #include "CaseAction.h"
 #include "combat.h"

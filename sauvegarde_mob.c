@@ -17,8 +17,8 @@ void sauvegarderMonstres(Monster **monsters, int nombreMonstres) {
 
     sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, &err_msg);
 
-    for (int i = 0; i < nombreMonstres; ++i) {
-        char *sql = sqlite3_mprintf("REPLACE INTO monsters (id, name, hp, attack_min, attack_max, defense) VALUES (%d, %Q, %d, %d, %d, %d);",
+    for (int i = 0; i < nombreMonstres; i++) {
+        char *sql = sqlite3_mprintf("INSERT INTO monsters (id, name, hp, attack_min, attack_max, defense) VALUES (%d, %Q, %d, %d, %d, %d);",
                                     1, monsters[i]->name, monsters[i]->hp, monsters[i]->attackMin, monsters[i]->attackMax, monsters[i]->defense);
 
         rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
@@ -70,12 +70,17 @@ int chargerMonstre(Monster **monsters, int id) {
         actu->defense=sqlite3_column_int(stmt, 4);
         if(sizeActu==0){
             monsters= malloc(sizeof(Monster*));
-
         }
         else{
             monsters=realloc(monsters,sizeof(Monster*)*(sizeActu+1));
         }
-        monsters[sizeActu]=actu;
+        monsters[sizeActu]->name=malloc(sizeof(char)*(strlen(actu->name)+1));
+        strcpy(monsters[sizeActu]->name,actu->name);
+        monsters[sizeActu]->hp=actu->hp;
+        monsters[sizeActu]->attackMax=actu->attackMax;
+        monsters[sizeActu]->attackMin=actu->attackMin;
+        monsters[sizeActu]->defense=actu->defense;
+        free(actu);
         sizeActu++;
     }
 
